@@ -1,7 +1,7 @@
 import BaseEntity from '../base.entity';
 import DomainException from '../shared/exceptions/domain.exception';
 
-class UserEntity extends BaseEntity {
+class ClientEntity extends BaseEntity {
   private _host: string;
   private _client: string;
   private _apiKey: string;
@@ -137,4 +137,4 @@ class UserEntity extends BaseEntity {
   }
 }
 
-export default UserEntity;
+export default ClientEntity;
