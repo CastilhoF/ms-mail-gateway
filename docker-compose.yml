@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  api:
+    container_name: ${APP_NAME}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: run
+    hostname: ${APP_NAME}
+    env_file:
+      - .env.production
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    restart: on-failure
+    environment: 
+      - TZ=America/Sao_Paulo
+    networks:
+      - honey-code-network
+    volumes:
+      - ./../logs:/usr/app/logs
+volumes:
+  api:
+    external: true
+networks:
+  honey-code-network:
+    external: true 
