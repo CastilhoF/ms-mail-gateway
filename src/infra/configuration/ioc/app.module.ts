@@ -14,6 +14,7 @@ import SwaggerOptions from '../swagger/swagger.options';
 import throttlerOptions from '../security/ddos/throttler.options';
 import { winstonConfig } from '../log/winston.options';
 import { EnvironmentModule } from './environment.module';
+import CryptographyModule from './cryptography/cryptography.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { EnvironmentModule } from './environment.module';
     ThrottlerModule.forRoot(throttlerOptions),
     WinstonModule.forRoot(winstonConfig),
     CacheModule,
+    CryptographyModule,
     DatabaseModule,
     EnvironmentModule,
   ],

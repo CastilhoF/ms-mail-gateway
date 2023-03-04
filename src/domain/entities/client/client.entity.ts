@@ -29,43 +29,43 @@ class ClientEntity extends BaseEntity {
     this.validate();
   }
 
-  private validateHost(apiHost: string): boolean {
-    if (!apiHost) {
-      throw new DomainException('apiHost is required');
+  private validateHost(host: string): boolean {
+    if (!host || host === null || host === undefined) {
+      throw new DomainException('Host is required');
     }
     return true;
   }
 
   private validateClient(apiClient: string): boolean {
-    if (!apiClient) {
-      throw new DomainException('apiClient is required');
+    if (!apiClient || apiClient === null || apiClient === undefined) {
+      throw new DomainException('Client is required');
     }
     return true;
   }
 
   private validateApiKey(apiKey: string): boolean {
-    if (!apiKey) {
+    if (!apiKey || apiKey === null || apiKey === undefined) {
       throw new DomainException('apiKey is required');
     }
     return true;
   }
 
   private validateApiSecret(apiSecret: string): boolean {
-    if (!apiSecret) {
+    if (!apiSecret || apiSecret === null || apiSecret === undefined) {
       throw new DomainException('apiSecret is required');
     }
     return true;
   }
 
   private validateCreatedAt(createdAt: Date): boolean {
-    if (!createdAt) {
+    if (!createdAt || createdAt === null || createdAt === undefined) {
       throw new DomainException('createdAt is required');
     }
     return true;
   }
 
   private validateUpdatedAt(updatedAt: Date): boolean {
-    if (!updatedAt) {
+    if (!updatedAt || updatedAt === null || updatedAt === undefined) {
       throw new DomainException('updatedAt is required');
     }
     return true;
