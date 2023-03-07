@@ -4,9 +4,9 @@ import ApiKeyGeneratorInterface from '../../../../app/shared/interfaces/api-key-
 
 @Injectable()
 class ApiKeyGeneratorService implements ApiKeyGeneratorInterface {
-  hash(apiSecret: string): string {
+  async hash(apiSecret: string): Promise<string> {
     const salt = genSaltSync(10);
-    return hashSync(apiSecret, salt);
+    return await hashSync(apiSecret, salt);
   }
 }
 

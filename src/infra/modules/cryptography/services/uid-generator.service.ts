@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 class UidGeneratorService implements UidGeneratorInterface {
-  generate(): string {
+  async generate(): Promise<string> {
     return uuidv4();
   }
 }

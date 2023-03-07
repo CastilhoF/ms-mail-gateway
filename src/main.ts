@@ -4,10 +4,10 @@ import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { AppModule } from './infrastructure/configuration/ioc/app.module';
-import SwaggerOptions from './infrastructure/configuration/swagger/swagger.options';
-import validationGlobalPipe from './infrastructure/configuration/validation/validation.options';
-import versioningOptions from './infrastructure/configuration/versioning/versioning.options';
+import { AppModule } from './infra/configuration/ioc/app.module';
+import SwaggerOptions from './infra/configuration/swagger/swagger.options';
+import validationGlobalPipe from './infra/configuration/validation/validation.options';
+import versioningOptions from './infra/configuration/versioning/versioning.options';
 
 /**
  * Nest Bootstrap

@@ -9,9 +9,9 @@ class SwaggerOptions {
   setup(app: INestApplication) {
     const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
       .setTitle(this.applicationService.getAppName())
-      .setDescription('The cats API description')
+      .setDescription('Honey Code - MS Mail Gateway')
       .setVersion('1.0')
-      .addTag('music-pro')
+      .addTag('honey-code')
       .build();
 
     const document = SwaggerModule.createDocument(app, config);

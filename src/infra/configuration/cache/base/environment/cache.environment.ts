@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import CacheInterface from "./cache.interface";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import CacheInterface from './cache.interface';
 
 @Injectable()
 abstract class CacheEnvironment implements CacheInterface {

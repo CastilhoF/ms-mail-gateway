@@ -4,13 +4,13 @@ import ApiSecretHasherInterface from '../../../../app/shared/interfaces/api-secr
 
 @Injectable()
 class ApiSecretHasherService implements ApiSecretHasherInterface {
-  hash(apiSecret: string): string {
+  async hash(apiSecret: string): Promise<string> {
     const salt = genSaltSync(10);
-    return hashSync(apiSecret, salt);
+    return await hashSync(apiSecret, salt);
   }
 
-  compare(apiSecret: string, hashedApiSecret: string): Promise<boolean> {
-    return compare(apiSecret, hashedApiSecret);
+  async compare(apiSecret: string, hashedApiSecret: string): Promise<boolean> {
+    return await compare(apiSecret, hashedApiSecret);
   }
 }
 
