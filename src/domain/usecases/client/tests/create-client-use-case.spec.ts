@@ -9,7 +9,7 @@ import ApiKeyGeneratorInterface from '../../../../app/shared/interfaces/api-key-
 import ApiSecretHasherInterface from '../../../../app/shared/interfaces/api-secret-hasher.interface';
 import UidGeneratorInterface from '../../../../app/shared/interfaces/uid-generator.interface';
 
-describe('CreateClientUseCase', () => {
+describe('Create Client Use Case', () => {
   let clientRepository: MockProxy<ClientRepository> | null = null;
   let apiKeyGenerator: MockProxy<ApiKeyGeneratorInterface> | null = null;
   let apiSecretHasher: MockProxy<ApiSecretHasherInterface> | null = null;

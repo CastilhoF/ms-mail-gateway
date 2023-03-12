@@ -7,7 +7,7 @@ import { CreateClientOutputDto } from './dtos/create-client-output.dto';
 import CreateClientMapper from './mappers/create-client.mapper';
 import ApiKeyGeneratorInterface from '../../../app/shared/interfaces/api-key-generator.interface';
 import UidGeneratorInterface from '../../../app/shared/interfaces/uid-generator.interface';
-import ApiSecretHasherInterface from 'src/app/shared/interfaces/api-secret-hasher.interface';
+import ApiSecretHasherInterface from '../../../app/shared/interfaces/api-secret-hasher.interface';
 import SecretValidation from '../../shared/validations/secret.validation';
 
 @Injectable()
