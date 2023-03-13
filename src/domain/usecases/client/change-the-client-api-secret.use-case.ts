@@ -2,15 +2,14 @@ import { Injectable, Logger } from '@nestjs/common';
 import BaseUseCase from '../base.use-case';
 import ClientRepository from '../../../app/repositories/client/client.repository';
 import ClientEntity from '../../entities/client/client.entity';
-import { DefaultClientDto } from './dtos/default-client.dto';
-import DefaultClientMapper from './mappers/default-client.mapper';
 import ApiSecretHasherInterface from '../../../app/shared/interfaces/api-secret-hasher.interface';
 import SecretValidation from '../../shared/validations/secret.validation';
 import { ChangeClientApiSecretInputDto } from './dtos/change-client-api-secret-input.dto';
+import DomainException from '../../../domain/entities/shared/exceptions/domain.exception';
 
 @Injectable()
 export default class ChangeTheClientApiSecretUseCase
-  implements BaseUseCase<DefaultClientDto, DefaultClientDto>
+  implements BaseUseCase<ChangeClientApiSecretInputDto, string>
 {
   private readonly logger: Logger = new Logger(
     ChangeTheClientApiSecretUseCase.name,
@@ -22,15 +21,19 @@ export default class ChangeTheClientApiSecretUseCase
     private readonly apiSecretHasher: ApiSecretHasherInterface,
   ) {}
 
-  async execute(
-    input: ChangeClientApiSecretInputDto,
-  ): Promise<DefaultClientDto> {
+  async execute(input: ChangeClientApiSecretInputDto): Promise<string> {
     const { id, apiSecret } = input;
+
+    if (!id || !apiSecret) {
+      throw new DomainException(
+        'Invalid input: id and apiSecret are required.',
+      );
+    }
 
     const client: ClientEntity = await this.clientRepository.findById(id);
 
     if (!client) {
-      throw new Error(`Client not found: ${id}`);
+      throw new DomainException(`Client not found: ${id}`);
     }
 
     await this.secretValidation.validate(apiSecret);
@@ -49,6 +52,10 @@ export default class ChangeTheClientApiSecretUseCase
       client,
     );
 
-    return DefaultClientMapper.toDto(updatedClient);
+    this.logger.log(
+      `API Secret successfully changed for client: ${updatedClient.id}`,
+    );
+
+    return `API Secret successfully changed for client: ${updatedClient.id}`;
   }
 }
