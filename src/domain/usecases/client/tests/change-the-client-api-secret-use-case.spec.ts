@@ -97,13 +97,12 @@ describe('Change the client API secret use case', () => {
         apiSecretHasher,
       );
 
-      const exception = new DomainException(
-        'Invalid input: id and apiSecret are required.',
-      );
+      const exception = new DomainException('Id is required.');
 
-      await expect(useCase.execute(input)).rejects.toThrowError(exception);
+      await expect(useCase.execute(input)).rejects.toThrow(exception);
 
-      expect.assertions(1);
+      expect(apiSecretHasher.hash).not.toBeCalled();
+      expect.assertions(2);
     });
 
     it('should throw an error - id undefined', async () => {
@@ -119,13 +118,12 @@ describe('Change the client API secret use case', () => {
         apiSecretHasher,
       );
 
-      const exception = new DomainException(
-        'Invalid input: id and apiSecret are required.',
-      );
+      const exception = new DomainException('Id is required.');
 
-      await expect(useCase.execute(input)).rejects.toThrowError(exception);
+      await expect(useCase.execute(input)).rejects.toThrow(exception);
 
-      expect.assertions(1);
+      expect(apiSecretHasher.hash).not.toBeCalled();
+      expect.assertions(2);
     });
 
     it('should throw an error - apiSecret null', async () => {
@@ -141,13 +139,12 @@ describe('Change the client API secret use case', () => {
         apiSecretHasher,
       );
 
-      const exception = new DomainException(
-        'Invalid input: id and apiSecret are required.',
-      );
+      const exception = new DomainException('API Secret is required.');
 
-      await expect(useCase.execute(input)).rejects.toThrowError(exception);
+      await expect(useCase.execute(input)).rejects.toThrow(exception);
 
-      expect.assertions(1);
+      expect(apiSecretHasher.hash).not.toBeCalled();
+      expect.assertions(2);
     });
 
     it('should throw an error - apiSecret undefined', async () => {
@@ -163,13 +160,12 @@ describe('Change the client API secret use case', () => {
         apiSecretHasher,
       );
 
-      const exception = new DomainException(
-        'Invalid input: id and apiSecret are required.',
-      );
+      const exception = new DomainException('API Secret is required.');
 
-      await expect(useCase.execute(input)).rejects.toThrowError(exception);
+      await expect(useCase.execute(input)).rejects.toThrow(exception);
 
-      expect.assertions(1);
+      expect(apiSecretHasher.hash).not.toBeCalled();
+      expect.assertions(2);
     });
 
     it('should throw an error - client not found', async () => {
@@ -188,9 +184,10 @@ describe('Change the client API secret use case', () => {
 
       const exception = new DomainException(`Client not found: ${input.id}`);
 
-      await expect(useCase.execute(input)).rejects.toThrowError(exception);
+      await expect(useCase.execute(input)).rejects.toThrow(exception);
 
-      expect.assertions(1);
+      expect(apiSecretHasher.hash).not.toBeCalled();
+      expect.assertions(2);
     });
   });
 });

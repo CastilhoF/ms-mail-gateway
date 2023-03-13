@@ -24,11 +24,9 @@ export default class ChangeTheClientApiSecretUseCase
   async execute(input: ChangeClientApiSecretInputDto): Promise<string> {
     const { id, apiSecret } = input;
 
-    if (!id || !apiSecret) {
-      throw new DomainException(
-        'Invalid input: id and apiSecret are required.',
-      );
-    }
+    if (!id) throw new DomainException('Id is required.');
+
+    if (!apiSecret) throw new DomainException('API Secret is required.');
 
     const client: ClientEntity = await this.clientRepository.findById(id);
 
