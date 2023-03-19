@@ -4,6 +4,7 @@ import ClientRepository from '../../../app/repositories/client/client.repository
 import ClientEntity from '../../entities/client/client.entity';
 import { DefaultClientDto } from './dtos/default-client.dto';
 import DefaultClientMapper from './mappers/default-client.mapper';
+import DomainException from '../../../domain/entities/shared/exceptions/domain.exception';
 
 @Injectable()
 export default class FindOneClientByIdUseCase
@@ -17,7 +18,7 @@ export default class FindOneClientByIdUseCase
     const client: ClientEntity = await this.clientRepository.findById(id);
 
     if (!client) {
-      throw new Error(`Client not found: ${id}`);
+      throw new DomainException(`Client not found: ${id}`);
     }
 
     this.logger.log(`Finding one client by ID: ${client.id}`);
