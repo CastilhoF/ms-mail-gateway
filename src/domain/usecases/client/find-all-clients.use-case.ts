@@ -7,7 +7,7 @@ import DefaultClientMapper from './mappers/default-client.mapper';
 
 @Injectable()
 export default class FindAllClientsUseCase
-  implements BaseUseCase<null, DefaultClientDto[]>
+  implements BaseUseCase<void, DefaultClientDto[]>
 {
   private readonly logger: Logger = new Logger(FindAllClientsUseCase.name);
 
