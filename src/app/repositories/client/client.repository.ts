@@ -1,10 +1,14 @@
 import BaseRepository from '../base/base.repository';
 import ClientEntity from '../../../domain/entities/client/client.entity';
+import { PaginationDto } from '../../../domain/usecases/client/dtos/pagination.dto';
 
 abstract class ClientRepository extends BaseRepository<ClientEntity> {
   abstract findAll(): Promise<ClientEntity[]>;
 
-  abstract findMany(filter: Partial<ClientEntity>): Promise<ClientEntity[]>;
+  abstract findMany(
+    pagination: PaginationDto,
+    filter: Partial<ClientEntity>,
+  ): Promise<ClientEntity[]>;
 
   abstract findById(id: string): Promise<ClientEntity>;
 

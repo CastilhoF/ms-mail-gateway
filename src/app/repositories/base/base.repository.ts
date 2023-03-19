@@ -1,6 +1,9 @@
 abstract class BaseRepository<Entity> {
   abstract findAll(): Promise<Entity[]>;
-  abstract findMany(filter: Partial<Entity>): Promise<Entity[]>;
+  abstract findMany(
+    pagination: any,
+    filter: Partial<Entity>,
+  ): Promise<Entity[]>;
   abstract findById(id: string): Promise<Entity>;
   abstract findOne(filter: Partial<Entity>): Promise<Entity>;
   abstract save(entity: Entity): Promise<Entity>;
