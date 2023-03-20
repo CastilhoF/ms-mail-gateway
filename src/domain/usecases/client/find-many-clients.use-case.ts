@@ -8,26 +8,30 @@ import { FindManyInputDto } from './dtos/find-many-input.dto';
 
 @Injectable()
 export default class FindManyClientsUseCase
-  implements BaseUseCase<FindManyInputDto, DefaultClientDto[]>
+  implements
+    BaseUseCase<
+      FindManyInputDto,
+      { clients: DefaultClientDto[]; total: number }
+    >
 {
   private readonly logger: Logger = new Logger(FindManyClientsUseCase.name);
 
   constructor(private readonly clientRepository: ClientRepository) {}
 
-  async execute(input: FindManyInputDto): Promise<DefaultClientDto[]> {
+  async execute(
+    input: FindManyInputDto,
+  ): Promise<{ clients: DefaultClientDto[]; total: number }> {
     const { pagination, data } = input;
 
     this.logger.log(`Finding clients`);
 
-    const foundClients: ClientEntity[] = await this.clientRepository.findMany(
-      pagination,
-      data,
-    );
+    const foundClients: { clients: ClientEntity[]; total: number } =
+      await this.clientRepository.findMany(pagination, data);
 
-    const clients: DefaultClientDto[] = foundClients.map(
+    const clients: DefaultClientDto[] = foundClients?.clients.map(
       DefaultClientMapper.toDto,
     );
 
-    return clients;
+    return { clients, total: foundClients.total };
   }
 }

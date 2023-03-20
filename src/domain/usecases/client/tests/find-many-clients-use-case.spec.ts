@@ -14,7 +14,7 @@ describe('find many clients use case', () => {
 
   describe('when client is found', () => {
     it('should return many clients', async () => {
-      const clientMock = new ClientEntity(
+      const clientMock: ClientEntity = new ClientEntity(
         '355242a5-4d0d-4199-bced-166ba023267d',
         'www.test.com.br',
         'test',
@@ -24,13 +24,17 @@ describe('find many clients use case', () => {
         new Date(),
       );
 
+      const resultMock: { clients: ClientEntity[]; total: number } = {
+        clients: [clientMock],
+        total: 1,
+      };
+
       const FindQueryMock: Partial<DefaultClientDto> = {
         host: 'www.test.com.br',
       };
 
-      const findManyMock = clientRepository.findMany.mockResolvedValueOnce([
-        clientMock,
-      ]);
+      const findManyMock =
+        clientRepository.findMany.mockResolvedValueOnce(resultMock);
 
       const paginationMock: PaginationDto = {
         page: 1,
@@ -39,10 +43,11 @@ describe('find many clients use case', () => {
 
       const useCase = new FindManyClientsUseCase(clientRepository);
 
-      const resultExpect: DefaultClientDto[] = await useCase.execute({
-        pagination: paginationMock,
-        data: FindQueryMock,
-      });
+      const resultExpect: { clients: DefaultClientDto[]; total: number } =
+        await useCase.execute({
+          pagination: paginationMock,
+          data: FindQueryMock,
+        });
 
       const output = resultExpect;
 
@@ -58,7 +63,10 @@ describe('find many clients use case', () => {
         host: 'www.test.com.br',
       };
 
-      const findManyMock = clientRepository.findMany.mockResolvedValueOnce([]);
+      const findManyMock = clientRepository.findMany.mockResolvedValueOnce({
+        clients: [],
+        total: 0,
+      });
 
       const paginationMock: PaginationDto = {
         page: 1,
@@ -67,10 +75,11 @@ describe('find many clients use case', () => {
 
       const useCase = new FindManyClientsUseCase(clientRepository);
 
-      const resultExpect: DefaultClientDto[] = await useCase.execute({
-        pagination: paginationMock,
-        data: FindQueryMock,
-      });
+      const resultExpect: { clients: DefaultClientDto[]; total: number } =
+        await useCase.execute({
+          pagination: paginationMock,
+          data: FindQueryMock,
+        });
 
       const output = resultExpect;
 

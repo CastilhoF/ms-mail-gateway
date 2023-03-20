@@ -15,6 +15,7 @@ class RedisOptionsFactory implements CacheOptionsFactory {
       host: this.cacheConfig.getCacheHost(),
       port: this.cacheConfig.getCachePort(),
       database: this.cacheConfig.getCacheLogicalDatabase(),
+      password: this.cacheConfig.getCachePassword(),
       ttl: this.cacheConfig.getCacheTTL(),
       store: redisStore,
       isGlobal: true,
