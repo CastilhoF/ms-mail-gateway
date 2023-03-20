@@ -28,7 +28,7 @@ class SenderEntity extends BaseEntity {
 
     this.validate();
   }
-  
+
   private validateName(name: string): boolean {
     if (!name) {
       throw new DomainException('name is required');
@@ -38,7 +38,7 @@ class SenderEntity extends BaseEntity {
 
   private validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
+
     if (!email) {
       throw new DomainException('email is required');
     }

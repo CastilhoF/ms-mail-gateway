@@ -31,7 +31,7 @@ class ClientMongoRepository implements ClientRepository {
   async findMany(
     pagination: PaginationDto,
     filter: Partial<ClientEntity>,
-  ): Promise<{ clients: ClientEntity[]; total: number }> {
+  ): Promise<{ entities: ClientEntity[]; total: number }> {
     const partialClientModel: Partial<ClientModel> =
       ClientModelMapper.partialEntityToPartialModel(filter);
 
@@ -53,7 +53,7 @@ class ClientMongoRepository implements ClientRepository {
       throw new DatabaseNotFoundException('No clients found');
 
     return {
-      clients: clients.map((client) => ClientModelMapper.toEntity(client)),
+      entities: clients.map((client) => ClientModelMapper.toEntity(client)),
       total,
     };
   }

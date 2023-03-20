@@ -8,7 +8,7 @@ abstract class ClientRepository extends BaseRepository<ClientEntity> {
   abstract findMany(
     pagination: PaginationDto,
     filter: Partial<ClientEntity>,
-  ): Promise<{ clients: ClientEntity[]; total: number }>;
+  ): Promise<{ entities: ClientEntity[]; total: number }>;
 
   abstract findById(id: string): Promise<ClientEntity>;
 

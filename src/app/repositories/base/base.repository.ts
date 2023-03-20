@@ -3,7 +3,7 @@ abstract class BaseRepository<Entity> {
   abstract findMany(
     pagination: any,
     filter: Partial<Entity>,
-  ): Promise<{ clients: Entity[]; total: number }>;
+  ): Promise<{ entities: Entity[]; total: number }>;
   abstract findById(id: string): Promise<Entity>;
   abstract findOne(filter: Partial<Entity>): Promise<Entity>;
   abstract save(entity: Entity): Promise<Entity>;

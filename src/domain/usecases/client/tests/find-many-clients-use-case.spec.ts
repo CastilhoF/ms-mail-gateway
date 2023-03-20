@@ -24,8 +24,8 @@ describe('find many clients use case', () => {
         new Date(),
       );
 
-      const resultMock: { clients: ClientEntity[]; total: number } = {
-        clients: [clientMock],
+      const resultMock: { entities: ClientEntity[]; total: number } = {
+        entities: [clientMock],
         total: 1,
       };
 
@@ -43,7 +43,7 @@ describe('find many clients use case', () => {
 
       const useCase = new FindManyClientsUseCase(clientRepository);
 
-      const resultExpect: { clients: DefaultClientDto[]; total: number } =
+      const resultExpect: { entities: DefaultClientDto[]; total: number } =
         await useCase.execute({
           pagination: paginationMock,
           data: FindQueryMock,
@@ -64,7 +64,7 @@ describe('find many clients use case', () => {
       };
 
       const findManyMock = clientRepository.findMany.mockResolvedValueOnce({
-        clients: [],
+        entities: [],
         total: 0,
       });
 
@@ -75,7 +75,7 @@ describe('find many clients use case', () => {
 
       const useCase = new FindManyClientsUseCase(clientRepository);
 
-      const resultExpect: { clients: DefaultClientDto[]; total: number } =
+      const resultExpect: { entities: DefaultClientDto[]; total: number } =
         await useCase.execute({
           pagination: paginationMock,
           data: FindQueryMock,

@@ -11,7 +11,7 @@ export default class FindManyClientsUseCase
   implements
     BaseUseCase<
       FindManyInputDto,
-      { clients: DefaultClientDto[]; total: number }
+      { entities: DefaultClientDto[]; total: number }
     >
 {
   private readonly logger: Logger = new Logger(FindManyClientsUseCase.name);
@@ -20,18 +20,18 @@ export default class FindManyClientsUseCase
 
   async execute(
     input: FindManyInputDto,
-  ): Promise<{ clients: DefaultClientDto[]; total: number }> {
+  ): Promise<{ entities: DefaultClientDto[]; total: number }> {
     const { pagination, data } = input;
 
     this.logger.log(`Finding clients`);
 
-    const foundClients: { clients: ClientEntity[]; total: number } =
+    const foundClients: { entities: ClientEntity[]; total: number } =
       await this.clientRepository.findMany(pagination, data);
 
-    const clients: DefaultClientDto[] = foundClients?.clients.map(
+    const entities: DefaultClientDto[] = foundClients?.entities.map(
       DefaultClientMapper.toDto,
     );
 
-    return { clients, total: foundClients.total };
+    return { entities, total: foundClients.total };
   }
 }
