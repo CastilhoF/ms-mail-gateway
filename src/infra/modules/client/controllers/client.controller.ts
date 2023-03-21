@@ -79,11 +79,13 @@ class ClientController {
     return await this.clientService.findOneClientByUid(uid);
   }
 
-  @Post('find-by-host/:host')
+  @Post('find-by-host')
   @HttpCode(HttpStatus.OK)
   @FindByHost.Doc()
-  async findOneByHost(@Param('host') host: string): Promise<DefaultClientDto> {
-    return await this.clientService.findOneClientByHost(host);
+  async findOneByHost(
+    @Body() input: { host: string },
+  ): Promise<DefaultClientDto> {
+    return await this.clientService.findOneClientByHost(input.host);
   }
 
   @Patch('update-client/:uid')
