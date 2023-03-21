@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import apiKeyGeneratorProvider from './providers/api-key-generator.provider';
 import apiSecretHasherProvider from './providers/api-secret-hasher.provider';
 import uidGeneratorProvider from './providers/uid-generator.provider';
 
+@Global()
 @Module({
   providers: [
     apiKeyGeneratorProvider,

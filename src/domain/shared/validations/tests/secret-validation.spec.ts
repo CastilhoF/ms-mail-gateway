@@ -8,64 +8,20 @@ describe('SecretValidation', () => {
     secretValidation = new SecretValidation();
   });
 
-  it('should throw an exception when password is less than 8 characters long', async () => {
-    const apiKey = '1234567';
-
-    const promise = secretValidation.validate(apiKey);
-
-    await expect(promise).rejects.toThrowError(
-      new DomainException('Password must be at least 8 characters long'),
-    );
-  });
-
-  it('should throw an exception when password does not contain lowercase letters', async () => {
-    const apiKey = 'ABCDEFGH1$';
-
-    const promise = secretValidation.validate(apiKey);
-
-    await expect(promise).rejects.toThrowError(
-      new DomainException(
-        'Password must contain at least one lowercase letter',
-      ),
-    );
-  });
-
-  it('should throw an exception when password does not contain uppercase letters', async () => {
-    const apiKey = 'abcdefgh1$';
-
-    const promise = secretValidation.validate(apiKey);
-
-    await expect(promise).rejects.toThrowError(
-      new DomainException(
-        'Password must contain at least one uppercase letter',
-      ),
-    );
-  });
-
-  it('should throw an exception when password does not contain digits', async () => {
-    const apiKey = 'Abcdefgh$';
-
-    const promise = secretValidation.validate(apiKey);
-
-    await expect(promise).rejects.toThrowError(
-      new DomainException('Password must contain at least one digit'),
-    );
-  });
-
-  it('should throw an exception when password does not contain special characters', async () => {
+  it('should throw an exception when api key does not a valid uuidv4', async () => {
     const apiKey = 'Abcdefgh1';
 
     const promise = secretValidation.validate(apiKey);
 
     await expect(promise).rejects.toThrowError(
       new DomainException(
-        'Password must contain at least one special character (@$!%*?&)',
+        'Api Secret must be a valid UUID v4 (xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx)',
       ),
     );
   });
 
   it('should return true when password is valid', async () => {
-    const apiKey = 'Abcdefgh1$';
+    const apiKey = '71f97782-f5ea-42bf-8c04-50a69379ddd4';
 
     const result = await secretValidation.validate(apiKey);
 

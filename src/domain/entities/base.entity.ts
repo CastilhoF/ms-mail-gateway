@@ -1,16 +1,16 @@
 abstract class BaseEntity {
-  private _id?: string;
+  private _uid?: string;
 
-  constructor(id: string) {
-    this._id = id;
+  constructor(uid: string) {
+    this._uid = uid;
   }
 
-  get id(): string {
-    return this._id;
+  get uid(): string {
+    return this._uid;
   }
 
-  set id(id: string) {
-    this._id = id;
+  set uid(uid: string) {
+    this._uid = uid;
   }
 }
 

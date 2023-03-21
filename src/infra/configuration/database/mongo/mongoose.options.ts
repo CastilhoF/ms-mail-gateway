@@ -13,9 +13,9 @@ const MongooseOptions = (
   const host = databaseConfig.getDatabaseHost();
   const port = databaseConfig.getDatabasePort();
 
-  let uri = `${protocol}://${host}`
+  let uri = `${protocol}://${host}`;
 
-  if (protocol === 'mongodb') uri += `:${port}`
+  if (protocol === 'mongodb') uri += `:${port}`;
 
   return {
     appName: applicationConfig.getAppName(),

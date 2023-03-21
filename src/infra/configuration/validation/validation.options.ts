@@ -22,6 +22,7 @@ const validationGlobalPipe = (): PipeTransform => {
     'validationError.target': true,
     'validationError.value': true,
     whitelist: true,
+    transform: true,
   };
 
   return new ValidationPipe(options);

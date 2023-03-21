@@ -1,34 +1,12 @@
 import DomainException from '../../entities/shared/exceptions/domain.exception';
 
 class SecretValidation {
-  async validate(apiKey: string): Promise<boolean> {
-    if (apiKey.length < 8) {
-      throw new DomainException('Password must be at least 8 characters long');
-    }
-
-    const lowercaseRegex = /[a-z]/;
-    if (!lowercaseRegex.test(apiKey)) {
+  async validate(apiSecret: string): Promise<boolean> {
+    const isUUidV4 =
+      /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[8|9aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
+    if (!isUUidV4.test(apiSecret)) {
       throw new DomainException(
-        'Password must contain at least one lowercase letter',
-      );
-    }
-
-    const uppercaseRegex = /[A-Z]/;
-    if (!uppercaseRegex.test(apiKey)) {
-      throw new DomainException(
-        'Password must contain at least one uppercase letter',
-      );
-    }
-
-    const digitRegex = /\d/;
-    if (!digitRegex.test(apiKey)) {
-      throw new DomainException('Password must contain at least one digit');
-    }
-
-    const specialCharRegex = /[@$!%*?&]/;
-    if (!specialCharRegex.test(apiKey)) {
-      throw new DomainException(
-        'Password must contain at least one special character (@$!%*?&)',
+        'Api Secret must be a valid UUID v4 (xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx)',
       );
     }
 

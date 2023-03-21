@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import DatabaseInterface from "./database.interface";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import DatabaseInterface from './database.interface';
 
 @Injectable()
 class DatabaseEnvironment implements DatabaseInterface {
@@ -25,7 +25,6 @@ class DatabaseEnvironment implements DatabaseInterface {
   getDatabaseName(): string {
     return this.configService.get<string>('DATABASE_NAME');
   }
-
 }
 
 export default DatabaseEnvironment;

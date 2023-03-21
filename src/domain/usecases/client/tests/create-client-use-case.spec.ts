@@ -9,7 +9,7 @@ import ApiKeyGeneratorInterface from '../../../../app/shared/interfaces/api-key-
 import ApiSecretHasherInterface from '../../../../app/shared/interfaces/api-secret-hasher.interface';
 import UidGeneratorInterface from '../../../../app/shared/interfaces/uid-generator.interface';
 
-describe('CreateClientUseCase', () => {
+describe('Create Client Use Case', () => {
   let clientRepository: MockProxy<ClientRepository> | null = null;
   let apiKeyGenerator: MockProxy<ApiKeyGeneratorInterface> | null = null;
   let apiSecretHasher: MockProxy<ApiSecretHasherInterface> | null = null;
@@ -33,7 +33,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -63,7 +63,7 @@ describe('CreateClientUseCase', () => {
       const resultExpect: CreateClientOutputDto = await useCase.execute(input);
 
       const output: CreateClientOutputDto = {
-        id: clientId,
+        uid: clientId,
         host: input.host,
         client: input.client,
         apiKey: apiKeyHash,
@@ -90,7 +90,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: null,
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -125,7 +125,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: undefined,
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -160,7 +160,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: null,
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -195,7 +195,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: undefined,
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -300,7 +300,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -335,7 +335,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -370,7 +370,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -405,7 +405,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -440,7 +440,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);
@@ -475,7 +475,7 @@ describe('CreateClientUseCase', () => {
       const input: CreateClientInputDto = {
         host: 'www.test.com.br',
         client: 'test',
-        apiSecret: 'P@ssw0rd',
+        apiSecret: 'a9e8fbfa-7e8d-4561-b039-8677d819c066',
       };
 
       uidGenerator.generate.mockResolvedValue(clientId);

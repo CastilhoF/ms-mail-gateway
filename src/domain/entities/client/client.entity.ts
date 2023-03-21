@@ -10,7 +10,7 @@ class ClientEntity extends BaseEntity {
   private _updatedAt: Date;
 
   constructor(
-    id: string,
+    uid: string,
     host: string,
     client: string,
     apiKey: string,
@@ -18,7 +18,7 @@ class ClientEntity extends BaseEntity {
     createdAt: Date,
     updatedAt: Date,
   ) {
-    super(id);
+    super(uid);
     this._host = host;
     this._client = client;
     this._apiKey = apiKey;

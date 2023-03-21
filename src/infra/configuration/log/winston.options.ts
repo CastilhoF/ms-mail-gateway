@@ -18,7 +18,7 @@ const consoleOptions: ConsoleTransportOptions = {
     winston.format.ms(),
     winston.format.splat(),
     winston.format.errors(),
-    utilities.format.nestLike('music-pro-template', {
+    utilities.format.nestLike('ms-mail-gateway', {
       prettyPrint: true,
       colors: true,
     }),
@@ -29,7 +29,7 @@ const logConsole: ConsoleTransportInstance = new Console(consoleOptions);
 
 const fileOptions: FileTransportOptions = {
   dirname: DIR_PATH,
-  filename: 'music-pro-template.log',
+  filename: 'ms-mail-gateway.log',
   format: winston.format.combine(
     winston.format.timestamp(),
     winston.format.ms(),

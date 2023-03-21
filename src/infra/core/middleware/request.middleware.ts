@@ -1,10 +1,11 @@
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
+import { NextFunction, Request, Response } from 'express';
 
 @Injectable()
 export class RequestMiddleware implements NestMiddleware {
   private readonly logger: Logger = new Logger(RequestMiddleware.name);
 
-  use(request: Request, response: Response, next: () => void) {
+  use(request: Request, response: Response, next: NextFunction) {
     this.logger.debug(
       'Request: %O',
       this.requestFormat(request),
@@ -16,13 +17,11 @@ export class RequestMiddleware implements NestMiddleware {
 
   requestFormat(request: Request) {
     return {
-      route: `${request.method} - ${request.url}`,
+      route: `${request.method} - ${request.originalUrl}`,
       body: request.body,
       headers: request.headers,
-      cache: request.cache,
-      mode: request.mode,
-      credentials: request.credentials,
-      destination: request.destination,
+      params: request.params,
+      query: request.query,
     };
   }
 }

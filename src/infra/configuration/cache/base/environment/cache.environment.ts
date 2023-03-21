@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import CacheInterface from "./cache.interface";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import CacheInterface from './cache.interface';
 
 @Injectable()
 abstract class CacheEnvironment implements CacheInterface {
@@ -16,6 +16,10 @@ abstract class CacheEnvironment implements CacheInterface {
 
   getCacheTTL(): number {
     return this.config.get<number>('CACHE_TTL');
+  }
+
+  getCachePassword(): string {
+    return this.config.get<string>('CACHE_PASSWORD');
   }
 }
 

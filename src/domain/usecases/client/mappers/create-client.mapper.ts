@@ -17,7 +17,7 @@ class CreateClientMapper {
 
   static toOutputDto(entity: ClientEntity): CreateClientOutputDto {
     return {
-      id: entity.id,
+      uid: entity.uid,
       host: entity.host,
       client: entity.client,
       apiKey: entity.apiKey,
