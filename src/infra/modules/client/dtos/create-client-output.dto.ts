@@ -25,11 +25,13 @@ export class CreateClientOutputDto {
   @IsNotEmpty()
   @IsString()
   @Expose({ name: 'api_key' })
+  @ApiProperty(ClientFieldsDocumentation.apiKey)
   readonly apiKey: string;
 
   @IsNotEmpty()
   @IsString()
   @Expose({ name: 'api_secret' })
+  @ApiProperty(ClientFieldsDocumentation.apiSecret)
   readonly apiSecret: string;
 
   @IsNotEmpty()
