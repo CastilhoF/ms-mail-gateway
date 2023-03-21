@@ -40,6 +40,7 @@ async function start(app: INestApplication) {
   const host = configService.get('APP_HOST');
   const port = configService.get('APP_PORT');
 
+  app.setGlobalPrefix(configService.get('APP_GLOBAL_PREFIX'));
   app.get(SwaggerOptions).setup(app);
 
   await app.listen(port, host, async () => {

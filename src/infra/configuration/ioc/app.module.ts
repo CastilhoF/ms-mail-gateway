@@ -3,6 +3,7 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ThrottlerModule } from '@nestjs/throttler';
+import SwaggerOptions from '../swagger/swagger.options';
 import { WinstonModule } from 'nest-winston';
 import CacheModule from './cache/cache.module';
 import DatabaseModule from './database/database.module';
@@ -10,11 +11,11 @@ import { RequestMiddleware } from '../../core/middleware/request.middleware';
 import httpProvider from '../http/provider/http.provider';
 import eventOptions from '../event/event.options';
 import environmentOptions from '../environment/environment.options';
-import SwaggerOptions from '../swagger/swagger.options';
 import throttlerOptions from '../security/ddos/throttler.options';
 import { winstonConfig } from '../log/winston.options';
 import { EnvironmentModule } from './environment.module';
 import CryptographyModule from './cryptography/cryptography.module';
+import ClientModule from './client/client.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import CryptographyModule from './cryptography/cryptography.module';
     CryptographyModule,
     DatabaseModule,
     EnvironmentModule,
+    ClientModule,
   ],
   controllers: [],
   providers: [SwaggerOptions],

@@ -8,7 +8,7 @@ import { ClientDocument } from '../../../../infra/configuration/ioc/database/sch
 import ClientModelMapper from '../../database/mappers/client-model.mapper';
 import DatabaseConflictException from '../../database/exceptions/database-conflict.exception';
 import DatabaseNotFoundException from '../../database/exceptions/database-not-found.exception';
-import { PaginationDto } from '../dtos/pagination.dto';
+import { PaginationDto } from '../../../../domain/usecases/client/dtos/pagination.dto';
 
 @Injectable()
 class ClientMongoRepository implements ClientRepository {

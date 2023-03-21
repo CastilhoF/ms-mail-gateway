@@ -3,16 +3,15 @@ import { Expose } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 import ClientFieldsDocumentation from '../documentation/client-fields.documentation';
 import { DefaultClientDto } from './default-client.dto';
-import { PaginationDto } from './pagination.dto';
 
-export class FindManyInputDto {
+export class FindManyOutputDto {
   @IsNotEmpty()
-  @Expose({ name: 'pagination' })
-  @ApiProperty(ClientFieldsDocumentation.pagination)
-  pagination: PaginationDto;
+  @Expose({ name: 'clients' })
+  @ApiProperty(ClientFieldsDocumentation.entities)
+  entities: DefaultClientDto[];
 
   @IsNotEmpty()
-  @Expose({ name: 'data' })
-  @ApiProperty(ClientFieldsDocumentation.data)
-  data: Partial<DefaultClientDto>;
+  @Expose({ name: 'total' })
+  @ApiProperty(ClientFieldsDocumentation.total)
+  total: number;
 }

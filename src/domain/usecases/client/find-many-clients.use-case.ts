@@ -5,6 +5,7 @@ import ClientEntity from '../../entities/client/client.entity';
 import { DefaultClientDto } from './dtos/default-client.dto';
 import DefaultClientMapper from './mappers/default-client.mapper';
 import { FindManyInputDto } from './dtos/find-many-input.dto';
+import { FindManyOutputDto } from './dtos/find-many-output.dto';
 
 @Injectable()
 export default class FindManyClientsUseCase
@@ -18,9 +19,7 @@ export default class FindManyClientsUseCase
 
   constructor(private readonly clientRepository: ClientRepository) {}
 
-  async execute(
-    input: FindManyInputDto,
-  ): Promise<{ entities: DefaultClientDto[]; total: number }> {
+  async execute(input: FindManyInputDto): Promise<FindManyOutputDto> {
     const { pagination, data } = input;
 
     this.logger.log(`Finding clients`);

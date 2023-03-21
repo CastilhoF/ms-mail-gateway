@@ -22,6 +22,10 @@ class ApplicationEnvironment implements ApplicationInterface {
   getNodeEnv(): EnvironmentEntity {
     return this.configService.get<EnvironmentEntity>('NODE_ENV');
   }
+
+  getGlobalPrefix(): string {
+    return this.configService.get<string>('APP_GLOBAL_PREFIX');
+  }
 }
 
 export default ApplicationEnvironment;
