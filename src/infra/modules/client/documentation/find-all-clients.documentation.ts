@@ -22,12 +22,14 @@ class GetAllClients {
   };
 
   public static getAllBody: ApiBodyOptions = {
+    description: 'Get All Clients',
     isArray: false,
     required: true,
   };
 
   public static getAllResponse: ApiResponseOptions = {
     type: () => DefaultClientDto,
+    description: 'Clients found',
     status: 200,
     isArray: true,
   };

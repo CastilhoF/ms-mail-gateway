@@ -1,15 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber } from 'class-validator';
-import ClientsDtosDocumentation from '../documentation/clients-dtos.documentation';
+import FindManyPagination from '../documentation/find-many-pagination.documentation';
 
 export class PaginationDto {
   @IsNumber()
   @IsNotEmpty()
-  @ApiProperty(ClientsDtosDocumentation.page)
+  @ApiProperty(FindManyPagination.page)
   page: number;
 
   @IsNumber()
   @IsNotEmpty()
-  @ApiProperty(ClientsDtosDocumentation.limit)
+  @ApiProperty(FindManyPagination.limit)
   limit: number;
 }

@@ -20,9 +20,14 @@ class DeleteClient {
     tags: ['Client'],
   };
 
-  public static deleteParam: ApiParamOptions = { name: 'id', type: String };
+  public static deleteParam: ApiParamOptions = {
+    name: 'id',
+    description: 'Delete client by id',
+    type: String,
+  };
 
   public static deleteResponse: ApiResponseOptions = {
+    description: 'Client deleted',
     status: 204,
     isArray: false,
   };

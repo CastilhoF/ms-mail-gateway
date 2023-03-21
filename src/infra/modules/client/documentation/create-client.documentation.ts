@@ -25,12 +25,14 @@ class CreateClient {
 
   public static createBody: ApiBodyOptions = {
     type: () => CreateClientInputDto,
+    description: 'Create Client by dto',
     isArray: false,
     required: true,
   };
 
   public static createResponse: ApiResponseOptions = {
     type: () => CreateClientOutputDto,
+    description: 'Client created',
     status: 201,
     isArray: false,
   };
@@ -44,13 +46,11 @@ class CreateClient {
   };
 
   public static createBadRequestSchema: ExceptionsResponseSchemaDto = {
-    example: [
-      {
-        statusCode: 400,
-        message: 'Client not found',
-        error: 'Bad Request',
-      },
-    ],
+    example: {
+      statusCode: 400,
+      message: 'Client not found',
+      error: 'Bad Request',
+    },
   };
 
   public static createInternalErrorSchema: ExceptionsResponseSchemaDto = {

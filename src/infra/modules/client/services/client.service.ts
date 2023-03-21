@@ -85,8 +85,10 @@ class ClientService {
     return result;
   }
 
-  public async patchClient(input: Partial<DefaultClientDto>): Promise<void> {
-    await this.patchClientUseCase.execute(input).catch(errorCallback);
+  public async patchClient(
+    input: Partial<DefaultClientDto>,
+  ): Promise<DefaultClientDto> {
+    return await this.patchClientUseCase.execute(input).catch(errorCallback);
   }
 }
 

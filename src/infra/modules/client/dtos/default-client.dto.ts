@@ -8,43 +8,43 @@ export class DefaultClientDto {
   @IsNotEmpty()
   @Expose({ name: 'id' })
   @ApiProperty(ClientFieldsDocumentation.id)
-  readonly id: string;
+  id: string;
 
   @IsNotEmpty()
   @IsString()
   @Expose({ name: 'host' })
   @ApiProperty(ClientFieldsDocumentation.host)
-  readonly host: string;
+  host: string;
 
   @IsNotEmpty()
   @IsString()
   @Expose({ name: 'client' })
   @ApiProperty(ClientFieldsDocumentation.client)
-  readonly client: string;
+  client: string;
 
   @IsNotEmpty()
   @IsString()
   @Expose({ name: 'api_key' })
   @ApiProperty(ClientFieldsDocumentation.apiKey)
-  readonly apiKey: string;
+  apiKey: string;
 
   @IsNotEmpty()
   @IsString()
   @Expose({ name: 'api_secret' })
   @ApiProperty(ClientFieldsDocumentation.apiSecret)
-  readonly apiSecret: string;
+  apiSecret: string;
 
   @IsNotEmpty()
   @IsDate()
   @Expose({ name: 'created_at' })
   @ApiProperty(ClientFieldsDocumentation.createdAt)
-  readonly createdAt: Date;
+  createdAt: Date;
 
   @IsNotEmpty()
   @IsDate()
   @Expose({ name: 'updated_at' })
   @ApiProperty(ClientFieldsDocumentation.updatedAt)
-  readonly updatedAt: Date;
+  updatedAt: Date;
 
   constructor(
     id: string,
