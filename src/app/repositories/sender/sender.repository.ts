@@ -8,7 +8,7 @@ abstract class SenderRepository extends BaseRepository<SenderEntity> {
     filter: Partial<SenderEntity>,
   ): Promise<{ entities: SenderEntity[]; total: number }>;
 
-  abstract findById(id: string): Promise<SenderEntity>;
+  abstract findByUid(uid: string): Promise<SenderEntity>;
 
   abstract findOne(filter: Partial<SenderEntity>): Promise<SenderEntity>;
 
@@ -18,14 +18,14 @@ abstract class SenderRepository extends BaseRepository<SenderEntity> {
 
   abstract save(entity: SenderEntity): Promise<SenderEntity>;
 
-  abstract update(id: string, entity: SenderEntity): Promise<SenderEntity>;
+  abstract update(uid: string, entity: SenderEntity): Promise<SenderEntity>;
 
   abstract patch(
-    id: string,
+    uid: string,
     partialEntity: Partial<SenderEntity>,
   ): Promise<SenderEntity>;
 
-  abstract delete(id: string): Promise<void>;
+  abstract delete(uid: string): Promise<void>;
 }
 
 export default SenderRepository;

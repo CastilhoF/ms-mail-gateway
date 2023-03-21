@@ -3,17 +3,17 @@ import DomainException from '../../../../domain/entities/shared/exceptions/domai
 import ClientRepository from '../../../../app/repositories/client/client.repository';
 import ClientEntity from '../../../entities/client/client.entity';
 import { DefaultClientDto } from '../dtos/default-client.dto';
-import FindOneClientByIdUseCase from '../find-one-client-by-id.use-case';
+import FindOneClientByUidUseCase from '../find-one-client-by-uid.use-case';
 import DefaultClientMapper from '../mappers/default-client.mapper';
 
-describe('find one client by id use case', () => {
+describe('find one client by uid use case', () => {
   let clientRepository: MockProxy<ClientRepository> | null = null;
 
   beforeEach(() => {
     clientRepository = mock<ClientRepository>();
   });
 
-  describe('when get one client by id', () => {
+  describe('when get one client by uid', () => {
     it('should return one client', async () => {
       const clientMock = new ClientEntity(
         '355242a5-4d0d-4199-bced-166ba023267d',
@@ -25,10 +25,10 @@ describe('find one client by id use case', () => {
         new Date(),
       );
 
-      const findByIdMock =
-        clientRepository.findById.mockResolvedValueOnce(clientMock);
+      const findByUidMock =
+        clientRepository.findByUid.mockResolvedValueOnce(clientMock);
 
-      const useCase = new FindOneClientByIdUseCase(clientRepository);
+      const useCase = new FindOneClientByUidUseCase(clientRepository);
 
       const resultExpect: DefaultClientDto = await useCase.execute(
         '355242a5-4d0d-4199-bced-166ba023267d',
@@ -36,7 +36,7 @@ describe('find one client by id use case', () => {
 
       const output = DefaultClientMapper.toDto(clientMock);
 
-      expect(findByIdMock).toBeCalledTimes(1);
+      expect(findByUidMock).toBeCalledTimes(1);
       expect(resultExpect).toEqual(output);
       expect.assertions(2);
     });
@@ -44,7 +44,7 @@ describe('find one client by id use case', () => {
     it('should return not found error', async () => {
       const id = '355242a5-4d0d-4199-bced-166ba023267d';
 
-      const useCase = new FindOneClientByIdUseCase(clientRepository);
+      const useCase = new FindOneClientByUidUseCase(clientRepository);
 
       const exception = new DomainException(`Client not found: ${id}`);
 

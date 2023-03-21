@@ -6,9 +6,9 @@ import ClientFieldsDocumentation from '../documentation/client-fields.documentat
 export class DefaultClientDto {
   @IsUUID()
   @IsNotEmpty()
-  @Expose({ name: 'id' })
-  @ApiProperty(ClientFieldsDocumentation.id)
-  id: string;
+  @Expose({ name: 'uid' })
+  @ApiProperty(ClientFieldsDocumentation.uid)
+  uid: string;
 
   @IsNotEmpty()
   @IsString()
@@ -47,7 +47,7 @@ export class DefaultClientDto {
   updatedAt: Date;
 
   constructor(
-    id: string,
+    uid: string,
     host: string,
     client: string,
     apiKey: string,
@@ -55,7 +55,7 @@ export class DefaultClientDto {
     createdAt: Date,
     updatedAt: Date,
   ) {
-    this.id = id;
+    this.uid = uid;
     this.host = host;
     this.client = client;
     this.apiKey = apiKey;

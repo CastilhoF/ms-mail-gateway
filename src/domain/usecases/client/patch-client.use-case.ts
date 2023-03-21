@@ -18,13 +18,15 @@ export default class PatchClientUseCase
   ) {}
 
   async execute(data: Partial<DefaultClientDto>): Promise<DefaultClientDto> {
-    if (!data.id) throw new DomainException('Client id is required');
+    if (!data.uid) throw new DomainException('Client uid is required');
 
-    const client: ClientEntity = await this.clientRepository.findById(data.id);
+    const client: ClientEntity = await this.clientRepository.findByUid(
+      data.uid,
+    );
 
     if (!client) {
-      this.logger.error(`Client not found: ${data.id}`);
-      throw new DomainException(`Client not found: ${data.id}`);
+      this.logger.error(`Client not found: ${data.uid}`);
+      throw new DomainException(`Client not found: ${data.uid}`);
     }
     const updatedAt = new Date();
 
@@ -46,9 +48,9 @@ export default class PatchClientUseCase
 
     const updatedClient: ClientEntity = Object.assign(client, updatedData);
 
-    this.logger.log(`Patching client: ${client.id}`);
+    this.logger.log(`Patching client: ${client.uid}`);
     const patchedClient: ClientEntity = await this.clientRepository.patch(
-      client.id,
+      client.uid,
       updatedClient,
     );
 

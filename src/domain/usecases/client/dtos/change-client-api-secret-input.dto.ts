@@ -1,4 +1,4 @@
 export class ChangeClientApiSecretInputDto {
-  readonly id: string;
+  readonly uid: string;
   readonly apiSecret: string;
 }

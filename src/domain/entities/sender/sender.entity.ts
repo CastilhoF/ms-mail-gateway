@@ -10,7 +10,7 @@ class SenderEntity extends BaseEntity {
   private _updatedAt: Date;
 
   constructor(
-    id: string,
+    uid: string,
     name: string,
     email: string,
     apiKey: string,
@@ -18,7 +18,7 @@ class SenderEntity extends BaseEntity {
     createdAt: Date,
     updatedAt: Date,
   ) {
-    super(id);
+    super(uid);
     this._name = name;
     this._email = email;
     this._apiKey = apiKey;

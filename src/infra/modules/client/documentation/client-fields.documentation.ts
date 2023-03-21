@@ -1,10 +1,10 @@
 import { ApiPropertyOptions } from '@nestjs/swagger';
 
 class ClientFieldsDocumentation {
-  public static id: ApiPropertyOptions = {
-    name: 'id',
-    title: 'ID',
-    description: 'ID',
+  public static uid: ApiPropertyOptions = {
+    name: 'uid',
+    title: 'UID',
+    description: 'UID - [UUID V4]',
     example: '0x00000',
     isArray: false,
     type: String,

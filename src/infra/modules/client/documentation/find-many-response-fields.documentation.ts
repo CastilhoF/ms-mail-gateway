@@ -8,7 +8,7 @@ class FindManyResponseFieldsDocumentation {
     description: 'Entities',
     example: [
       {
-        id: '0x00000',
+        uid: '0x00000',
         host: 'https://example.com',
         client: 'Example',
         apiKey: '0x00000',

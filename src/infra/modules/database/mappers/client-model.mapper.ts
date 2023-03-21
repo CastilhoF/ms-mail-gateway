@@ -1,14 +1,11 @@
 import { instanceToPlain } from 'class-transformer';
 import ClientModel from '../../database/models/client-model';
 import ClientEntity from '../../../../domain/entities/client/client.entity';
-import { Types } from 'mongoose';
 
 class ClientModelMapper {
   public static toEntity(model: ClientModel): ClientEntity {
-    const id = model._id?.toString();
-
     return new ClientEntity(
-      id,
+      model.uid,
       model.host,
       model.client,
       model.api_key,
@@ -26,7 +23,7 @@ class ClientModelMapper {
     entity: Partial<ClientEntity>,
   ): Partial<ClientModel> {
     const clientModel: Partial<ClientModel> = {
-      _id: new Types.ObjectId(entity?.id),
+      uid: entity?.uid,
       host: entity?.host,
       client: entity?.client,
       api_key: entity?.apiKey,

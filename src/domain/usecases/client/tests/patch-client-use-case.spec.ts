@@ -32,7 +32,7 @@ describe('Patch Client Use Case', () => {
       );
 
       const input: Partial<DefaultClientDto> = {
-        id: '355242a5-4d0d-4199-bced-166ba023267d',
+        uid: '355242a5-4d0d-4199-bced-166ba023267d',
         host: 'www.test2.com.br',
       };
 
@@ -46,8 +46,8 @@ describe('Patch Client Use Case', () => {
         updatedAt,
       );
 
-      const findByIdClientMock =
-        clientRepository.findById.mockResolvedValueOnce(clientMock);
+      const findByUidClientMock =
+        clientRepository.findByUid.mockResolvedValueOnce(clientMock);
 
       const clientPatchMock =
         clientRepository.patch.mockResolvedValueOnce(clientPatchedMock);
@@ -59,7 +59,7 @@ describe('Patch Client Use Case', () => {
       const output: DefaultClientDto =
         DefaultClientMapper.toDto(clientPatchedMock);
 
-      expect(findByIdClientMock).toBeCalledTimes(1);
+      expect(findByUidClientMock).toBeCalledTimes(1);
       expect(clientPatchMock).toBeCalledTimes(1);
       expect(resultExpect).toEqual(output);
 
@@ -81,12 +81,12 @@ describe('Patch Client Use Case', () => {
       );
 
       const input: Partial<DefaultClientDto> = {
-        id: '355242a5-4d0d-4199-bced-166ba023267d',
+        uid: '355242a5-4d0d-4199-bced-166ba023267d',
         client: 'Test_New_Test',
       };
 
       const clientPatchedMock: ClientEntity = new ClientEntity(
-        clientMock.id,
+        clientMock.uid,
         clientMock.host,
         input.client,
         clientMock.apiKey,
@@ -95,8 +95,8 @@ describe('Patch Client Use Case', () => {
         updatedAt,
       );
 
-      const findByIdClientMock =
-        clientRepository.findById.mockResolvedValueOnce(clientMock);
+      const findByUidClientMock =
+        clientRepository.findByUid.mockResolvedValueOnce(clientMock);
 
       const clientPatchMock =
         clientRepository.patch.mockResolvedValueOnce(clientPatchedMock);
@@ -112,7 +112,7 @@ describe('Patch Client Use Case', () => {
       const output: DefaultClientDto =
         DefaultClientMapper.toDto(clientPatchedMock);
 
-      expect(findByIdClientMock).toBeCalledTimes(1);
+      expect(findByUidClientMock).toBeCalledTimes(1);
       expect(apiKeyHashed).toBeCalledTimes(1);
       expect(clientPatchMock).toBeCalledTimes(1);
       expect(resultExpect).toEqual(output);
@@ -121,10 +121,10 @@ describe('Patch Client Use Case', () => {
     });
   });
 
-  describe('when patching a client with invalid id', () => {
-    it('should throw an error - id not passed', async () => {
+  describe('when patching a client with invalid uid', () => {
+    it('should throw an error - uid not passed', async () => {
       const input: Partial<DefaultClientDto> = {
-        id: '',
+        uid: '',
         host: 'www.test2.com.br',
       };
 
@@ -135,9 +135,9 @@ describe('Patch Client Use Case', () => {
       expect.assertions(1);
     });
 
-    it('should throw an error - id null', async () => {
+    it('should throw an error - uid null', async () => {
       const input: Partial<DefaultClientDto> = {
-        id: null,
+        uid: null,
         host: 'www.test2.com.br',
       };
 
@@ -148,9 +148,9 @@ describe('Patch Client Use Case', () => {
       expect.assertions(1);
     });
 
-    it('should throw an error - id undefined', async () => {
+    it('should throw an error - uid undefined', async () => {
       const input: Partial<DefaultClientDto> = {
-        id: undefined,
+        uid: undefined,
         host: 'www.test2.com.br',
       };
 
@@ -161,20 +161,20 @@ describe('Patch Client Use Case', () => {
       expect.assertions(1);
     });
 
-    it('should throw an error - find by id return not found', async () => {
+    it('should throw an error - find by uid return not found', async () => {
       const input: Partial<DefaultClientDto> = {
-        id: '355242a5-4d0d-4199-bced-166ba023267d',
+        uid: '355242a5-4d0d-4199-bced-166ba023267d',
         host: 'www.test2.com.br',
       };
 
-      const findByIdClientMock =
-        clientRepository.findById.mockResolvedValueOnce(null);
+      const findByUidClientMock =
+        clientRepository.findByUid.mockResolvedValueOnce(null);
 
       const useCase = new PatchClientUseCase(clientRepository, apiKeyGenerator);
 
       await expect(useCase.execute(input)).rejects.toThrow(DomainException);
 
-      expect(findByIdClientMock).toBeCalledTimes(1);
+      expect(findByUidClientMock).toBeCalledTimes(1);
 
       expect.assertions(2);
     });

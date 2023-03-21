@@ -22,16 +22,16 @@ export default class ChangeTheClientApiSecretUseCase
   ) {}
 
   async execute(input: ChangeClientApiSecretInputDto): Promise<string> {
-    const { id, apiSecret } = input;
+    const { uid, apiSecret } = input;
 
-    if (!id) throw new DomainException('Id is required.');
+    if (!uid) throw new DomainException('Uid is required.');
 
     if (!apiSecret) throw new DomainException('API Secret is required.');
 
-    const client: ClientEntity = await this.clientRepository.findById(id);
+    const client: ClientEntity = await this.clientRepository.findByUid(uid);
 
     if (!client) {
-      throw new DomainException(`Client not found: ${id}`);
+      throw new DomainException(`Client not found: ${uid}`);
     }
 
     await this.secretValidation.validate(apiSecret);
@@ -44,16 +44,16 @@ export default class ChangeTheClientApiSecretUseCase
 
     client.apiSecret = hashedApiSecret;
 
-    this.logger.log(`Changing the client API secret: ${client.id}`);
+    this.logger.log(`Changing the client API secret: ${client.uid}`);
 
     const updatedClient: ClientEntity = await this.clientRepository.save(
       client,
     );
 
     this.logger.log(
-      `API Secret successfully changed for client: ${updatedClient.id}`,
+      `API Secret successfully changed for client: ${updatedClient.uid}`,
     );
 
-    return `API Secret successfully changed for client: ${updatedClient.id}`;
+    return `API Secret successfully changed for client: ${updatedClient.uid}`;
   }
 }

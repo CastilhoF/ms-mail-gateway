@@ -10,16 +10,16 @@ export default class DeleteClientUseCase implements BaseUseCase<string, void> {
 
   constructor(private readonly clientRepository: ClientRepository) {}
 
-  async execute(id: string): Promise<void> {
-    if (!id) throw new DomainException('Client id is required');
+  async execute(uid: string): Promise<void> {
+    if (!uid) throw new DomainException('Client uid is required');
 
-    const client: ClientEntity = await this.clientRepository.findById(id);
+    const client: ClientEntity = await this.clientRepository.findByUid(uid);
 
-    if (!client) throw new DomainException(`Client not found: ${id}`);
+    if (!client) throw new DomainException(`Client not found: ${uid}`);
 
-    this.logger.log(`Deleting client: ${client.id}`);
+    this.logger.log(`Deleting client: ${client.uid}`);
 
-    await this.clientRepository.delete(client.id);
+    await this.clientRepository.delete(client.uid);
 
     return;
   }

@@ -21,8 +21,8 @@ class DeleteClient {
   };
 
   public static deleteParam: ApiParamOptions = {
-    name: 'id',
-    description: 'Delete client by id',
+    name: 'uid',
+    description: 'Delete client by uid',
     type: String,
   };
 

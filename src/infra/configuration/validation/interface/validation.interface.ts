@@ -19,6 +19,7 @@ interface CustomValidationInterface extends ValidatorOptions {
   'validationError.target': boolean;
   'validationError.value': boolean;
   whitelist: boolean;
+  transform: boolean;
 }
 
 export default CustomValidationInterface;

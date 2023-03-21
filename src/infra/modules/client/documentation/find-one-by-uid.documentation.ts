@@ -14,21 +14,21 @@ import { ExceptionsResponseSchemaDto } from '../dtos/exception-schema.dto';
 import { DefaultClientDto } from '../dtos/default-client.dto';
 
 class FindById {
-  public static findByIdOperation: ApiOperationOptions = {
-    description: 'Find By Id',
-    summary: 'Find By Id',
+  public static findByUidOperation: ApiOperationOptions = {
+    description: 'Find By Uid',
+    summary: 'Find By Uid',
     deprecated: false,
     tags: ['Client'],
   };
 
-  public static findByIdParam: ApiParamOptions = {
-    name: 'id',
-    description: 'Client Id',
+  public static findByUidParam: ApiParamOptions = {
+    name: 'uid',
+    description: 'Client Uid',
     type: String,
     required: true,
   };
 
-  public static findByIdResponse: ApiResponseOptions = {
+  public static findByUidResponse: ApiResponseOptions = {
     type: () => DefaultClientDto,
     description: 'Client found',
     status: 200,
@@ -55,9 +55,9 @@ class FindById {
 
   public static Doc(): MethodDecorator {
     return applyDecorators(
-      ApiOperation(FindById.findByIdOperation),
-      ApiParam(FindById.findByIdParam),
-      ApiResponse(FindById.findByIdResponse),
+      ApiOperation(this.findByUidOperation),
+      ApiParam(this.findByUidParam),
+      ApiResponse(this.findByUidResponse),
       ApiBadRequestResponse(Exceptions.BadRequest(this.BadRequestSchema)),
       ApiInternalServerErrorResponse(
         Exceptions.InternalServer(this.InternalErrorSchema),

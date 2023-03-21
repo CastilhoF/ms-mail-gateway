@@ -16,6 +16,7 @@ import { winstonConfig } from '../log/winston.options';
 import { EnvironmentModule } from './environment.module';
 import CryptographyModule from './cryptography/cryptography.module';
 import ClientModule from './client/client.module';
+import { ThrottlerGuardProvider } from '../security/ddos/throttler.guard';
 
 @Module({
   imports: [
@@ -31,7 +32,7 @@ import ClientModule from './client/client.module';
     ClientModule,
   ],
   controllers: [],
-  providers: [SwaggerOptions],
+  providers: [SwaggerOptions, ThrottlerGuardProvider],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

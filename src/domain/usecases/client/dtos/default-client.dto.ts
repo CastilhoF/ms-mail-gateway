@@ -1,5 +1,5 @@
 export class DefaultClientDto {
-  readonly id: string;
+  readonly uid: string;
   readonly host: string;
   readonly client: string;
   readonly apiKey: string;
@@ -8,7 +8,7 @@ export class DefaultClientDto {
   readonly updatedAt: Date;
 
   constructor(
-    id: string,
+    uid: string,
     host: string,
     client: string,
     apiKey: string,
@@ -16,7 +16,7 @@ export class DefaultClientDto {
     createdAt: Date,
     updatedAt: Date,
   ) {
-    this.id = id;
+    this.uid = uid;
     this.host = host;
     this.client = client;
     this.apiKey = apiKey;

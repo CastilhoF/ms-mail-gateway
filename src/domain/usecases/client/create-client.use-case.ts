@@ -24,7 +24,7 @@ export default class CreateClientUseCase
     private readonly uidGenerator: UidGeneratorInterface,
   ) {}
 
-  async execute(input: CreateClientInputDto): Promise<CreateClientOutputDto> {
+  async execute(input: any): Promise<CreateClientOutputDto> {
     const { host, client, apiSecret } = input;
 
     await this.secretValidation.validate(apiSecret);
@@ -47,9 +47,9 @@ export default class CreateClientUseCase
       apiSecret: hashedApiSecret,
     });
 
-    clientEntity.id = await this.uidGenerator.generate();
+    clientEntity.uid = await this.uidGenerator.generate();
 
-    this.logger.log(`Creating client: ${clientEntity.id}`);
+    this.logger.log(`Creating client: ${clientEntity.uid}`);
 
     const createdClient: ClientEntity = await this.clientRepository.save(
       clientEntity,

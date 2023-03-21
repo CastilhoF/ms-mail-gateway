@@ -6,9 +6,9 @@ import ClientFieldsDocumentation from '../documentation/client-fields.documentat
 export class CreateClientOutputDto {
   @IsUUID()
   @IsNotEmpty()
-  @Expose({ name: 'id' })
-  @ApiProperty(ClientFieldsDocumentation.id)
-  readonly id: string;
+  @Expose({ name: 'uid' })
+  @ApiProperty(ClientFieldsDocumentation.uid)
+  readonly uid: string;
 
   @IsNotEmpty()
   @IsString()
@@ -47,7 +47,7 @@ export class CreateClientOutputDto {
   readonly updatedAt: Date;
 
   constructor(
-    id: string,
+    uid: string,
     host: string,
     client: string,
     apiKey: string,
@@ -55,7 +55,7 @@ export class CreateClientOutputDto {
     createdAt: Date,
     updatedAt: Date,
   ) {
-    this.id = id;
+    this.uid = uid;
     this.host = host;
     this.client = client;
     this.apiKey = apiKey;

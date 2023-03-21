@@ -7,21 +7,21 @@ import DefaultClientMapper from './mappers/default-client.mapper';
 import DomainException from '../../../domain/entities/shared/exceptions/domain.exception';
 
 @Injectable()
-export default class FindOneClientByIdUseCase
+export default class FindOneClientByUidUseCase
   implements BaseUseCase<string, DefaultClientDto>
 {
-  private readonly logger: Logger = new Logger(FindOneClientByIdUseCase.name);
+  private readonly logger: Logger = new Logger(FindOneClientByUidUseCase.name);
 
   constructor(private readonly clientRepository: ClientRepository) {}
 
-  async execute(id: string): Promise<DefaultClientDto> {
-    const client: ClientEntity = await this.clientRepository.findById(id);
+  async execute(uid: string): Promise<DefaultClientDto> {
+    const client: ClientEntity = await this.clientRepository.findByUid(uid);
 
     if (!client) {
-      throw new DomainException(`Client not found: ${id}`);
+      throw new DomainException(`Client not found: ${uid}`);
     }
 
-    this.logger.log(`Finding one client by ID: ${client.id}`);
+    this.logger.log(`Finding one client by ID: ${client.uid}`);
 
     return DefaultClientMapper.toDto(client);
   }

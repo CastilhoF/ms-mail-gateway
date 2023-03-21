@@ -11,7 +11,7 @@ describe('Delete Client Use Case', () => {
     clientRepository = mock<ClientRepository>();
   });
 
-  describe('when deleting client by client id', () => {
+  describe('when deleting client by client uid', () => {
     it('when client exists', async () => {
       const createdAt = new Date();
       const updatedAt = new Date();
@@ -33,7 +33,7 @@ describe('Delete Client Use Case', () => {
         updatedAt,
       );
 
-      clientRepository.findById.mockResolvedValue(clientMock);
+      clientRepository.findByUid.mockResolvedValue(clientMock);
 
       const useCase = new DeleteClientUseCase(clientRepository);
 
@@ -50,7 +50,7 @@ describe('Delete Client Use Case', () => {
 
         const input = clientId;
 
-        clientRepository.findById.mockResolvedValue(null);
+        clientRepository.findByUid.mockResolvedValue(null);
 
         const useCase = new DeleteClientUseCase(clientRepository);
 
@@ -62,26 +62,26 @@ describe('Delete Client Use Case', () => {
         expect.assertions(2);
       });
 
-      it('when client id is not provided - id is null', async () => {
+      it('when client uid is not provided - uid is null', async () => {
         const input = null;
 
         const useCase = new DeleteClientUseCase(clientRepository);
 
         await expect(useCase.execute(input)).rejects.toThrow(
-          new DomainException('Client id is required'),
+          new DomainException('Client uid is required'),
         );
 
         expect(clientRepository.delete).not.toBeCalled();
         expect.assertions(2);
       });
 
-      it('when client id is not provided- id is undefined', async () => {
+      it('when client uid is not provided - uid is undefined', async () => {
         const input = undefined;
 
         const useCase = new DeleteClientUseCase(clientRepository);
 
         await expect(useCase.execute(input)).rejects.toThrow(
-          new DomainException('Client id is required'),
+          new DomainException('Client uid is required'),
         );
 
         expect(clientRepository.delete).not.toBeCalled();

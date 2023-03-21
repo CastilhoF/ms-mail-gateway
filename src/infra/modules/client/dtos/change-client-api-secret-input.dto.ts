@@ -6,9 +6,9 @@ import ClientFieldsDocumentation from '../documentation/client-fields.documentat
 export class ChangeClientApiSecretInputDto {
   @IsUUID()
   @IsNotEmpty()
-  @Expose({ name: 'id' })
-  @ApiProperty(ClientFieldsDocumentation.id)
-  readonly id: string;
+  @Expose({ name: 'uid' })
+  @ApiProperty(ClientFieldsDocumentation.uid)
+  readonly uid: string;
 
   @IsNotEmpty()
   @IsString()

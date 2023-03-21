@@ -14,15 +14,17 @@ import versioningOptions from './infra/configuration/versioning/versioning.optio
  */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
-  setupMiddlewares(app);
-  await start(app);
+  const configService = app.get(ConfigService);
+  setupMiddlewares(app, configService);
+  await start(app, configService);
 }
 
 /**
  * Init Middlewares
  * @param app Nest Instance
  */
-function setupMiddlewares(app: INestApplication) {
+function setupMiddlewares(app: INestApplication, configService: ConfigService) {
+  app.setGlobalPrefix(configService.get('APP_GLOBAL_PREFIX'));
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
   app.use(helmet());
   app.use(cookieParser());
@@ -35,12 +37,10 @@ function setupMiddlewares(app: INestApplication) {
  * Start Application
  * @param app Nest Instance
  */
-async function start(app: INestApplication) {
-  const configService = app.get(ConfigService);
+async function start(app: INestApplication, configService: ConfigService) {
   const host = configService.get('APP_HOST');
   const port = configService.get('APP_PORT');
 
-  app.setGlobalPrefix(configService.get('APP_GLOBAL_PREFIX'));
   app.get(SwaggerOptions).setup(app);
 
   await app.listen(port, host, async () => {

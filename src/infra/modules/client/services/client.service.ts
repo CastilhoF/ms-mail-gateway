@@ -10,7 +10,7 @@ import DeleteClientUseCase from '../../../../domain/usecases/client/delete-clien
 import FindAllClientsUseCase from '../../../../domain/usecases/client/find-all-clients.use-case';
 import FindManyClientsUseCase from '../../../../domain/usecases/client/find-many-clients.use-case';
 import FindOneClientByClientUseCase from '../../../../domain/usecases/client/find-one-client-by-client.use-case';
-import FindOneClientByIdUseCase from '../../../../domain/usecases/client/find-one-client-by-id.use-case';
+import FindOneClientByUidUseCase from '../../../../domain/usecases/client/find-one-client-by-uid.use-case';
 import FindOneClientByHostUseCase from '../../../../domain/usecases/client/find-one-client-by-host.use-case';
 import PatchClientUseCase from '../../../../domain/usecases/client/patch-client.use-case';
 
@@ -22,7 +22,7 @@ class ClientService {
     private readonly findAllClientsUseCase: FindAllClientsUseCase,
     private readonly findManyClientsUseCase: FindManyClientsUseCase,
     private readonly findOneClientByClientUseCase: FindOneClientByClientUseCase,
-    private readonly findOneClientByIdUseCase: FindOneClientByIdUseCase,
+    private readonly findOneClientByUidUseCase: FindOneClientByUidUseCase,
     private readonly findOneClientByHostUseCase: FindOneClientByHostUseCase,
     private readonly patchClientUseCase: PatchClientUseCase,
   ) {}
@@ -37,8 +37,8 @@ class ClientService {
     return result;
   }
 
-  public async deleteClient(id: string): Promise<void> {
-    await this.deleteClientUseCase.execute(id).catch(errorCallback);
+  public async deleteClient(uid: string): Promise<void> {
+    await this.deleteClientUseCase.execute(uid).catch(errorCallback);
   }
 
   public async findAllClients(): Promise<DefaultClientDto[]> {
@@ -69,9 +69,9 @@ class ClientService {
     return result;
   }
 
-  public async findOneClientById(id: string): Promise<DefaultClientDto> {
-    const result = await this.findOneClientByIdUseCase
-      .execute(id)
+  public async findOneClientByUid(uid: string): Promise<DefaultClientDto> {
+    const result = await this.findOneClientByUidUseCase
+      .execute(uid)
       .catch(errorCallback);
 
     return result;

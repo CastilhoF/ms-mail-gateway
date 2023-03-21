@@ -21,7 +21,7 @@ import DeleteClient from '../documentation/delete-client.documentation';
 import GetAllClients from '../documentation/find-all-clients.documentation';
 import FindManyClients from '../documentation/find-many-clients.documentation';
 import FindByClient from '../documentation/find-one-by-client.documentation';
-import FindById from '../documentation/find-one-by-id.documentation';
+import FindByUid from '../documentation/find-one-by-uid.documentation';
 import FindByHost from '../documentation/find-one-by-host.documentation';
 import ClientService from '../services/client.service';
 import PatchClient from '../documentation/patch-client.documentation';
@@ -35,16 +35,16 @@ class ClientController {
   @HttpCode(HttpStatus.CREATED)
   @CreateClient.Doc()
   async createClient(
-    createClientInputDto: CreateClientInputDto,
+    @Body() createClientInputDto: CreateClientInputDto,
   ): Promise<CreateClientOutputDto> {
     return await this.clientService.createClient(createClientInputDto);
   }
 
-  @Delete('delete-client/:id')
+  @Delete('delete-client/:uid')
   @HttpCode(HttpStatus.NO_CONTENT)
   @DeleteClient.Doc()
-  async deleteClient(@Param('id') id: string): Promise<void> {
-    return await this.clientService.deleteClient(id);
+  async deleteClient(@Param('uid') uid: string): Promise<void> {
+    return await this.clientService.deleteClient(uid);
   }
 
   @Get('find-all-clients')
@@ -72,11 +72,11 @@ class ClientController {
     return await this.clientService.findOneClientByClient(client);
   }
 
-  @Post('find-by-id/:id')
+  @Post('find-by-uid/:uid')
   @HttpCode(HttpStatus.OK)
-  @FindById.Doc()
-  async findOneById(@Param('id') id: string): Promise<DefaultClientDto> {
-    return await this.clientService.findOneClientById(id);
+  @FindByUid.Doc()
+  async findOneById(@Param('uid') uid: string): Promise<DefaultClientDto> {
+    return await this.clientService.findOneClientByUid(uid);
   }
 
   @Post('find-by-host/:host')
@@ -86,14 +86,14 @@ class ClientController {
     return await this.clientService.findOneClientByHost(host);
   }
 
-  @Patch('update-client/:id')
+  @Patch('update-client/:uid')
   @HttpCode(HttpStatus.OK)
   @PatchClient.Doc()
   async updateClient(
-    @Param('id') id: string,
+    @Param('uid') uid: string,
     @Body() client: Partial<DefaultClientDto>,
   ): Promise<DefaultClientDto> {
-    client.id = id;
+    client.uid = uid;
     return await this.clientService.patchClient(client);
   }
 }

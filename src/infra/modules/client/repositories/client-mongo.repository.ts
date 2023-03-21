@@ -58,9 +58,9 @@ class ClientMongoRepository implements ClientRepository {
     };
   }
 
-  async findById(id: string): Promise<ClientEntity> {
+  async findByUid(uid: string): Promise<ClientEntity> {
     const client: ClientDocument = await this.clientModel
-      .findById(id)
+      .findOne({ uid: uid })
       .exec()
       .catch((error) => {
         this.logger.error(error);
@@ -105,40 +105,46 @@ class ClientMongoRepository implements ClientRepository {
     return ClientModelMapper.toEntity(client);
   }
 
-  async update(id: string, entity: ClientEntity): Promise<ClientEntity> {
+  async update(uid: string, entity: ClientEntity): Promise<ClientEntity> {
     const clientModel: ClientModel = ClientModelMapper.toModel(entity);
 
-    const { _id, ...clientModelWithoutId } = clientModel;
+    const { ...clientModelWithoutId } = clientModel;
 
     await this.clientModel
-      .updateOne({ _id }, clientModelWithoutId)
+      .updateOne({ uid }, clientModelWithoutId)
       .catch((error) => {
         this.logger.error(error);
         throw error;
       });
 
-    return this.findById(id);
+    return this.findByUid(uid);
   }
 
   async patch(
-    id: string,
+    uid: string,
     partialEntity: Partial<ClientEntity>,
   ): Promise<ClientEntity> {
     const partialClientModel: Partial<ClientModel> =
       ClientModelMapper.partialEntityToPartialModel(partialEntity);
 
     await this.clientModel
-      .updateOne({ _id: id }, partialClientModel)
+      .updateOne({ uid: uid }, partialClientModel)
       .catch((error) => {
         this.logger.error(error);
         throw error;
       });
 
-    return this.findById(id);
+    return this.findByUid(uid);
   }
 
-  async delete(id: string): Promise<void> {
-    await this.clientModel.deleteOne({ _id: id }).catch((error) => {
+  async delete(uid: string): Promise<void> {
+    const client: ClientDocument = await this.clientModel
+      .findOne({ uid })
+      .exec();
+
+    if (!client) throw new DatabaseNotFoundException('Client not found');
+
+    await this.clientModel.deleteOne(client).catch((error) => {
       this.logger.error(error);
       throw error;
     });

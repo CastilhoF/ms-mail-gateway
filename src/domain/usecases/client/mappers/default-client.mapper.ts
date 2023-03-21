@@ -4,7 +4,7 @@ import ClientEntity from '../../../../domain/entities/client/client.entity';
 class DefaultClientMapper {
   static toDto(entity: ClientEntity): DefaultClientDto {
     return {
-      id: entity.id,
+      uid: entity.uid,
       host: entity.host,
       client: entity.client,
       apiKey: entity.apiKey,
@@ -16,7 +16,7 @@ class DefaultClientMapper {
 
   static toEntity(dto: DefaultClientDto): ClientEntity {
     return new ClientEntity(
-      dto.id,
+      dto.uid,
       dto.host,
       dto.client,
       dto.apiKey,

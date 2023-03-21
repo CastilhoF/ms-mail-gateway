@@ -31,8 +31,8 @@ class PatchClient {
   };
 
   public static patchClientParam: ApiParamOptions = {
-    name: 'id',
-    description: 'Client id',
+    name: 'uid',
+    description: 'Client uid',
     type: String,
     required: true,
   };

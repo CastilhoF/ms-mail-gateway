@@ -1,11 +1,11 @@
 import { Prop, Schema } from '@nestjs/mongoose';
-import { Types } from 'mongoose';
 import { schemaConfig } from '../../../configuration/ioc/database/schemas/configuration/schema.config';
 import ClientEntity from '../../../../domain/entities/client/client.entity';
 
 @Schema(schemaConfig('client'))
 class ClientModel {
-  _id: Types.ObjectId;
+  @Prop({ required: true, unique: true, index: true })
+  uid: string;
 
   @Prop({ required: true, unique: true, index: true })
   host: string;
@@ -26,7 +26,7 @@ class ClientModel {
   updated_at: Date;
 
   constructor(entity: ClientEntity) {
-    this._id = entity.id ? new Types.ObjectId(entity.id) : undefined;
+    this.uid = entity.uid;
     this.host = entity.host;
     this.client = entity.client;
     this.api_key = entity.apiKey;

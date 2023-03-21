@@ -32,11 +32,11 @@ describe('Change the client API secret use case', () => {
       const clientId = '355242a5-4d0d-4199-bced-166ba023267d';
       const apiKey = '446f1542-fb57-4e10-9d2e-5ff7e9939bb2';
       const apiSecret = '0d1eb304-4359-4507-817d-398bef7f7c3d';
-      const newApiSecret = 'P@ssw0rd';
+      const newApiSecret = 'a9e8fbfa-7e8d-4561-b039-8677d819c066';
       const newApiSecretHashed = await service.hash(newApiSecret);
 
       const input: ChangeClientApiSecretInputDto = {
-        id: clientId,
+        uid: clientId,
         apiSecret: newApiSecret,
       };
 
@@ -84,11 +84,11 @@ describe('Change the client API secret use case', () => {
   });
 
   describe('When change apiSecret to a new invalid apiSecret', () => {
-    it('should throw an error - id null', async () => {
-      const newApiSecret = 'P@ssw0rd';
+    it('should throw an error - uid null', async () => {
+      const newApiSecret = 'a9e8fbfa-7e8d-4561-b039-8677d819c066';
 
       const input: ChangeClientApiSecretInputDto = {
-        id: null,
+        uid: null,
         apiSecret: newApiSecret,
       };
 
@@ -97,7 +97,7 @@ describe('Change the client API secret use case', () => {
         apiSecretHasher,
       );
 
-      const exception = new DomainException('Id is required.');
+      const exception = new DomainException('Uid is required.');
 
       await expect(useCase.execute(input)).rejects.toThrow(exception);
 
@@ -105,11 +105,11 @@ describe('Change the client API secret use case', () => {
       expect.assertions(2);
     });
 
-    it('should throw an error - id undefined', async () => {
-      const newApiSecret = 'P@ssw0rd';
+    it('should throw an error - uid undefined', async () => {
+      const newApiSecret = 'a9e8fbfa-7e8d-4561-b039-8677d819c066';
 
       const input: ChangeClientApiSecretInputDto = {
-        id: undefined,
+        uid: undefined,
         apiSecret: newApiSecret,
       };
 
@@ -118,7 +118,7 @@ describe('Change the client API secret use case', () => {
         apiSecretHasher,
       );
 
-      const exception = new DomainException('Id is required.');
+      const exception = new DomainException('Uid is required.');
 
       await expect(useCase.execute(input)).rejects.toThrow(exception);
 
@@ -130,7 +130,7 @@ describe('Change the client API secret use case', () => {
       const clientId = '355242a5-4d0d-4199-bced-166ba023267d';
 
       const input: ChangeClientApiSecretInputDto = {
-        id: clientId,
+        uid: clientId,
         apiSecret: null,
       };
 
@@ -151,7 +151,7 @@ describe('Change the client API secret use case', () => {
       const clientId = '355242a5-4d0d-4199-bced-166ba023267d';
 
       const input: ChangeClientApiSecretInputDto = {
-        id: clientId,
+        uid: clientId,
         apiSecret: undefined,
       };
 
@@ -170,10 +170,10 @@ describe('Change the client API secret use case', () => {
 
     it('should throw an error - client not found', async () => {
       const clientId = '355242a5-4d0d-4199-bced-166ba023267d';
-      const newApiSecret = 'P@ssw0rd';
+      const newApiSecret = 'a9e8fbfa-7e8d-4561-b039-8677d819c066';
 
       const input: ChangeClientApiSecretInputDto = {
-        id: clientId,
+        uid: clientId,
         apiSecret: newApiSecret,
       };
 
@@ -182,7 +182,7 @@ describe('Change the client API secret use case', () => {
         apiSecretHasher,
       );
 
-      const exception = new DomainException(`Client not found: ${input.id}`);
+      const exception = new DomainException(`Client not found: ${input.uid}`);
 
       await expect(useCase.execute(input)).rejects.toThrow(exception);
 
