@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateClientInputDto } from '../dtos/create-client-input.dto';
-import { CreateClientOutputDto } from '../dtos/create-client-output.dto';
-import { DefaultClientDto } from '../dtos/default-client.dto';
-import { FindManyInputDto } from '../dtos/find-many-input.dto';
-import { FindManyOutputDto } from '../dtos/find-many-output.dto';
-import ClientService from './client.service';
+import { CreateClientInputDto } from '../../dtos/create-client-input.dto';
+import { CreateClientOutputDto } from '../../dtos/create-client-output.dto';
+import { DefaultClientDto } from '../../dtos/default-client.dto';
+import { FindManyInputDto } from '../../dtos/find-many-input.dto';
+import { FindManyOutputDto } from '../../dtos/find-many-output.dto';
+import ClientService from '../client.service';
 
 describe('ClientService', () => {
   let clientService: ClientService;
