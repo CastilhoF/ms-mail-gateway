@@ -1,5 +1,3 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { HttpStatus } from '@nestjs/common';
 import { CreateClientInputDto } from '../../dtos/create-client-input.dto';
 import { CreateClientOutputDto } from '../../dtos/create-client-output.dto';
 import ClientController from '../client.controller';
