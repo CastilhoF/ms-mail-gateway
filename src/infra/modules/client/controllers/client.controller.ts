@@ -81,7 +81,7 @@ class ClientController {
   @Post('find-by-uid/:uid')
   @HttpCode(HttpStatus.OK)
   @FindByUid.Doc()
-  async findOneById(@Param('uid') uid: string): Promise<DefaultClientDto> {
+  async findOneByUid(@Param('uid') uid: string): Promise<DefaultClientDto> {
     return await this.clientService.findOneClientByUid(uid);
   }
 

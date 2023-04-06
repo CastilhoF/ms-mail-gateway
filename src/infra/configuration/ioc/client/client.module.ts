@@ -28,6 +28,7 @@ import { clientSchemaOptions } from '../database/schemas/client.schema';
     PatchClientUseCase,
     ClientService,
   ],
+  exports: [ClientService],
 })
 class ClientModule {}
 
