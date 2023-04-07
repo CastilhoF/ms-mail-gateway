@@ -11,6 +11,7 @@ import FindManyClientsUseCase from '../../../../../domain/usecases/client/find-m
 import FindOneClientByClientUseCase from '../../../../../domain/usecases/client/find-one-client-by-client.use-case';
 import FindOneClientByHostUseCase from '../../../../../domain/usecases/client/find-one-client-by-host.use-case';
 import FindOneClientByUidUseCase from '../../../../../domain/usecases/client/find-one-client-by-uid.use-case';
+import FindOneClientByApiKeyUseCase from '../../../../../domain/usecases/client/find-one-client-by-api-key.use-case';
 import PatchClientUseCase from '../../../../../domain/usecases/client/patch-client.use-case';
 import DeleteClientUseCase from '../../../../../domain/usecases/client/delete-client.use-case';
 import ClientRepository from '../../../../../app/repositories/client/client.repository';
@@ -41,6 +42,8 @@ describe('ClientController', () => {
     new FindOneClientByHostUseCase(clientRepository);
   const findOneClientByUidUseCase: FindOneClientByUidUseCase =
     new FindOneClientByUidUseCase(clientRepository);
+  const findOneClientByApiKeyUseCase: FindOneClientByApiKeyUseCase =
+    new FindOneClientByApiKeyUseCase(clientRepository);
   const patchClientUseCase: PatchClientUseCase = new PatchClientUseCase(
     clientRepository,
     apiKeyGenerator,
@@ -58,6 +61,7 @@ describe('ClientController', () => {
       findOneClientByClientUseCase,
       findOneClientByUidUseCase,
       findOneClientByHostUseCase,
+      findOneClientByApiKeyUseCase,
       patchClientUseCase,
     );
     clientController = new ClientController(clientService);
