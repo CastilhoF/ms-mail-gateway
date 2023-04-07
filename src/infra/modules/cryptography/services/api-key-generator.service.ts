@@ -3,7 +3,7 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { genSaltSync, hashSync } from 'bcrypt';
+import * as crypto from 'crypto';
 import ApiKeyGeneratorInterface from '../../../../app/shared/interfaces/api-key-generator.interface';
 
 @Injectable()
@@ -12,8 +12,8 @@ class ApiKeyGeneratorService implements ApiKeyGeneratorInterface {
 
   async hash(apiSecret: string): Promise<string> {
     try {
-      const salt = genSaltSync(10);
-      return await hashSync(apiSecret, salt);
+      const hash = crypto.createHash('sha256').update(apiSecret).digest('hex');
+      return hash;
     } catch (error) {
       this.logger.error(`Error hashing API key: ${error.message}`);
       throw new InternalServerErrorException(
