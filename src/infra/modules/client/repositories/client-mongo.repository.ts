@@ -40,13 +40,16 @@ class ClientMongoRepository implements ClientRepository {
     const [clients, total] = await Promise.all([
       this.clientModel
         .find(partialClientModel)
-        .skip(skip)
+        .skip(pagination.page > 1 ? skip : undefined)
         .limit(pagination.limit)
         .catch((error) => {
           this.logger.error(error);
           throw error;
         }),
-      this.clientModel.countDocuments(partialClientModel),
+      this.clientModel.countDocuments(partialClientModel).catch((error) => {
+        this.logger.error(error);
+        throw error;
+      }),
     ]);
 
     if (clients.length === 0)
@@ -117,7 +120,7 @@ class ClientMongoRepository implements ClientRepository {
         throw error;
       });
 
-    return this.findByUid(uid);
+    return await this.findByUid(uid);
   }
 
   async patch(
@@ -140,7 +143,10 @@ class ClientMongoRepository implements ClientRepository {
   async delete(uid: string): Promise<void> {
     const client: ClientDocument = await this.clientModel
       .findOne({ uid })
-      .exec();
+      .catch((error) => {
+        this.logger.error(error);
+        throw error;
+      });
 
     if (!client) throw new DatabaseNotFoundException('Client not found');
 

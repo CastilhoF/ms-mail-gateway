@@ -1,5 +1,5 @@
 import { ApiResponseOptions } from '@nestjs/swagger';
-import { ExceptionsResponseSchemaDto } from '../dtos/exception-schema.dto';
+import { ExceptionsResponseSchemaDto } from './dtos/exception-schema.dto';
 
 class Exceptions {
   public static Conflict(
@@ -18,6 +18,12 @@ class Exceptions {
     schema: ExceptionsResponseSchemaDto,
   ): ApiResponseOptions {
     return { schema: schema, description: 'Not Found', status: 404 };
+  }
+
+  public static Unauthorized(
+    schema: ExceptionsResponseSchemaDto,
+  ): ApiResponseOptions {
+    return { schema: schema, description: 'Unauthorized', status: 401 };
   }
 
   public static InternalServer(

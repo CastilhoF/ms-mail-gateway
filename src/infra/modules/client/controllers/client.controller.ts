@@ -31,6 +31,7 @@ import PatchClient from '../documentation/patch-client.documentation';
 class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
+  // Create a new client
   @Post('create-client')
   @HttpCode(HttpStatus.CREATED)
   @CreateClient.Doc()
@@ -40,6 +41,7 @@ class ClientController {
     return await this.clientService.createClient(createClientInputDto);
   }
 
+  // Delete a client with the given UID
   @Delete('delete-client/:uid')
   @HttpCode(HttpStatus.NO_CONTENT)
   @DeleteClient.Doc()
@@ -47,6 +49,7 @@ class ClientController {
     return await this.clientService.deleteClient(uid);
   }
 
+  // Find all clients
   @Get('find-all-clients')
   @HttpCode(HttpStatus.OK)
   @GetAllClients.Doc()
@@ -54,6 +57,7 @@ class ClientController {
     return await this.clientService.findAllClients();
   }
 
+  // Find multiple clients that match the given criteria
   @Post('find-many-clients')
   @HttpCode(HttpStatus.OK)
   @FindManyClients.Doc()
@@ -63,6 +67,7 @@ class ClientController {
     return await this.clientService.findManyClients(input);
   }
 
+  // Find a client with the given client ID
   @Post('find-by-client/:client')
   @HttpCode(HttpStatus.OK)
   @FindByClient.Doc()
@@ -72,13 +77,15 @@ class ClientController {
     return await this.clientService.findOneClientByClient(client);
   }
 
+  // Find a client with the given UID
   @Post('find-by-uid/:uid')
   @HttpCode(HttpStatus.OK)
   @FindByUid.Doc()
-  async findOneById(@Param('uid') uid: string): Promise<DefaultClientDto> {
+  async findOneByUid(@Param('uid') uid: string): Promise<DefaultClientDto> {
     return await this.clientService.findOneClientByUid(uid);
   }
 
+  // Find a client with the given host name
   @Post('find-by-host')
   @HttpCode(HttpStatus.OK)
   @FindByHost.Doc()
@@ -88,6 +95,7 @@ class ClientController {
     return await this.clientService.findOneClientByHost(input.host);
   }
 
+  // Update a client with the given UID
   @Patch('update-client/:uid')
   @HttpCode(HttpStatus.OK)
   @PatchClient.Doc()

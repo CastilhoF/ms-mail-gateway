@@ -8,9 +8,10 @@ import {
   ApiOperationOptions,
   ApiResponse,
   ApiResponseOptions,
+  ApiSecurity,
 } from '@nestjs/swagger';
-import Exceptions from './exceptions.documentation';
-import { ExceptionsResponseSchemaDto } from '../dtos/exception-schema.dto';
+import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
+import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
 import { FindManyOutputDto } from '../dtos/find-many-output.dto';
 import { FindManyInputDto } from '../dtos/find-many-input.dto';
 
@@ -54,6 +55,7 @@ class FindManyClients {
 
   public static Doc(): MethodDecorator {
     return applyDecorators(
+      ApiSecurity('x-api-key'),
       ApiOperation(FindManyClients.findManyOperation),
       ApiBody(FindManyClients.findManyBody),
       ApiResponse(FindManyClients.findManyResponse),

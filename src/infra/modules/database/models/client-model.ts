@@ -4,25 +4,25 @@ import ClientEntity from '../../../../domain/entities/client/client.entity';
 
 @Schema(schemaConfig('client'))
 class ClientModel {
-  @Prop({ required: true, unique: true, index: true })
+  @Prop({ type: String, required: true, unique: true, index: true })
   uid: string;
 
-  @Prop({ required: true, unique: true, index: true })
+  @Prop({ type: String, required: true, unique: true, index: true })
   host: string;
 
-  @Prop({ required: true, unique: true, index: true })
+  @Prop({ type: String, required: true, unique: true, index: true })
   client: string;
 
-  @Prop({ required: true, unique: false, index: false })
+  @Prop({ type: String, required: true, unique: false, index: false })
   api_key: string;
 
-  @Prop({ required: true, unique: false, index: false })
+  @Prop({ type: String, required: true, unique: false, index: false })
   api_secret: string;
 
-  @Prop({ required: false })
+  @Prop({ type: Date, required: false })
   created_at: Date;
 
-  @Prop({ required: false })
+  @Prop({ type: Date, required: false })
   updated_at: Date;
 
   constructor(entity: ClientEntity) {

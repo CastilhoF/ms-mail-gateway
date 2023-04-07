@@ -66,7 +66,7 @@ describe('Change the client API secret use case', () => {
       );
 
       apiSecretHasher.hash.mockResolvedValue(newApiSecretHashed);
-      clientRepository.findById.mockResolvedValue(clientMock);
+      clientRepository.findByUid.mockResolvedValue(clientMock);
 
       const clientSaveMock = clientRepository.save.mockResolvedValueOnce(
         clientSecretUpdatedMock,
