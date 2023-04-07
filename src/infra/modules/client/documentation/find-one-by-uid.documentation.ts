@@ -8,9 +8,10 @@ import {
   ApiParamOptions,
   ApiResponse,
   ApiResponseOptions,
+  ApiSecurity,
 } from '@nestjs/swagger';
-import Exceptions from './exceptions.documentation';
-import { ExceptionsResponseSchemaDto } from '../dtos/exception-schema.dto';
+import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
+import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
 import { DefaultClientDto } from '../dtos/default-client.dto';
 
 class FindById {
@@ -55,6 +56,7 @@ class FindById {
 
   public static Doc(): MethodDecorator {
     return applyDecorators(
+      ApiSecurity('x-api-key'),
       ApiOperation(this.findByUidOperation),
       ApiParam(this.findByUidParam),
       ApiResponse(this.findByUidResponse),

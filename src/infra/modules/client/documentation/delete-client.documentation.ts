@@ -8,9 +8,10 @@ import {
   ApiParamOptions,
   ApiResponse,
   ApiResponseOptions,
+  ApiSecurity,
 } from '@nestjs/swagger';
-import { ExceptionsResponseSchemaDto } from '../dtos/exception-schema.dto';
-import Exceptions from './exceptions.documentation';
+import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
+import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
 
 class DeleteClient {
   public static deleteOperation: ApiOperationOptions = {
@@ -50,6 +51,7 @@ class DeleteClient {
 
   public static Doc(): MethodDecorator & ClassDecorator {
     return applyDecorators(
+      ApiSecurity('x-api-key'),
       ApiOperation(DeleteClient.deleteOperation),
       ApiParam(DeleteClient.deleteParam),
       ApiResponse(DeleteClient.deleteResponse),

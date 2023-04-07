@@ -9,11 +9,12 @@ import {
   ApiOperationOptions,
   ApiResponse,
   ApiResponseOptions,
+  ApiSecurity,
 } from '@nestjs/swagger';
-import Exceptions from './exceptions.documentation';
+import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
 import { CreateClientInputDto } from '../dtos/create-client-input.dto';
 import { CreateClientOutputDto } from '../dtos/create-client-output.dto';
-import { ExceptionsResponseSchemaDto } from '../dtos/exception-schema.dto';
+import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
 
 class CreateClient {
   public static createOperation: ApiOperationOptions = {
@@ -63,6 +64,7 @@ class CreateClient {
 
   public static Doc(): any {
     return applyDecorators(
+      ApiSecurity('x-api-key'),
       ApiOperation(this.createOperation),
       ApiBody(this.createBody),
       ApiResponse(this.createResponse),
