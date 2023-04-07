@@ -13,6 +13,7 @@ import FindOneClientByClientUseCase from '../../../../domain/usecases/client/fin
 import FindOneClientByUidUseCase from '../../../../domain/usecases/client/find-one-client-by-uid.use-case';
 import FindOneClientByHostUseCase from '../../../../domain/usecases/client/find-one-client-by-host.use-case';
 import PatchClientUseCase from '../../../../domain/usecases/client/patch-client.use-case';
+import FindOneClientByApiKeyUseCase from '../../../../domain/usecases/client/find-one-client-by-api-key.use-case';
 
 @Injectable()
 class ClientService {
@@ -24,6 +25,7 @@ class ClientService {
     private readonly findOneClientByClientUseCase: FindOneClientByClientUseCase,
     private readonly findOneClientByUidUseCase: FindOneClientByUidUseCase,
     private readonly findOneClientByHostUseCase: FindOneClientByHostUseCase,
+    private readonly findOneClientByApiKeyUseCase: FindOneClientByApiKeyUseCase,
     private readonly patchClientUseCase: PatchClientUseCase,
   ) {}
 
@@ -80,6 +82,16 @@ class ClientService {
   public async findOneClientByHost(host: string): Promise<DefaultClientDto> {
     const result = await this.findOneClientByHostUseCase
       .execute(host)
+      .catch(errorCallback);
+
+    return result;
+  }
+
+  public async findOneClientByApiKey(
+    apiKey: string,
+  ): Promise<DefaultClientDto> {
+    const result = await this.findOneClientByApiKeyUseCase
+      .execute(apiKey)
       .catch(errorCallback);
 
     return result;
