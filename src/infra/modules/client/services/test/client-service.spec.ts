@@ -179,6 +179,31 @@ describe('ClientService', () => {
     });
   });
 
+  describe('find one client by apiKey', () => {
+    const input =
+      '$2b$10$TWyjqjJcWMOPtv8PElzU2OGNrTbz9D3KvJdjXPLHAyD5j5LD5hJV.';
+
+    const outputMock: DefaultClientDto = {
+      uid: '370268e9-1612-4c37-8d60-15fbdeae3659',
+      host: 'https://example.com',
+      client: 'Example',
+      apiKey: '$2b$10$TWyjqjJcWMOPtv8PElzU2OGNrTbz9D3KvJdjXPLHAyD5j5LD5hJV.',
+      apiSecret: '$2b$10$p9jltpv/Ysu7TGaDP1VWIuQFIkAx.jEzdJv2nlus7ETsjL8ly7fpW',
+      createdAt: new Date('2023-03-29T11:10:49.769Z'),
+      updatedAt: new Date('2023-03-29T11:10:49.769Z'),
+    };
+
+    it('should return a client', async () => {
+      jest
+        .spyOn(clientService, 'findOneClientByApiKey')
+        .mockResolvedValue(outputMock);
+
+      expect(await clientService.findOneClientByApiKey(input)).toEqual(
+        outputMock,
+      );
+    });
+  });
+
   describe('patch client', () => {
     const input: Partial<DefaultClientDto> = { host: 'https://example.com.br' };
 
