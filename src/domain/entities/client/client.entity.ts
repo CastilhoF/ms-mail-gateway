@@ -1,4 +1,5 @@
 import BaseEntity from '../base.entity';
+import Normalizer from '../../shared/normalization/normalizer';
 import DomainException from '../shared/exceptions/domain.exception';
 
 class ClientEntity extends BaseEntity {
@@ -97,7 +98,7 @@ class ClientEntity extends BaseEntity {
 
   set client(client: string) {
     this.validateClient(client);
-    this._client = client;
+    this._client = Normalizer.normalizeClient(client);
   }
 
   get apiKey(): string {
