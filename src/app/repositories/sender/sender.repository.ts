@@ -18,6 +18,8 @@ abstract class SenderRepository extends BaseRepository<SenderEntity> {
 
   abstract findOneByName(name: string): Promise<SenderEntity>;
 
+  abstract findOneByClientUid(clientId: string): Promise<SenderEntity>;
+
   abstract save(entity: SenderEntity): Promise<SenderEntity>;
 
   abstract update(uid: string, entity: SenderEntity): Promise<SenderEntity>;
