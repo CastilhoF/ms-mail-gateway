@@ -1,10 +1,12 @@
 import BaseRepository from '../base/base.repository';
 import SenderEntity from '../../../domain/entities/sender/sender.entity';
+import { PaginationDto } from '../../../domain/usecases/sender/dtos/pagination.dto';
 
 abstract class SenderRepository extends BaseRepository<SenderEntity> {
   abstract findAll(): Promise<SenderEntity[]>;
 
   abstract findMany(
+    pagination: PaginationDto,
     filter: Partial<SenderEntity>,
   ): Promise<{ entities: SenderEntity[]; total: number }>;
 
