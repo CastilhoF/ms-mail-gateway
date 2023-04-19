@@ -12,28 +12,27 @@ import {
   ApiSecurity,
 } from '@nestjs/swagger';
 import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
-import { CreateClientInputDto } from '../dtos/create-client-input.dto';
-import { CreateClientOutputDto } from '../dtos/create-client-output.dto';
+import { DefaultSenderDto } from '../dtos/default-sender.dto';
 import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
 
-class CreateClient {
+class CreateSender {
   public static operation: ApiOperationOptions = {
-    description: 'Create Client',
-    summary: 'Create Client',
+    description: 'Create Sender',
+    summary: 'Create Sender',
     deprecated: false,
-    tags: ['Client'],
+    tags: ['Sender'],
   };
 
   public static body: ApiBodyOptions = {
-    type: () => CreateClientInputDto,
-    description: 'Create Client by dto',
+    type: () => DefaultSenderDto,
+    description: 'Create Sender by dto',
     isArray: false,
     required: true,
   };
 
   public static response: ApiResponseOptions = {
-    type: () => CreateClientOutputDto,
-    description: 'Client created',
+    type: () => DefaultSenderDto,
+    description: 'Sender created',
     status: 201,
     isArray: false,
   };
@@ -41,7 +40,7 @@ class CreateClient {
   public static conflictSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 409,
-      message: 'Client already exists',
+      message: 'Sender already exists',
       error: 'Conflict',
     },
   };
@@ -49,7 +48,7 @@ class CreateClient {
   public static badRequestSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 400,
-      message: 'Client not found',
+      message: 'Sender not found',
       error: 'Bad Request',
     },
   };
@@ -57,12 +56,12 @@ class CreateClient {
   public static internalErrorSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 500,
-      message: 'Error creating client',
+      message: 'Error creating sender',
       error: 'Internal Server Error',
     },
   };
 
-  public static Doc(): any {
+  public static Doc(): MethodDecorator {
     return applyDecorators(
       ApiSecurity('x-api-key'),
       ApiOperation(this.operation),
@@ -77,4 +76,4 @@ class CreateClient {
   }
 }
 
-export default CreateClient;
+export default CreateSender;

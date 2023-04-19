@@ -15,32 +15,24 @@ import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentatio
 import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
 
 class GetAllClients {
-  public static getAllOperation: ApiOperationOptions = {
+  public static operation: ApiOperationOptions = {
     description: 'Get All Clients',
     summary: 'Get All Clients',
     deprecated: false,
     tags: ['Client'],
   };
 
-  public static getAllBody: ApiBodyOptions = {
+  public static body: ApiBodyOptions = {
     description: 'Get All Clients',
     isArray: false,
     required: true,
   };
 
-  public static getAllResponse: ApiResponseOptions = {
+  public static response: ApiResponseOptions = {
     type: () => DefaultClientDto,
     description: 'Clients found',
     status: 200,
     isArray: true,
-  };
-
-  public static createConflictSchema: ExceptionsResponseSchemaDto = {
-    example: {
-      statusCode: 409,
-      message: 'Client already exists',
-      error: 'Conflict',
-    },
   };
 
   public static createBadRequestSchema: ExceptionsResponseSchemaDto = {
@@ -64,9 +56,9 @@ class GetAllClients {
   public static Doc(): any {
     return applyDecorators(
       ApiSecurity('x-api-key'),
-      ApiOperation(this.getAllOperation),
-      ApiBody(this.getAllBody),
-      ApiResponse(this.getAllResponse),
+      ApiOperation(this.operation),
+      ApiBody(this.body),
+      ApiResponse(this.response),
       ApiBadRequestResponse(Exceptions.BadRequest(this.createBadRequestSchema)),
       ApiInternalServerErrorResponse(
         Exceptions.InternalServer(this.createInternalErrorSchema),

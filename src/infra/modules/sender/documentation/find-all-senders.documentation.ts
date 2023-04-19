@@ -2,9 +2,7 @@ import { applyDecorators } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiBody,
-  ApiParam,
   ApiBodyOptions,
-  ApiParamOptions,
   ApiInternalServerErrorResponse,
   ApiOperation,
   ApiOperationOptions,
@@ -12,48 +10,42 @@ import {
   ApiResponseOptions,
   ApiSecurity,
 } from '@nestjs/swagger';
+import { DefaultSenderDto } from '../dtos/default-sender.dto';
 import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
 import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
-import { DefaultClientDto } from '../dtos/default-client.dto';
 
-class PatchClient {
+class FindAllSenders {
   public static operation: ApiOperationOptions = {
-    description: 'Patch Client',
-    summary: 'Patch Client',
+    description: 'Get All Senders',
+    summary: 'Get All Senders',
     deprecated: false,
-    tags: ['Client'],
+    tags: ['Sender'],
   };
 
   public static body: ApiBodyOptions = {
-    type: () => DefaultClientDto,
-    description: 'Patch Client by partial dto',
+    description: 'Get All Senders',
     isArray: false,
-    required: true,
-  };
-
-  public static param: ApiParamOptions = {
-    name: 'uid',
-    description: 'Client uid',
-    type: String,
     required: true,
   };
 
   public static response: ApiResponseOptions = {
-    type: () => DefaultClientDto,
-    description: 'Client patched',
+    type: () => DefaultSenderDto,
+    description: 'Senders found',
     status: 200,
-    isArray: false,
+    isArray: true,
   };
 
-  public static BadRequestSchema: ExceptionsResponseSchemaDto = {
-    example: {
-      statusCode: 400,
-      message: 'Clients not found',
-      error: 'Bad Request',
-    },
+  public static badRequestSchema: ExceptionsResponseSchemaDto = {
+    example: [
+      {
+        statusCode: 400,
+        message: 'Senders not found',
+        error: 'Bad Request',
+      },
+    ],
   };
 
-  public static InternalErrorSchema: ExceptionsResponseSchemaDto = {
+  public static internalErrorSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 500,
       message: 'Internal Server Error',
@@ -61,19 +53,18 @@ class PatchClient {
     },
   };
 
-  public static Doc(): MethodDecorator {
+  public static Doc(): any {
     return applyDecorators(
       ApiSecurity('x-api-key'),
       ApiOperation(this.operation),
       ApiBody(this.body),
-      ApiParam(this.param),
       ApiResponse(this.response),
-      ApiBadRequestResponse(Exceptions.BadRequest(this.BadRequestSchema)),
+      ApiBadRequestResponse(Exceptions.BadRequest(this.badRequestSchema)),
       ApiInternalServerErrorResponse(
-        Exceptions.InternalServer(this.InternalErrorSchema),
+        Exceptions.InternalServer(this.internalErrorSchema),
       ),
     );
   }
 }
 
-export default PatchClient;
+export default FindAllSenders;

@@ -1,54 +1,45 @@
 import { applyDecorators } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
-  ApiBody,
-  ApiParam,
-  ApiBodyOptions,
-  ApiParamOptions,
   ApiInternalServerErrorResponse,
   ApiOperation,
   ApiOperationOptions,
+  ApiParam,
+  ApiParamOptions,
   ApiResponse,
   ApiResponseOptions,
   ApiSecurity,
 } from '@nestjs/swagger';
 import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
 import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
-import { DefaultClientDto } from '../dtos/default-client.dto';
+import { DefaultSenderDto } from '../dtos/default-sender.dto';
 
-class PatchClient {
+class FindSenderByClientUid {
   public static operation: ApiOperationOptions = {
-    description: 'Patch Client',
-    summary: 'Patch Client',
+    description: 'Find Sender By Client Uid',
+    summary: 'Find Sender By Client Uid',
     deprecated: false,
-    tags: ['Client'],
-  };
-
-  public static body: ApiBodyOptions = {
-    type: () => DefaultClientDto,
-    description: 'Patch Client by partial dto',
-    isArray: false,
-    required: true,
+    tags: ['Sender'],
   };
 
   public static param: ApiParamOptions = {
-    name: 'uid',
-    description: 'Client uid',
+    name: 'client-uid',
+    description: 'Client Uid',
     type: String,
     required: true,
   };
 
   public static response: ApiResponseOptions = {
-    type: () => DefaultClientDto,
-    description: 'Client patched',
+    type: () => DefaultSenderDto,
+    description: 'Sender found',
     status: 200,
-    isArray: false,
+    isArray: true,
   };
 
   public static BadRequestSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 400,
-      message: 'Clients not found',
+      message: 'Senders not found',
       error: 'Bad Request',
     },
   };
@@ -65,7 +56,6 @@ class PatchClient {
     return applyDecorators(
       ApiSecurity('x-api-key'),
       ApiOperation(this.operation),
-      ApiBody(this.body),
       ApiParam(this.param),
       ApiResponse(this.response),
       ApiBadRequestResponse(Exceptions.BadRequest(this.BadRequestSchema)),
@@ -76,4 +66,4 @@ class PatchClient {
   }
 }
 
-export default PatchClient;
+export default FindSenderByClientUid;

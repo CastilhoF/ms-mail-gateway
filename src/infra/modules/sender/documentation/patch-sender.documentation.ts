@@ -14,33 +14,33 @@ import {
 } from '@nestjs/swagger';
 import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
 import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
-import { DefaultClientDto } from '../dtos/default-client.dto';
+import { DefaultSenderDto } from '../dtos/default-sender.dto';
 
-class PatchClient {
+class PatchSender {
   public static operation: ApiOperationOptions = {
-    description: 'Patch Client',
-    summary: 'Patch Client',
+    description: 'Patch Sender',
+    summary: 'Patch Sender',
     deprecated: false,
-    tags: ['Client'],
+    tags: ['Sender'],
   };
 
   public static body: ApiBodyOptions = {
-    type: () => DefaultClientDto,
-    description: 'Patch Client by partial dto',
+    type: () => DefaultSenderDto,
+    description: 'Patch Sender by partial dto',
     isArray: false,
     required: true,
   };
 
   public static param: ApiParamOptions = {
     name: 'uid',
-    description: 'Client uid',
+    description: 'Sender uid',
     type: String,
     required: true,
   };
 
   public static response: ApiResponseOptions = {
-    type: () => DefaultClientDto,
-    description: 'Client patched',
+    type: () => DefaultSenderDto,
+    description: 'Sender patched',
     status: 200,
     isArray: false,
   };
@@ -48,7 +48,7 @@ class PatchClient {
   public static BadRequestSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 400,
-      message: 'Clients not found',
+      message: 'Senders not found',
       error: 'Bad Request',
     },
   };
@@ -76,4 +76,4 @@ class PatchClient {
   }
 }
 
-export default PatchClient;
+export default PatchSender;

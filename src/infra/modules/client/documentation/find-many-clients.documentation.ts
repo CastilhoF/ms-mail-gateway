@@ -56,9 +56,9 @@ class FindManyClients {
   public static Doc(): MethodDecorator {
     return applyDecorators(
       ApiSecurity('x-api-key'),
-      ApiOperation(FindManyClients.findManyOperation),
-      ApiBody(FindManyClients.findManyBody),
-      ApiResponse(FindManyClients.findManyResponse),
+      ApiOperation(this.findManyOperation),
+      ApiBody(this.findManyBody),
+      ApiResponse(this.findManyResponse),
       ApiBadRequestResponse(Exceptions.BadRequest(this.BadRequestSchema)),
       ApiInternalServerErrorResponse(
         Exceptions.InternalServer(this.InternalErrorSchema),

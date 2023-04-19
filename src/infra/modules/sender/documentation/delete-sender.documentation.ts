@@ -1,7 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import {
-  ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
   ApiOperation,
   ApiOperationOptions,
   ApiParam,
@@ -12,60 +12,55 @@ import {
 } from '@nestjs/swagger';
 import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
 import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
-import { DefaultClientDto } from '../dtos/default-client.dto';
 
-class FindById {
+class DeleteSender {
   public static operation: ApiOperationOptions = {
-    description: 'Find By Uid',
-    summary: 'Find By Uid',
+    description: 'Delete Sender',
+    summary: 'Delete Sender',
     deprecated: false,
-    tags: ['Client'],
+    tags: ['Sender'],
   };
 
   public static param: ApiParamOptions = {
     name: 'uid',
-    description: 'Client Uid',
+    description: 'Delete Sender by uid',
     type: String,
-    required: true,
   };
 
   public static response: ApiResponseOptions = {
-    type: () => DefaultClientDto,
-    description: 'Client found',
-    status: 200,
-    isArray: true,
+    description: 'Sender deleted',
+    status: 204,
+    isArray: false,
   };
 
-  public static BadRequestSchema: ExceptionsResponseSchemaDto = {
-    example: [
-      {
-        statusCode: 400,
-        message: 'Clients not found',
-        error: 'Bad Request',
-      },
-    ],
+  public static notFoundSchema: ExceptionsResponseSchemaDto = {
+    example: {
+      statusCode: 404,
+      message: 'Sender not found',
+      error: 'Not Found',
+    },
   };
 
-  public static InternalErrorSchema: ExceptionsResponseSchemaDto = {
+  public static internalErrorSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 500,
-      message: 'Internal Server Error',
+      message: 'Error deleting Sender',
       error: 'Internal Server Error',
     },
   };
 
-  public static Doc(): MethodDecorator {
+  public static Doc(): MethodDecorator & ClassDecorator {
     return applyDecorators(
       ApiSecurity('x-api-key'),
       ApiOperation(this.operation),
       ApiParam(this.param),
       ApiResponse(this.response),
-      ApiBadRequestResponse(Exceptions.BadRequest(this.BadRequestSchema)),
+      ApiNotFoundResponse(Exceptions.NotFound(this.notFoundSchema)),
       ApiInternalServerErrorResponse(
-        Exceptions.InternalServer(this.InternalErrorSchema),
+        Exceptions.InternalServer(this.internalErrorSchema),
       ),
     );
   }
 }
 
-export default FindById;
+export default DeleteSender;

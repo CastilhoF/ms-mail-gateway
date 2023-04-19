@@ -15,21 +15,21 @@ import Exceptions from '../../../../app/shared/documentation/exceptions.document
 import { DefaultClientDto } from '../dtos/default-client.dto';
 
 class FindByClient {
-  public static findByClientOperation: ApiOperationOptions = {
+  public static operation: ApiOperationOptions = {
     description: 'Find By Client',
     summary: 'Find By Client',
     deprecated: false,
     tags: ['Client'],
   };
 
-  public static findByClientParam: ApiParamOptions = {
+  public static param: ApiParamOptions = {
     name: 'client',
     description: 'Client Name',
     type: String,
     required: true,
   };
 
-  public static findByClientResponse: ApiResponseOptions = {
+  public static response: ApiResponseOptions = {
     type: () => DefaultClientDto,
     description: 'Client found',
     status: 200,
@@ -55,9 +55,9 @@ class FindByClient {
   public static Doc(): MethodDecorator {
     return applyDecorators(
       ApiSecurity('x-api-key'),
-      ApiOperation(FindByClient.findByClientOperation),
-      ApiParam(FindByClient.findByClientParam),
-      ApiResponse(FindByClient.findByClientResponse),
+      ApiOperation(this.operation),
+      ApiParam(this.param),
+      ApiResponse(this.response),
       ApiBadRequestResponse(Exceptions.BadRequest(this.BadRequestSchema)),
       ApiInternalServerErrorResponse(
         Exceptions.InternalServer(this.InternalErrorSchema),
