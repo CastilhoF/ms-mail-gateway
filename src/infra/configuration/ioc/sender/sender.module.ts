@@ -10,9 +10,15 @@ import FindSenderByClientUidUseCase from '../../../../domain/usecases/sender/fin
 import PatchSenderUseCase from '../../../../domain/usecases/sender/patch-sender.use-case';
 import { senderSchemaOptions } from '../database/schemas/sender.schema';
 import SenderService from '../../../../infra/modules/sender/services/sender.service';
+import SenderController from '../../../../infra/modules/sender/controllers/sender.controller';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [MongooseModule.forFeature([senderSchemaOptions])],
+  imports: [
+    MongooseModule.forFeature([senderSchemaOptions]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+  ],
+  controllers: [SenderController],
   providers: [
     SenderRepositoryProvider,
     CreateSenderUseCase,

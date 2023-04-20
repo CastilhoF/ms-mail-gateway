@@ -9,6 +9,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { CreateClientInputDto } from '../dtos/create-client-input.dto';
@@ -25,7 +26,10 @@ import FindByUid from '../documentation/find-one-by-uid.documentation';
 import FindByHost from '../documentation/find-one-by-host.documentation';
 import ClientService from '../services/client.service';
 import PatchClient from '../documentation/patch-client.documentation';
+// import { GetClientPayload } from 'src/app/shared/decorators/get-client-payload.decorator';
+// import { AuthGuard } from '@nestjs/passport';
 
+// @UseGuards(AuthGuard())
 @Controller({ path: 'client', version: '1' })
 @UseInterceptors(ClassSerializerInterceptor)
 class ClientController {
@@ -68,7 +72,7 @@ class ClientController {
   }
 
   // Find a client with the given client ID
-  @Post('find-by-client/:client')
+  @Get('find-by-client/:client')
   @HttpCode(HttpStatus.OK)
   @FindByClient.Doc()
   async findOneByClient(
@@ -78,7 +82,7 @@ class ClientController {
   }
 
   // Find a client with the given UID
-  @Post('find-by-uid/:uid')
+  @Get('find-by-uid/:uid')
   @HttpCode(HttpStatus.OK)
   @FindByUid.Doc()
   async findOneByUid(@Param('uid') uid: string): Promise<DefaultClientDto> {

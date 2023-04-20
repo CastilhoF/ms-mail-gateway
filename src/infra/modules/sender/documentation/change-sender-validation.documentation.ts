@@ -6,6 +6,8 @@ import {
   ApiInternalServerErrorResponse,
   ApiOperation,
   ApiOperationOptions,
+  ApiParam,
+  ApiParamOptions,
   ApiResponse,
   ApiResponseOptions,
   ApiSecurity,
@@ -26,6 +28,12 @@ class ChangeSenderValidation {
     type: () => DefaultSenderDto,
     description: 'Change Sender Validation by dto',
     isArray: false,
+    required: true,
+  };
+
+  public static param: ApiParamOptions = {
+    name: 'uid',
+    description: 'Sender uid',
     required: true,
   };
 
@@ -52,10 +60,11 @@ class ChangeSenderValidation {
     },
   };
 
-  public static changeSenderValidation(): MethodDecorator & ClassDecorator {
+  public static Doc(): MethodDecorator & ClassDecorator {
     return applyDecorators(
       ApiSecurity('x-api-key'),
       ApiOperation(this.operation),
+      ApiParam(this.param),
       ApiBody(this.body),
       ApiResponse(this.response),
       ApiBadRequestResponse(Exceptions.BadRequest(this.badRequestSchema)),

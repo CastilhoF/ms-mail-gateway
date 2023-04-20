@@ -14,6 +14,7 @@ import {
 import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
 import { DefaultSenderDto } from '../dtos/default-sender.dto';
 import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
+import { CreateSenderInputDto } from '../dtos/create-sender-input.dto';
 
 class CreateSender {
   public static operation: ApiOperationOptions = {
@@ -24,7 +25,7 @@ class CreateSender {
   };
 
   public static body: ApiBodyOptions = {
-    type: () => DefaultSenderDto,
+    type: () => CreateSenderInputDto,
     description: 'Create Sender by dto',
     isArray: false,
     required: true,

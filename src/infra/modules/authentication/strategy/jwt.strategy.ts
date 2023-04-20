@@ -1,24 +1,21 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import ClientRepository from '../../../../app/repositories/client/client.repository';
-import SenderRepository from '../../../../app/repositories/sender/sender.repository';
 import { JwtPayloadInterface } from '../../../../app/shared/interfaces/jwt-payload.interface';
-import { InjectRepository } from '@nestjs/typeorm';
 import {
   JwtStrategyOutputDto,
   SenderInformationDto,
 } from '../dtos/jwt-strategy-output.dto';
-import { ConfigService } from '@nestjs/config';
-import ClientService from '../../client/services/client.service';
 import AuthenticationEnvironment from '../../../../infra/configuration/authentication/authentication.environment';
 import FindOneClientByApiKeyUseCase from '../../../../domain/usecases/client/find-one-client-by-api-key.use-case';
+import FindSenderByClientUidUseCase from '../../../../domain/usecases/sender/find-sender-by-client-uid.use-case';
 
 @Injectable()
 class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     private readonly findOneClientByApiKeyUseCase: FindOneClientByApiKeyUseCase,
     private readonly authenticationEnvironment: AuthenticationEnvironment,
+    private readonly findSenderByClientUidUseCase: FindSenderByClientUidUseCase,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -34,11 +31,11 @@ class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException();
     }
 
-    const sender = undefined; //await this.senderRepository.findOne({ name: client.client });
+    const sender = await this.findSenderByClientUidUseCase.execute(client.uid);
 
     const senderInformation = new SenderInformationDto(
       sender ? sender.email : '',
-      sender ? sender.apiKey : '',
+      sender ? sender.senderApiKey : '',
       sender ? sender.validated : false,
     );
 

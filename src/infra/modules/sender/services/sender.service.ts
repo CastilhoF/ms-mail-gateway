@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { errorCallback } from '../../helpers/exceptions/exception.callback';
+import { CreateSenderInputDto } from '../../../../domain/usecases/sender/dtos/create-sender-input.dto.ts';
 import { DefaultSenderDto } from '../../../../domain/usecases/sender/dtos/default-sender.dto';
 import { FindManyInputDto } from '../../../../domain/usecases/sender/dtos/find-many-input.dto';
 import { FindManyOutputDto } from '../../../../domain/usecases/sender/dtos/find-many-output.dto';
@@ -18,13 +19,13 @@ class SenderService {
     private readonly deleteSenderUseCase: DeleteSenderUseCase,
     private readonly findAllSendersUseCase: FindAllSendersUseCase,
     private readonly findManySendersUseCase: FindManySendersUseCase,
-    private readonly changeSenderValidatedUseCase: ChangeSenderValidatedUseCase,
     private readonly findSenderByClientUidUseCase: FindSenderByClientUidUseCase,
+    private readonly changeSenderValidatedUseCase: ChangeSenderValidatedUseCase,
     private readonly patchSenderUseCase: PatchSenderUseCase,
   ) {}
 
   public async createSender(
-    input: DefaultSenderDto,
+    input: CreateSenderInputDto,
   ): Promise<DefaultSenderDto> {
     const result = await this.createSenderUseCase
       .execute(input)
@@ -57,8 +58,10 @@ class SenderService {
 
   public async changeSenderValidated(
     input: Partial<DefaultSenderDto>,
-  ): Promise<void> {
-    await this.changeSenderValidatedUseCase.execute(input).catch(errorCallback);
+  ): Promise<DefaultSenderDto> {
+    return await this.changeSenderValidatedUseCase
+      .execute(input)
+      .catch(errorCallback);
   }
 
   public async findSenderByClientUid(
