@@ -5,7 +5,6 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
-import { Client } from '@sendgrid/client';
 import * as sendGridMail from '@sendgrid/mail';
 import { SendGridSendMailInputDto } from '../dtos/send-mail-input.dto';
 import { SendGridVerifyMailInputDto } from '../dtos/verify-email-input.dto';
@@ -61,61 +60,23 @@ class SendGridMailService implements SendGridMailInterface {
 
   async verifyEmail(input: SendGridVerifyMailInputDto): Promise<string> {
     try {
-      const { email, apiKey } = input;
+      const subject = 'Sending with SendGrid is Fun';
+      const text = 'and easy to do anywhere, even with Node.js';
+      const html =
+        '<strong>and easy to do anywhere, even with Node.js</strong>';
 
-      const client = new Client();
+      const payload: SendGridSendMailInputDto = new SendGridSendMailInputDto(
+        input.email,
+        input.email,
+        subject,
+        text,
+        html,
+        input.apiKey,
+      );
 
-      client.setApiKey(apiKey);
+      await this.sendMail(payload);
 
-      const result = await client.request({
-        method: 'GET',
-        url: '/v3/suppression/list',
-        qs: {
-          email_address: email,
-        },
-      });
-
-      this.logger.log(result);
-
-      return result[0].statusCode.toString();
-    } catch (error) {
-      this.logger.error(error);
-      throw new InternalServerErrorException('Error sending email');
-    }
-  }
-
-  async verifyDomain(domain: string, apiKey: string): Promise<any> {
-    try {
-      const client = new Client();
-
-      if (!domain || !apiKey) throw new BadRequestException('Missing params');
-
-      client.setApiKey(apiKey);
-
-      const result = await client
-        .request({
-          method: 'POST',
-          url: '/v3/user/webhooks/event/settings/domain_verification',
-          body: {
-            domain: domain,
-          },
-        })
-        .catch((error) => {
-          this.logger.error(`Error verifying domain: ${domain}`);
-
-          if (error.code === 403)
-            throw new ForbiddenException(
-              `Error verifying domain: ${domain} - ${error.response.body.errors[0].message} - Field: ${error.response.body.errors[0].field}`,
-            );
-
-          throw new InternalServerErrorException(
-            `Error verifying domain: ${domain}`,
-          );
-        });
-
-      this.logger.log(result);
-
-      return result[0].statusCode.toString();
+      return `Email sent to ${input.email}`;
     } catch (error) {
       this.logger.error(error);
 
