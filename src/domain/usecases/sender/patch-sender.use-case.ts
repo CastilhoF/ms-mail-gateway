@@ -36,7 +36,7 @@ export default class PatchSenderUseCase
 
     this.logger.log(`Patching sender: ${sender.uid}`);
     const patchedSender: SenderEntity = await this.senderRepository.patch(
-      sender.uid,
+      data.uid,
       updatedSender,
     );
 

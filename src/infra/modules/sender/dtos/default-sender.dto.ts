@@ -25,7 +25,7 @@ export class DefaultSenderDto {
   service: string;
 
   @IsString()
-  @Expose({ name: 'sender_api_key' })
+  @Expose({ name: 'senderApiKey' })
   @ApiProperty(SenderFieldsDocumentation.senderApiKey)
   senderApiKey: string;
 
