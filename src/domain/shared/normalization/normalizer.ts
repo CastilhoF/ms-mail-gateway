@@ -20,6 +20,16 @@ class Normalizer {
 
     return senderNormalized;
   }
+
+  public static normalizeService(service: string): string {
+    if (!service) {
+      throw new DomainException('service is required');
+    }
+
+    const serviceNormalized = service.trim().replace(/ /g, '-').toLowerCase();
+
+    return serviceNormalized;
+  }
 }
 
 export default Normalizer;
