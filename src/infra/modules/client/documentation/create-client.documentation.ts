@@ -17,28 +17,28 @@ import { CreateClientOutputDto } from '../dtos/create-client-output.dto';
 import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentation/dtos/exception-schema.dto';
 
 class CreateClient {
-  public static createOperation: ApiOperationOptions = {
+  public static operation: ApiOperationOptions = {
     description: 'Create Client',
     summary: 'Create Client',
     deprecated: false,
     tags: ['Client'],
   };
 
-  public static createBody: ApiBodyOptions = {
+  public static body: ApiBodyOptions = {
     type: () => CreateClientInputDto,
     description: 'Create Client by dto',
     isArray: false,
     required: true,
   };
 
-  public static createResponse: ApiResponseOptions = {
+  public static response: ApiResponseOptions = {
     type: () => CreateClientOutputDto,
     description: 'Client created',
     status: 201,
     isArray: false,
   };
 
-  public static createConflictSchema: ExceptionsResponseSchemaDto = {
+  public static conflictSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 409,
       message: 'Client already exists',
@@ -46,7 +46,7 @@ class CreateClient {
     },
   };
 
-  public static createBadRequestSchema: ExceptionsResponseSchemaDto = {
+  public static badRequestSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 400,
       message: 'Client not found',
@@ -54,7 +54,7 @@ class CreateClient {
     },
   };
 
-  public static createInternalErrorSchema: ExceptionsResponseSchemaDto = {
+  public static internalErrorSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 500,
       message: 'Error creating client',
@@ -65,13 +65,13 @@ class CreateClient {
   public static Doc(): any {
     return applyDecorators(
       ApiSecurity('x-api-key'),
-      ApiOperation(this.createOperation),
-      ApiBody(this.createBody),
-      ApiResponse(this.createResponse),
-      ApiConflictResponse(Exceptions.Conflict(this.createConflictSchema)),
-      ApiBadRequestResponse(Exceptions.BadRequest(this.createBadRequestSchema)),
+      ApiOperation(this.operation),
+      ApiBody(this.body),
+      ApiResponse(this.response),
+      ApiConflictResponse(Exceptions.Conflict(this.conflictSchema)),
+      ApiBadRequestResponse(Exceptions.BadRequest(this.badRequestSchema)),
       ApiInternalServerErrorResponse(
-        Exceptions.InternalServer(this.createInternalErrorSchema),
+        Exceptions.InternalServer(this.internalErrorSchema),
       ),
     );
   }

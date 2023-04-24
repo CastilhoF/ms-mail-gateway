@@ -14,26 +14,26 @@ import { ExceptionsResponseSchemaDto } from '../../../../app/shared/documentatio
 import Exceptions from '../../../../app/shared/documentation/exceptions.documentation';
 
 class DeleteClient {
-  public static deleteOperation: ApiOperationOptions = {
+  public static operation: ApiOperationOptions = {
     description: 'Delete Client',
     summary: 'Delete Client',
     deprecated: false,
     tags: ['Client'],
   };
 
-  public static deleteParam: ApiParamOptions = {
+  public static param: ApiParamOptions = {
     name: 'uid',
     description: 'Delete client by uid',
     type: String,
   };
 
-  public static deleteResponse: ApiResponseOptions = {
+  public static response: ApiResponseOptions = {
     description: 'Client deleted',
     status: 204,
     isArray: false,
   };
 
-  public static deleteNotFoundSchema: ExceptionsResponseSchemaDto = {
+  public static notFoundSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 404,
       message: 'Client not found',
@@ -41,7 +41,7 @@ class DeleteClient {
     },
   };
 
-  public static deleteInternalErrorSchema: ExceptionsResponseSchemaDto = {
+  public static internalServerErrorSchema: ExceptionsResponseSchemaDto = {
     example: {
       statusCode: 500,
       message: 'Error deleting client',
@@ -52,12 +52,12 @@ class DeleteClient {
   public static Doc(): MethodDecorator & ClassDecorator {
     return applyDecorators(
       ApiSecurity('x-api-key'),
-      ApiOperation(DeleteClient.deleteOperation),
-      ApiParam(DeleteClient.deleteParam),
-      ApiResponse(DeleteClient.deleteResponse),
-      ApiNotFoundResponse(Exceptions.NotFound(this.deleteNotFoundSchema)),
+      ApiOperation(this.operation),
+      ApiParam(this.param),
+      ApiResponse(this.response),
+      ApiNotFoundResponse(Exceptions.NotFound(this.notFoundSchema)),
       ApiInternalServerErrorResponse(
-        Exceptions.InternalServer(this.deleteInternalErrorSchema),
+        Exceptions.InternalServer(this.internalServerErrorSchema),
       ),
     );
   }

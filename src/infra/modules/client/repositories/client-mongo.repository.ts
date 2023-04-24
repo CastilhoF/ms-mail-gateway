@@ -67,7 +67,7 @@ class ClientMongoRepository implements ClientRepository {
       .exec()
       .catch((error) => {
         this.logger.error(error);
-        throw new DatabaseNotFoundException(error);
+        throw new Error(error);
       });
 
     if (!client) throw new DatabaseNotFoundException('Client not found');

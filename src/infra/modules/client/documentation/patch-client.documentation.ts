@@ -17,28 +17,28 @@ import Exceptions from '../../../../app/shared/documentation/exceptions.document
 import { DefaultClientDto } from '../dtos/default-client.dto';
 
 class PatchClient {
-  public static patchClientOperation: ApiOperationOptions = {
+  public static operation: ApiOperationOptions = {
     description: 'Patch Client',
     summary: 'Patch Client',
     deprecated: false,
     tags: ['Client'],
   };
 
-  public static patchClientBody: ApiBodyOptions = {
+  public static body: ApiBodyOptions = {
     type: () => DefaultClientDto,
     description: 'Patch Client by partial dto',
     isArray: false,
     required: true,
   };
 
-  public static patchClientParam: ApiParamOptions = {
+  public static param: ApiParamOptions = {
     name: 'uid',
     description: 'Client uid',
     type: String,
     required: true,
   };
 
-  public static patchClientResponse: ApiResponseOptions = {
+  public static response: ApiResponseOptions = {
     type: () => DefaultClientDto,
     description: 'Client patched',
     status: 200,
@@ -64,10 +64,10 @@ class PatchClient {
   public static Doc(): MethodDecorator {
     return applyDecorators(
       ApiSecurity('x-api-key'),
-      ApiOperation(PatchClient.patchClientOperation),
-      ApiBody(PatchClient.patchClientBody),
-      ApiParam(PatchClient.patchClientParam),
-      ApiResponse(PatchClient.patchClientResponse),
+      ApiOperation(this.operation),
+      ApiBody(this.body),
+      ApiParam(this.param),
+      ApiResponse(this.response),
       ApiBadRequestResponse(Exceptions.BadRequest(this.BadRequestSchema)),
       ApiInternalServerErrorResponse(
         Exceptions.InternalServer(this.InternalErrorSchema),

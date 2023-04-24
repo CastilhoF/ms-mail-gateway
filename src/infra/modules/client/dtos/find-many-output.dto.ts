@@ -6,7 +6,7 @@ import { DefaultClientDto } from './default-client.dto';
 
 export class FindManyOutputDto {
   @IsNotEmpty()
-  @Expose({ name: 'clients' })
+  @Expose({ name: 'entities' })
   @ApiProperty(FindManyResponseFieldsDocumentation.entities)
   entities: DefaultClientDto[];
 

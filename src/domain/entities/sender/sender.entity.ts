@@ -1,11 +1,14 @@
 import BaseEntity from '../base.entity';
 import DomainException from '../shared/exceptions/domain.exception';
+import Normalizer from '../../../domain/shared/normalization/normalizer';
 
 class SenderEntity extends BaseEntity {
   private _name: string;
   private _email: string;
-  private _apiKey: string;
+  private _service: string;
+  private _senderApiKey: string;
   private _validated: boolean;
+  private _clientUid: string;
   private _createdAt: Date;
   private _updatedAt: Date;
 
@@ -13,16 +16,20 @@ class SenderEntity extends BaseEntity {
     uid: string,
     name: string,
     email: string,
-    apiKey: string,
+    service: string,
+    senderApiKey: string,
     validated: boolean,
+    clientUid: string,
     createdAt: Date,
     updatedAt: Date,
   ) {
     super(uid);
     this._name = name;
     this._email = email;
-    this._apiKey = apiKey;
+    this._service = service;
+    this._senderApiKey = senderApiKey;
     this._validated = validated;
+    this._clientUid = clientUid;
     this._createdAt = createdAt;
     this._updatedAt = updatedAt;
 
@@ -39,27 +46,41 @@ class SenderEntity extends BaseEntity {
   private validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!email) {
+    if (!email || email.trim().length === 0) {
       throw new DomainException('email is required');
     }
 
-    if (emailRegex.test(email)) {
+    if (!emailRegex.test(email)) {
       throw new DomainException('email is not valid');
     }
 
     return true;
   }
 
-  private validateApiKey(apiKey: string): boolean {
-    if (!apiKey) {
-      throw new DomainException('apiKey is required');
+  private validateApiKey(senderApiKey: string): boolean {
+    if (!senderApiKey) {
+      throw new DomainException('senderApiKey is required');
+    }
+    return true;
+  }
+
+  private validateService(service: string): boolean {
+    if (!service) {
+      throw new DomainException('service is required');
     }
     return true;
   }
 
   private validateValidated(validated: boolean): boolean {
-    if (!validated) {
+    if (validated === undefined || validated === null) {
       throw new DomainException('validated is required');
+    }
+    return true;
+  }
+
+  private validateClientUid(clientUid: string): boolean {
+    if (!clientUid) {
+      throw new DomainException('clientUid is required');
     }
     return true;
   }
@@ -81,8 +102,10 @@ class SenderEntity extends BaseEntity {
   private validate(): void {
     this.validateName(this._name);
     this.validateEmail(this._email);
-    this.validateApiKey(this._apiKey);
+    this.validateService(this._service);
+    this.validateApiKey(this._senderApiKey);
     this.validateValidated(this._validated);
+    this.validateClientUid(this._clientUid);
     this.validateCreatedAt(this._createdAt);
     this.validateUpdatedAt(this._updatedAt);
   }
@@ -93,7 +116,7 @@ class SenderEntity extends BaseEntity {
 
   set name(name: string) {
     this.validateName(name);
-    this._name = name;
+    this._name = Normalizer.normalizeSender(name);
   }
 
   get email(): string {
@@ -105,13 +128,22 @@ class SenderEntity extends BaseEntity {
     this._email = email;
   }
 
-  get apiKey(): string {
-    return this._apiKey;
+  get service(): string {
+    return this._service;
   }
 
-  set apiKey(apiKey: string) {
-    this.validateApiKey(apiKey);
-    this._apiKey = apiKey;
+  set service(service: string) {
+    this.validateService(service);
+    this._service = Normalizer.normalizeSender(service);
+  }
+
+  get senderApiKey(): string {
+    return this._senderApiKey;
+  }
+
+  set senderApiKey(senderApiKey: string) {
+    this.validateApiKey(senderApiKey);
+    this._senderApiKey = senderApiKey;
   }
 
   get validated(): boolean {
@@ -121,6 +153,15 @@ class SenderEntity extends BaseEntity {
   set validated(validated: boolean) {
     this.validateValidated(validated);
     this._validated = validated;
+  }
+
+  get clientUid(): string {
+    return this._clientUid;
+  }
+
+  set clientUid(clientUid: string) {
+    this.validateClientUid(clientUid);
+    this._clientUid = clientUid;
   }
 
   get createdAt(): Date {

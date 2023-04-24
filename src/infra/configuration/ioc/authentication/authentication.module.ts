@@ -12,9 +12,12 @@ import {
 import AuthenticateClientUseCase from '../../../../domain/usecases/client/authenticate-client.use-case';
 import AuthenticationEnvironment from '../../authentication/authentication.environment';
 import { ClientRepositoryProvider } from '../client/providers/client-repository.provider';
+import { SenderRepositoryProvider } from '../sender/providers/sender-repository.provider';
 import FindOneClientByApiKeyUseCase from '../../../../domain/usecases/client/find-one-client-by-api-key.use-case';
+import FindSenderByClientUidUseCase from '../../../../domain/usecases/sender/find-sender-by-client-uid.use-case';
 import { MongooseModule } from '@nestjs/mongoose';
 import { clientSchemaOptions } from '../database/schemas/client.schema';
+import { senderSchemaOptions } from '../database/schemas/sender.schema';
 
 @Global()
 @Module({
@@ -22,6 +25,7 @@ import { clientSchemaOptions } from '../database/schemas/client.schema';
     PassportModule.register(configStrategy),
     JwtModule.registerAsync(jwtConfigOptions),
     MongooseModule.forFeature([clientSchemaOptions]),
+    MongooseModule.forFeature([senderSchemaOptions]),
   ],
   controllers: [AuthenticationController],
   providers: [
@@ -31,7 +35,9 @@ import { clientSchemaOptions } from '../database/schemas/client.schema';
     AuthenticateClientUseCase,
     AuthenticationEnvironment,
     ClientRepositoryProvider,
+    SenderRepositoryProvider,
     FindOneClientByApiKeyUseCase,
+    FindSenderByClientUidUseCase,
   ],
   exports: [jwtServiceProvider, AuthenticationService, JwtStrategy],
 })

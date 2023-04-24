@@ -20,6 +20,8 @@ import { ThrottlerGuardProvider } from '../security/ddos/throttler.guard';
 import AuthenticationModule from './authentication/authentication.module';
 import { AuthorizationMiddleware } from 'src/infra/core/middleware/authorization.middleware';
 import { AuthMiddleware } from '../middlewares/authorization-middleware.config';
+import SenderModule from './sender/sender.module';
+import MailModule from './mail/mail.module';
 
 @Module({
   imports: [
@@ -34,6 +36,8 @@ import { AuthMiddleware } from '../middlewares/authorization-middleware.config';
     EnvironmentModule,
     AuthenticationModule,
     ClientModule,
+    SenderModule,
+    MailModule,
   ],
   controllers: [],
   providers: [SwaggerOptions, ThrottlerGuardProvider],
