@@ -3,9 +3,10 @@ import { SendGridMailProvider } from './providers/sendgrid-mail.provider';
 import SendGridMailService from '../../../../infra/modules/sendgrid/services/sendgrid-mail.service';
 import SendMailUseCase from '../../../../domain/usecases/mail/send-mail.use-case';
 import SendMailVerificationUseCase from '../../../../domain/usecases/mail/send-mail-verification.use-case';
+import SendGridMailController from '../../../modules/sendgrid/sendgrid.controller';
 
 @Module({
-  controllers: [],
+  controllers: [SendGridMailController],
   providers: [
     SendGridMailProvider,
     SendGridMailService,

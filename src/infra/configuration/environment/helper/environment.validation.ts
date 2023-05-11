@@ -34,6 +34,11 @@ const environmentValidation = (): Joi.ObjectSchema => {
     CACHE_DATABASE_LOGICAL: Joi.number().required(),
     CACHE_TTL: Joi.number().required(),
 
+    // BULL
+    BULL_SEND_MAIL_QUEUE_NAME: Joi.string().required(),
+    BULL_SEND_MAIL_QUEUE_LIMITER: Joi.number().required(),
+    BULL_SEND_MAIL_QUEUE_DELAY: Joi.number().required(),
+
     // DATABASE
     DATABASE_PROTOCOL: Joi.string(),
     DATABASE_PORT: Joi.number().port(),
