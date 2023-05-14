@@ -13,13 +13,9 @@ import FindOneClientByApiKeyUseCase from '../../../../domain/usecases/client/fin
 import FindOneClientByHostUseCase from '../../../../domain/usecases/client/find-one-client-by-host.use-case';
 import PatchClientUseCase from '../../../../domain/usecases/client/patch-client.use-case';
 import { clientSchemaOptions } from '../database/schemas/client.schema';
-//import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([clientSchemaOptions]),
-    //PassportModule.register({ defaultStrategy: 'jwt' }),
-  ],
+  imports: [MongooseModule.forFeature([clientSchemaOptions])],
   controllers: [ClientController],
   providers: [
     ClientRepositoryProvider,

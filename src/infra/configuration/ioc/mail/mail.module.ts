@@ -1,18 +1,21 @@
-import { Module } from '@nestjs/common';
+import { Module, Global } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
 import { SendGridMailProvider } from './providers/sendgrid-mail.provider';
 import SendGridMailService from '../../../../infra/modules/sendgrid/services/sendgrid-mail.service';
-import SendMailUseCase from '../../../../domain/usecases/mail/send-mail.use-case';
-import SendMailVerificationUseCase from '../../../../domain/usecases/mail/send-mail-verification.use-case';
+import MailService from '../../../../infra/modules/mail/service/mail.service';
+import { BullModule } from '@nestjs/bull';
+import { sendMailQueue } from '../../bull/bull-queues.config';
+import MailController from '../../../../infra/modules/mail/controller/mail.controller';
 
+@Global()
 @Module({
-  controllers: [],
-  providers: [
-    SendGridMailProvider,
-    SendGridMailService,
-    SendMailUseCase,
-    SendMailVerificationUseCase,
+  controllers: [MailController],
+  imports: [
+    BullModule.registerQueue(sendMailQueue),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
-  exports: [SendGridMailProvider, SendMailUseCase, SendMailVerificationUseCase],
+  providers: [SendGridMailProvider, SendGridMailService, MailService],
+  exports: [SendGridMailProvider, MailService],
 })
 class MailModule {}
 
