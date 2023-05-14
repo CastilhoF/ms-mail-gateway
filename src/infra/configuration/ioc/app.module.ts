@@ -18,13 +18,17 @@ import CryptographyModule from './cryptography/cryptography.module';
 import ClientModule from './client/client.module';
 import { ThrottlerGuardProvider } from '../security/ddos/throttler.guard';
 import AuthenticationModule from './authentication/authentication.module';
-import { AuthorizationMiddleware } from 'src/infra/core/middleware/authorization.middleware';
+import { AuthorizationMiddleware } from '../../../infra/core/middleware/authorization.middleware';
 import { AuthMiddleware } from '../middlewares/authorization-middleware.config';
 import SenderModule from './sender/sender.module';
 import MailModule from './mail/mail.module';
+import QueueModule from './queue/queue.module';
+import { BullModule } from '@nestjs/bull';
+import { bullProvider } from '../bull/provider/bull.provider';
 
 @Module({
   imports: [
+    BullModule.forRootAsync(bullProvider),
     ConfigModule.forRoot(environmentOptions),
     EventEmitterModule.forRoot(eventOptions),
     HttpModule.registerAsync(httpProvider),
@@ -38,6 +42,7 @@ import MailModule from './mail/mail.module';
     ClientModule,
     SenderModule,
     MailModule,
+    QueueModule,
   ],
   controllers: [],
   providers: [SwaggerOptions, ThrottlerGuardProvider],
