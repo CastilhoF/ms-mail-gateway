@@ -5,9 +5,9 @@ import SendMailFieldsDocumentation from '../documentation/send-mail-fields.docum
 
 export class SendMailInputDto {
   @IsEmail()
-  @Expose({ name: 'to' })
-  @ApiProperty(SendMailFieldsDocumentation.to)
-  to: string;
+  @Expose({ name: 'from' })
+  @ApiProperty(SendMailFieldsDocumentation.from)
+  from: string;
 
   @IsString()
   @Expose({ name: 'subject' })
@@ -15,20 +15,28 @@ export class SendMailInputDto {
   subject: string;
 
   @IsString()
-  @Expose({ name: 'html' })
-  @ApiProperty(SendMailFieldsDocumentation.html)
-  html: string;
+  @IsOptional()
+  @Expose({ name: 'message' })
+  @ApiProperty(SendMailFieldsDocumentation.message)
+  message?: string;
 
   @IsString()
+  @IsOptional()
+  @Expose({ name: 'html' })
+  @ApiProperty(SendMailFieldsDocumentation.html)
+  html?: string;
+
+  @IsString()
+  @IsOptional()
   @Expose({ name: 'text' })
   @ApiProperty(SendMailFieldsDocumentation.text)
-  text: string;
+  text?: string;
 
   @IsEmail()
   @IsOptional()
-  @Expose({ name: 'from' })
-  @ApiProperty(SendMailFieldsDocumentation.from)
-  from?: string;
+  @Expose({ name: 'to' })
+  @ApiProperty(SendMailFieldsDocumentation.to)
+  to?: string;
 
   @IsString()
   @IsOptional()

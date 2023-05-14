@@ -29,16 +29,16 @@ class MailController {
     @GetClientPayload() client: JwtStrategyOutputDto,
   ): Promise<any> {
     const { senderInformation } = client;
-    sendMailInputDto.from = senderInformation.email;
+    sendMailInputDto.to = senderInformation.email;
     sendMailInputDto.apiKey = senderInformation.apiKey;
-    sendMailInputDto.service = 'SendGrid';
+    sendMailInputDto.service = 'sendgrid';
 
     const result = await this.mailService.sendMail(sendMailInputDto);
 
     if (!result) {
       return {
         status: 400,
-        message: 'Error sending mail',
+        message: 'Bad Request - Error',
       };
     } else {
       return {

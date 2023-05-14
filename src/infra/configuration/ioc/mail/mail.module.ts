@@ -6,10 +6,11 @@ import MailService from '../../../../infra/modules/mail/service/mail.service';
 import { BullModule } from '@nestjs/bull';
 import { sendMailQueue } from '../../bull/bull-queues.config';
 import MailController from '../../../../infra/modules/mail/controller/mail.controller';
+import SendGridMailController from '../../../../infra/modules/sendgrid/controller/sendgrid.controller';
 
 @Global()
 @Module({
-  controllers: [MailController],
+  controllers: [MailController, SendGridMailController],
   imports: [
     BullModule.registerQueue(sendMailQueue),
     PassportModule.register({ defaultStrategy: 'jwt' }),

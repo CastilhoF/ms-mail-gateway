@@ -51,6 +51,16 @@ class SendMailFieldsDocumentation {
     required: true,
   };
 
+  public static message: ApiPropertyOptions = {
+    name: 'message',
+    title: 'Message',
+    description: 'Message - Message of the email',
+    example: 'Hello, World!',
+    isArray: false,
+    type: String,
+    required: true,
+  };
+
   public static apiKey: ApiPropertyOptions = {
     name: 'apiKey',
     title: 'API Key',

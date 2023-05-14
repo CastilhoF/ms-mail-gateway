@@ -47,6 +47,7 @@
     "cookie-parser": "^1.4.6",
     "helmet": "^6.0.0",
     "joi": "^17.6.1",
+    "moment-timezone": "^0.5.43",
     "mongoose": "^6.6.2",
     "mysql2": "^2.3.3",
     "nest-winston": "^1.7.0",
