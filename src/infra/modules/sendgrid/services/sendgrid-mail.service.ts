@@ -76,7 +76,9 @@ class SendGridMailService implements SendGridMailInterface {
 
       await this.sendMail(payload);
 
-      return `Email sent to ${input.email}`;
+      this.logger.debug(`Email ${input.email} validated successfully`);
+
+      return 'Email validated successfully';
     } catch (error) {
       this.logger.error(error);
 

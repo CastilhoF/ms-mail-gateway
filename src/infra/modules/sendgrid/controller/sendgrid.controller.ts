@@ -8,7 +8,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import SendGridMailService from '../services/sendgrid-mail.service';
-import { SendGridSendMailInputDto } from '../dtos/send-mail-input.dto';
+import { SendGridVerifyMailInputDto } from '../dtos/verify-email-input.dto';
 
 @Controller({ path: 'sendgrid', version: '1' })
 @UseInterceptors(ClassSerializerInterceptor)
@@ -18,9 +18,9 @@ class SendGridMailController {
   @Post('sendgrid-sender-authentication')
   @HttpCode(HttpStatus.OK)
   async sendGridSenderAuthentication(
-    @Body() input: SendGridSendMailInputDto,
-  ): Promise<void> {
-    return await this.sendGridMailService.sendMail(input);
+    @Body() input: SendGridVerifyMailInputDto,
+  ): Promise<string> {
+    return await this.sendGridMailService.verifyEmail(input);
   }
 }
 

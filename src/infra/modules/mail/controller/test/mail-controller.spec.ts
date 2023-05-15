@@ -4,7 +4,7 @@ import MailController from '../mail.controller';
 import MailEnvironment from '../../../../../infra/configuration/mail/environment/mail.environment';
 import { Queue } from 'bull';
 import { ConfigService } from '@nestjs/config';
-import { JwtStrategyOutputDto } from 'src/infra/modules/authentication/dtos/jwt-strategy-output.dto';
+import { JwtStrategyOutputDto } from '../../../../../infra/modules/authentication/dtos/jwt-strategy-output.dto';
 import { BadRequestException } from '@nestjs/common';
 
 describe('mail controller', () => {
