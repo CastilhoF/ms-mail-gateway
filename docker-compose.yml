@@ -15,12 +15,13 @@ services:
     environment: 
       - TZ=America/Sao_Paulo
     networks:
-      - honey-code-network
+      - hc-network-services
     volumes:
       - ./../logs:/usr/app/logs
 volumes:
   api:
     external: true
 networks:
-  honey-code-network:
+  hc-network-services:
     external: true 
+    

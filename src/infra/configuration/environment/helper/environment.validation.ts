@@ -47,6 +47,9 @@ const environmentValidation = (): Joi.ObjectSchema => {
     DATABASE_PASSWORD: Joi.string().required(),
     DATABASE_NAME: Joi.string().required(),
     DATABASE_SYNCHRONIZE: Joi.boolean(),
+
+    // MAIL
+    TEMPLATE_PATH: Joi.string().required(),
   });
 };
 

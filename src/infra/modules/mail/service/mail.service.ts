@@ -9,26 +9,37 @@ import { Queue } from 'bull';
 import { SendMailInputDto } from '../dtos/send-mail-input.dto';
 import { readFileSync } from 'fs';
 import { compile } from 'handlebars';
+import { ServiceEnum } from '../dtos/service.enum';
+import MailEnvironment from '../../../../infra/configuration/mail/environment/mail.environment';
 
 @Injectable()
 class MailService {
   private readonly logger: Logger = new Logger(MailService.name);
   constructor(
     @InjectQueue('send-mail') private readonly sendMailQueue: Queue,
+    private readonly mailEnvironment: MailEnvironment,
   ) {}
 
   async sendMail(data: SendMailInputDto): Promise<any> {
     try {
-      this.logger.log(`Sending mail to ${data.to}`);
+      const { to, from, subject, message, apiKey, service } = data;
+
+      if (!to || !from || !subject || !message || !apiKey || !service) {
+        throw new BadRequestException('Missing required fields');
+      }
+
+      if (service !== ServiceEnum[service.toUpperCase()]) {
+        throw new BadRequestException('Service not supported');
+      }
 
       const template = readFileSync(
-        './src/infra/modules/mail/template/send-mail-template.hbs',
+        this.mailEnvironment.getTemplatePath(),
         'utf-8',
       );
 
       const render = compile(template);
 
-      const host = data.to.split('@')[1];
+      const host = to.split('@')[1];
 
       const brazilTime = new Date().toLocaleString('pt-BR', {
         timeZone: 'America/Sao_Paulo',
@@ -36,21 +47,21 @@ class MailService {
 
       const html = render({
         host,
-        from: data.from,
-        recipient: data.to,
-        subject: data.subject,
-        text: data.message,
+        from: from,
+        recipient: to,
+        subject: subject,
+        text: message,
         date: brazilTime,
       });
 
       const payload: SendMailInputDto = {
-        from: data.to,
-        to: data.to,
-        subject: data.subject,
-        text: data.message,
+        from: to,
+        to: to,
+        subject: subject,
+        text: message,
         html,
-        apiKey: data.apiKey,
-        service: data.service,
+        apiKey: apiKey,
+        service: service,
       };
 
       const sended = await this.sendMailQueue
