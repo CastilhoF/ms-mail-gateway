@@ -1,7 +1,7 @@
 import { RequestMethod } from '@nestjs/common';
 import { RouteInfo } from '@nestjs/common/interfaces';
 
-export class AuthMiddleware {
+export class ReqMiddleware {
   public static forRoutes: (string | RouteInfo)[] = [
     {
       path: '*',

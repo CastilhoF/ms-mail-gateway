@@ -26,6 +26,7 @@ import QueueModule from './queue/queue.module';
 import { BullModule } from '@nestjs/bull';
 import { bullProvider } from '../bull/provider/bull.provider';
 import HealthCheckModule from './health-check/health-check.module';
+import { ReqMiddleware } from '../middlewares/request-middleware.config';
 
 @Module({
   imports: [
@@ -51,9 +52,13 @@ import HealthCheckModule from './health-check/health-check.module';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(RequestMiddleware).forRoutes('*');
+    consumer
+      .apply(RequestMiddleware)
+      .exclude(...ReqMiddleware.exclude)
+      .forRoutes(...ReqMiddleware.forRoutes);
     consumer
       .apply(AuthorizationMiddleware)
-      .forRoutes(...AuthMiddleware.configuration);
+      .exclude(...AuthMiddleware.exclude)
+      .forRoutes(...AuthMiddleware.forRoutes);
   }
 }
