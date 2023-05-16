@@ -25,6 +25,7 @@ import MailModule from './mail/mail.module';
 import QueueModule from './queue/queue.module';
 import { BullModule } from '@nestjs/bull';
 import { bullProvider } from '../bull/provider/bull.provider';
+import HealthCheckModule from './health-check/health-check.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { bullProvider } from '../bull/provider/bull.provider';
     SenderModule,
     MailModule,
     QueueModule,
+    HealthCheckModule,
   ],
   controllers: [],
   providers: [SwaggerOptions, ThrottlerGuardProvider],
