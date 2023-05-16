@@ -14,7 +14,9 @@ const DIR_PATH = path.join(__dirname, './../../../../logs/');
 
 const consoleOptions: ConsoleTransportOptions = {
   format: winston.format.combine(
-    winston.format.timestamp(),
+    winston.format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss',
+    }),
     winston.format.ms(),
     winston.format.splat(),
     winston.format.errors(),

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-mail simples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #444444;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      margin-top: 0;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 1em;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1em;
+    }
+    @media only screen and (max-width: 480px) {
+      .container {
+        padding: 0.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>E-mail Enviado do Site - <strong>{{host}}</strong></p>
+    <p>Olá,</p>
+    <p>Este e-mail foi enviado por <strong>{{from}}</strong> em <strong>{{date}}</strong>.</p>
+    <p><strong>Assunto:</strong> {{subject}}</p>
+    <p><strong>Mensagem:</strong> {{text}}</p>
+    <br>
+    <h4>Obrigado, Fabi Sacramento Makeup - Equipe de Tecnologia</h4>
+  </div>
+</body>
+</html>

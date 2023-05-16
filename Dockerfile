@@ -1,4 +1,4 @@
-FROM node:18.12.1-alpine3.16 as build
+FROM node:18.16.0-alpine3.16 as build
 
 WORKDIR /usr/app
 
@@ -12,12 +12,16 @@ COPY src ./src
 
 RUN yarn build
 
-FROM node:18.12.1-alpine3.16 as run
+FROM node:18.16.0-alpine3.16 as run
+
 WORKDIR /usr/app
+
+COPY .env.production ./
 COPY package*.json ./
-RUN yarn install --production
+RUN yarn install --production && yarn cache clean
 
 COPY --from=build /usr/app/dist ./dist
+COPY ./template/send-mail-template.hbs ./template/
 
 RUN mkdir "logs"
 
