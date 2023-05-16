@@ -19,6 +19,8 @@ describe('monitoring controller', () => {
   });
 
   it('should return a status 200', () => {
-    expect(controller.healthCheck()).resolves.toEqual(undefined);
+    expect(controller.healthCheck()).resolves.toEqual({
+      message: 'OK',
+    });
   });
 });
