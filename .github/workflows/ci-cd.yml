@@ -48,6 +48,7 @@ jobs:
           --build-arg DATABASE_SYNCHRONIZE=${{ secrets.DATABASE_SYNCHRONIZE }} \
           --build-arg TEMPLATE_PATH=${{ secrets.TEMPLATE_PATH }}
   test:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -55,6 +56,7 @@ jobs:
       run: yarn start:test    
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
