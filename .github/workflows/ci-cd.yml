@@ -13,34 +13,34 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NODE_ENV: ${{ variables.NODE_ENV }}
-      APP_NAME: ${{ variables.APP_NAME }}
-      APP_HOST: ${{ variables.APP_HOST }}
-      APP_PORT: ${{ variables.APP_PORT }}
-      APP_DESCRIPTION: ${{ variables.APP_DESCRIPTION }}
-      APP_URL: ${{ variables.APP_URL }}
-      APP_API_KEY: ${{ variables.APP_API_KEY }}
-      APP_GLOBAL_PREFIX: ${{ variables.APP_GLOBAL_PREFIX }}
-      SWAGGER_SERVER_APP_URL: ${{ variables.SWAGGER_SERVER_APP_URL }}
-      SWAGGER_APP_NAME: ${{ variables.SWAGGER_APP_NAME }}
-      JWT_SECRET: ${{ variables.JWT_SECRET }}
-      JWT_EXPIRATION_TIME: ${{ variables.JWT_EXPIRATION_TIME }}
-      CACHE_HOST: ${{ variables.CACHE_HOST }}
-      CACHE_PORT: ${{ variables.CACHE_PORT }}
-      CACHE_PASSWORD: ${{ variables.CACHE_PASSWORD }}
-      CACHE_DATABASE_LOGICAL: ${{ variables.CACHE_DATABASE_LOGICAL }}
-      CACHE_TTL: ${{ variables.CACHE_TTL }}
-      BULL_SEND_MAIL_QUEUE_NAME: ${{ variables.BULL_SEND_MAIL_QUEUE_NAME }}
-      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ variables.BULL_SEND_MAIL_QUEUE_LIMITER }}
-      BULL_SEND_MAIL_QUEUE_DELAY: ${{ variables.BULL_SEND_MAIL_QUEUE_DELAY }}
-      DATABASE_PROTOCOL: ${{ variables.DATABASE_PROTOCOL }}
-      DATABASE_PORT: ${{ variables.DATABASE_PORT }}
-      DATABASE_HOST: ${{ variables.DATABASE_HOST }}
-      DATABASE_USER: ${{ variables.DATABASE_USER }}
-      DATABASE_PASSWORD: ${{ variables.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ variables.DATABASE_NAME }}
-      DATABASE_SYNCHRONIZE: ${{ variables.DATABASE_SYNCHRONIZE }}
-      TEMPLATE_PATH: ${{ variables.TEMPLATE_PATH }}
+      NODE_ENV: ${{ env.NODE_ENV }}
+      APP_NAME: ${{ env.APP_NAME }}
+      APP_HOST: ${{ env.APP_HOST }}
+      APP_PORT: ${{ env.APP_PORT }}
+      APP_DESCRIPTION: ${{ env.APP_DESCRIPTION }}
+      APP_URL: ${{ env.APP_URL }}
+      APP_API_KEY: ${{ env.APP_API_KEY }}
+      APP_GLOBAL_PREFIX: ${{ env.APP_GLOBAL_PREFIX }}
+      SWAGGER_SERVER_APP_URL: ${{ env.SWAGGER_SERVER_APP_URL }}
+      SWAGGER_APP_NAME: ${{ env.SWAGGER_APP_NAME }}
+      JWT_SECRET: ${{ env.JWT_SECRET }}
+      JWT_EXPIRATION_TIME: ${{ env.JWT_EXPIRATION_TIME }}
+      CACHE_HOST: ${{ env.CACHE_HOST }}
+      CACHE_PORT: ${{ env.CACHE_PORT }}
+      CACHE_PASSWORD: ${{ env.CACHE_PASSWORD }}
+      CACHE_DATABASE_LOGICAL: ${{ env.CACHE_DATABASE_LOGICAL }}
+      CACHE_TTL: ${{ env.CACHE_TTL }}
+      BULL_SEND_MAIL_QUEUE_NAME: ${{ env.BULL_SEND_MAIL_QUEUE_NAME }}
+      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ env.BULL_SEND_MAIL_QUEUE_LIMITER }}
+      BULL_SEND_MAIL_QUEUE_DELAY: ${{ env.BULL_SEND_MAIL_QUEUE_DELAY }}
+      DATABASE_PROTOCOL: ${{ env.DATABASE_PROTOCOL }}
+      DATABASE_PORT: ${{ env.DATABASE_PORT }}
+      DATABASE_HOST: ${{ env.DATABASE_HOST }}
+      DATABASE_USER: ${{ env.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ env.DATABASE_NAME }}
+      DATABASE_SYNCHRONIZE: ${{ env.DATABASE_SYNCHRONIZE }}
+      TEMPLATE_PATH: ${{ env.TEMPLATE_PATH }}
 
 
     steps:
@@ -62,34 +62,34 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NODE_ENV: ${{ variables.NODE_ENV }}
-      APP_NAME: ${{ variables.APP_NAME }}
-      APP_HOST: ${{ variables.APP_HOST }}
-      APP_PORT: ${{ variables.APP_PORT }}
-      APP_DESCRIPTION: ${{ variables.APP_DESCRIPTION }}
-      APP_URL: ${{ variables.APP_URL }}
-      APP_API_KEY: ${{ variables.APP_API_KEY }}
-      APP_GLOBAL_PREFIX: ${{ variables.APP_GLOBAL_PREFIX }}
-      SWAGGER_SERVER_APP_URL: ${{ variables.SWAGGER_SERVER_APP_URL }}
-      SWAGGER_APP_NAME: ${{ variables.SWAGGER_APP_NAME }}
-      JWT_SECRET: ${{ variables.JWT_SECRET }}
-      JWT_EXPIRATION_TIME: ${{ variables.JWT_EXPIRATION_TIME }}
-      CACHE_HOST: ${{ variables.CACHE_HOST }}
-      CACHE_PORT: ${{ variables.CACHE_PORT }}
-      CACHE_PASSWORD: ${{ variables.CACHE_PASSWORD }}
-      CACHE_DATABASE_LOGICAL: ${{ variables.CACHE_DATABASE_LOGICAL }}
-      CACHE_TTL: ${{ variables.CACHE_TTL }}
-      BULL_SEND_MAIL_QUEUE_NAME: ${{ variables.BULL_SEND_MAIL_QUEUE_NAME }}
-      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ variables.BULL_SEND_MAIL_QUEUE_LIMITER }}
-      BULL_SEND_MAIL_QUEUE_DELAY: ${{ variables.BULL_SEND_MAIL_QUEUE_DELAY }}
-      DATABASE_PROTOCOL: ${{ variables.DATABASE_PROTOCOL }}
-      DATABASE_PORT: ${{ variables.DATABASE_PORT }}
-      DATABASE_HOST: ${{ variables.DATABASE_HOST }}
-      DATABASE_USER: ${{ variables.DATABASE_USER }}
-      DATABASE_PASSWORD: ${{ variables.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ variables.DATABASE_NAME }}
-      DATABASE_SYNCHRONIZE: ${{ variables.DATABASE_SYNCHRONIZE }}
-      TEMPLATE_PATH: ${{ variables.TEMPLATE_PATH }}
+      NODE_ENV: ${{ env.NODE_ENV }}
+      APP_NAME: ${{ env.APP_NAME }}
+      APP_HOST: ${{ env.APP_HOST }}
+      APP_PORT: ${{ env.APP_PORT }}
+      APP_DESCRIPTION: ${{ env.APP_DESCRIPTION }}
+      APP_URL: ${{ env.APP_URL }}
+      APP_API_KEY: ${{ env.APP_API_KEY }}
+      APP_GLOBAL_PREFIX: ${{ env.APP_GLOBAL_PREFIX }}
+      SWAGGER_SERVER_APP_URL: ${{ env.SWAGGER_SERVER_APP_URL }}
+      SWAGGER_APP_NAME: ${{ env.SWAGGER_APP_NAME }}
+      JWT_SECRET: ${{ env.JWT_SECRET }}
+      JWT_EXPIRATION_TIME: ${{ env.JWT_EXPIRATION_TIME }}
+      CACHE_HOST: ${{ env.CACHE_HOST }}
+      CACHE_PORT: ${{ env.CACHE_PORT }}
+      CACHE_PASSWORD: ${{ env.CACHE_PASSWORD }}
+      CACHE_DATABASE_LOGICAL: ${{ env.CACHE_DATABASE_LOGICAL }}
+      CACHE_TTL: ${{ env.CACHE_TTL }}
+      BULL_SEND_MAIL_QUEUE_NAME: ${{ env.BULL_SEND_MAIL_QUEUE_NAME }}
+      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ env.BULL_SEND_MAIL_QUEUE_LIMITER }}
+      BULL_SEND_MAIL_QUEUE_DELAY: ${{ env.BULL_SEND_MAIL_QUEUE_DELAY }}
+      DATABASE_PROTOCOL: ${{ env.DATABASE_PROTOCOL }}
+      DATABASE_PORT: ${{ env.DATABASE_PORT }}
+      DATABASE_HOST: ${{ env.DATABASE_HOST }}
+      DATABASE_USER: ${{ env.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ env.DATABASE_NAME }}
+      DATABASE_SYNCHRONIZE: ${{ env.DATABASE_SYNCHRONIZE }}
+      TEMPLATE_PATH: ${{ env.TEMPLATE_PATH }}
 
     steps:
     - name: Configure SSH
