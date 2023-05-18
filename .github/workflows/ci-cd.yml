@@ -17,11 +17,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build Docker image
-      uses: docker/compose-action@v1
-      with:
-        compose-file: docker-compose.yml
-        context: .
-        command: build
+      run: docker-compose build
 
   deploy:
     needs: build
@@ -37,13 +33,5 @@ jobs:
       run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} docker-compose.yml ubuntu@132.226.255.117:/var/containerized-apps/ms-mail-gateway
 
     - name: SSH into Oracle Cloud server
-      uses: appleboy/ssh-action@master
-      with:
-        host: 132.226.255.117
-        username: ubuntu
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          sudo su
-          cd /var/containerized-apps/ms-mail-gateway
-          git pull origin main
-          docker compose -f docker-compose.yml --env-file ./.env.production up --build -d
+      run: |
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@132.226.255.117 'sudo su && cd /var/containerized-apps/ms-mail-gateway && git pull origin main && docker compose -f docker-compose.yml --env-file ./.env.production up --build -d'
