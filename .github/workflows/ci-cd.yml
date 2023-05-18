@@ -12,6 +12,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      NODE_ENV: ${{ variables.NODE_ENV }}
+      APP_NAME: ${{ variables.APP_NAME }}
+      APP_HOST: ${{ variables.APP_HOST }}
+      APP_PORT: ${{ variables.APP_PORT }}
+      APP_DESCRIPTION: ${{ variables.APP_DESCRIPTION }}
+      APP_URL: ${{ variables.APP_URL }}
+      APP_API_KEY: ${{ variables.APP_API_KEY }}
+      APP_GLOBAL_PREFIX: ${{ variables.APP_GLOBAL_PREFIX }}
+      SWAGGER_SERVER_APP_URL: ${{ variables.SWAGGER_SERVER_APP_URL }}
+      SWAGGER_APP_NAME: ${{ variables.SWAGGER_APP_NAME }}
+      JWT_SECRET: ${{ variables.JWT_SECRET }}
+      JWT_EXPIRATION_TIME: ${{ variables.JWT_EXPIRATION_TIME }}
+      CACHE_HOST: ${{ variables.CACHE_HOST }}
+      CACHE_PORT: ${{ variables.CACHE_PORT }}
+      CACHE_PASSWORD: ${{ variables.CACHE_PASSWORD }}
+      CACHE_DATABASE_LOGICAL: ${{ variables.CACHE_DATABASE_LOGICAL }}
+      CACHE_TTL: ${{ variables.CACHE_TTL }}
+      BULL_SEND_MAIL_QUEUE_NAME: ${{ variables.BULL_SEND_MAIL_QUEUE_NAME }}
+      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ variables.BULL_SEND_MAIL_QUEUE_LIMITER }}
+      BULL_SEND_MAIL_QUEUE_DELAY: ${{ variables.BULL_SEND_MAIL_QUEUE_DELAY }}
+      DATABASE_PROTOCOL: ${{ variables.DATABASE_PROTOCOL }}
+      DATABASE_PORT: ${{ variables.DATABASE_PORT }}
+      DATABASE_HOST: ${{ variables.DATABASE_HOST }}
+      DATABASE_USER: ${{ variables.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ variables.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ variables.DATABASE_NAME }}
+      DATABASE_SYNCHRONIZE: ${{ variables.DATABASE_SYNCHRONIZE }}
+      TEMPLATE_PATH: ${{ variables.TEMPLATE_PATH }}
+
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -29,6 +60,36 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: ${{ variables.NODE_ENV }}
+      APP_NAME: ${{ variables.APP_NAME }}
+      APP_HOST: ${{ variables.APP_HOST }}
+      APP_PORT: ${{ variables.APP_PORT }}
+      APP_DESCRIPTION: ${{ variables.APP_DESCRIPTION }}
+      APP_URL: ${{ variables.APP_URL }}
+      APP_API_KEY: ${{ variables.APP_API_KEY }}
+      APP_GLOBAL_PREFIX: ${{ variables.APP_GLOBAL_PREFIX }}
+      SWAGGER_SERVER_APP_URL: ${{ variables.SWAGGER_SERVER_APP_URL }}
+      SWAGGER_APP_NAME: ${{ variables.SWAGGER_APP_NAME }}
+      JWT_SECRET: ${{ variables.JWT_SECRET }}
+      JWT_EXPIRATION_TIME: ${{ variables.JWT_EXPIRATION_TIME }}
+      CACHE_HOST: ${{ variables.CACHE_HOST }}
+      CACHE_PORT: ${{ variables.CACHE_PORT }}
+      CACHE_PASSWORD: ${{ variables.CACHE_PASSWORD }}
+      CACHE_DATABASE_LOGICAL: ${{ variables.CACHE_DATABASE_LOGICAL }}
+      CACHE_TTL: ${{ variables.CACHE_TTL }}
+      BULL_SEND_MAIL_QUEUE_NAME: ${{ variables.BULL_SEND_MAIL_QUEUE_NAME }}
+      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ variables.BULL_SEND_MAIL_QUEUE_LIMITER }}
+      BULL_SEND_MAIL_QUEUE_DELAY: ${{ variables.BULL_SEND_MAIL_QUEUE_DELAY }}
+      DATABASE_PROTOCOL: ${{ variables.DATABASE_PROTOCOL }}
+      DATABASE_PORT: ${{ variables.DATABASE_PORT }}
+      DATABASE_HOST: ${{ variables.DATABASE_HOST }}
+      DATABASE_USER: ${{ variables.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ variables.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ variables.DATABASE_NAME }}
+      DATABASE_SYNCHRONIZE: ${{ variables.DATABASE_SYNCHRONIZE }}
+      TEMPLATE_PATH: ${{ variables.TEMPLATE_PATH }}
 
     steps:
     - name: Configure SSH
