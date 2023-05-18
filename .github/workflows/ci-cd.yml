@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main    
 
 jobs:
   build:
@@ -31,14 +34,16 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Copy docker-compose.yml
-      run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} docker-compose.yml root@132.226.255.117:/var/containerized-apps/ms-mail-gateway
+      run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} docker-compose.yml ubuntu@132.226.255.117:/var/containerized-apps/ms-mail-gateway
 
     - name: SSH into Oracle Cloud server
       uses: appleboy/ssh-action@master
       with:
-        host: your-server
-        username: user
+        host: 132.226.255.117
+        username: ubuntu
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
+          sudo su
           cd /var/containerized-apps/ms-mail-gateway
+          git pull origin main
           docker compose -f docker-compose.yml --env-file ./.env.production up --build -d
