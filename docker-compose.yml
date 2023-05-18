@@ -1,43 +1,43 @@
 version: '3.9'
 services:
   api:
-    container_name: ${{ secrets.APP_NAME }}
+    container_name: ${APP_NAME}
     build:
       context: .
       dockerfile: Dockerfile
       target: run
-    hostname: ${{ secrets.APP_NAME }}
+    hostname: ${APP_NAME}
     environment:
-      - APP_NAME=${{ secrets.APP_NAME }}
-      - APP_HOST=${{ secrets.APP_HOST }}
-      - APP_PORT=${{ secrets.APP_PORT }}
-      - APP_DESCRIPTION=${{ secrets.APP_DESCRIPTION }}
-      - APP_URL=${{ secrets.APP_URL }}
-      - APP_API_KEY=${{ secrets.APP_API_KEY }}
-      - APP_GLOBAL_PREFIX=${{ secrets.APP_GLOBAL_PREFIX }}
-      - SWAGGER_SERVER_APP_URL=${{ secrets.SWAGGER_SERVER_APP_URL }}
-      - SWAGGER_APP_NAME=${{ secrets.SWAGGER_APP_NAME }}
-      - JWT_SECRET=${{ secrets.JWT_SECRET }}
-      - JWT_EXPIRATION_TIME=${{ secrets.JWT_EXPIRATION_TIME }}
-      - CACHE_HOST=${{ secrets.CACHE_HOST }}
-      - CACHE_PORT=${{ secrets.CACHE_PORT }}
-      - CACHE_PASSWORD=${{ secrets.CACHE_PASSWORD }}
-      - CACHE_DATABASE_LOGICAL=${{ secrets.CACHE_DATABASE_LOGICAL }}
-      - CACHE_TTL=${{ secrets.CACHE_TTL }}
-      - BULL_SEND_MAIL_QUEUE_NAME=${{ secrets.BULL_SEND_MAIL_QUEUE_NAME }}
-      - BULL_SEND_MAIL_QUEUE_LIMITER=${{ secrets.BULL_SEND_MAIL_QUEUE_LIMITER }}
-      - BULL_SEND_MAIL_QUEUE_DELAY=${{ secrets.BULL_SEND_MAIL_QUEUE_DELAY }}
-      - DATABASE_PROTOCOL=${{ secrets.DATABASE_PROTOCOL }}
-      - DATABASE_PORT=${{ secrets.DATABASE_PORT }}
-      - DATABASE_HOST=${{ secrets.DATABASE_HOST }}
-      - DATABASE_USER=${{ secrets.DATABASE_USER }}
-      - DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
-      - DATABASE_NAME=${{ secrets.DATABASE_NAME }}
-      - DATABASE_SYNCHRONIZE=${{ secrets.DATABASE_SYNCHRONIZE }}
-      - TEMPLATE_PATH=${{ secrets.TEMPLATE_PATH }}
+      - APP_NAME=${APP_NAME}
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
+      - APP_DESCRIPTION=${APP_DESCRIPTION}
+      - APP_URL=${APP_URL}
+      - APP_API_KEY=${APP_API_KEY}
+      - APP_GLOBAL_PREFIX=${APP_GLOBAL_PREFIX}
+      - SWAGGER_SERVER_APP_URL=${SWAGGER_SERVER_APP_URL}
+      - SWAGGER_APP_NAME=${SWAGGER_APP_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION_TIME=${JWT_EXPIRATION_TIME}
+      - CACHE_HOST=${CACHE_HOST}
+      - CACHE_PORT=${CACHE_PORT}
+      - CACHE_PASSWORD=${CACHE_PASSWORD}
+      - CACHE_DATABASE_LOGICAL=${CACHE_DATABASE_LOGICAL}
+      - CACHE_TTL=${CACHE_TTL}
+      - BULL_SEND_MAIL_QUEUE_NAME=${BULL_SEND_MAIL_QUEUE_NAME}
+      - BULL_SEND_MAIL_QUEUE_LIMITER=${BULL_SEND_MAIL_QUEUE_LIMITER}
+      - BULL_SEND_MAIL_QUEUE_DELAY=${BULL_SEND_MAIL_QUEUE_DELAY}
+      - DATABASE_PROTOCOL=${DATABASE_PROTOCOL}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_SYNCHRONIZE=${DATABASE_SYNCHRONIZE}
+      - TEMPLATE_PATH=${TEMPLATE_PATH}
       - TZ=America/Sao_Paulo
     ports:
-      - "{ secrets.APP_PORT }}:{ secrets.APP_PORT }}"
+      - "${APP_PORT}:${APP_PORT}"
     restart: on-failure
     networks:
       - hc-network-services
