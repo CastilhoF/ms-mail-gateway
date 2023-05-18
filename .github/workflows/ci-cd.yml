@@ -13,34 +13,34 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NODE_ENV: ${{ env.NODE_ENV }}
-      APP_NAME: ${{ env.APP_NAME }}
-      APP_HOST: ${{ env.APP_HOST }}
-      APP_PORT: ${{ env.APP_PORT }}
-      APP_DESCRIPTION: ${{ env.APP_DESCRIPTION }}
-      APP_URL: ${{ env.APP_URL }}
-      APP_API_KEY: ${{ env.APP_API_KEY }}
-      APP_GLOBAL_PREFIX: ${{ env.APP_GLOBAL_PREFIX }}
-      SWAGGER_SERVER_APP_URL: ${{ env.SWAGGER_SERVER_APP_URL }}
-      SWAGGER_APP_NAME: ${{ env.SWAGGER_APP_NAME }}
-      JWT_SECRET: ${{ env.JWT_SECRET }}
-      JWT_EXPIRATION_TIME: ${{ env.JWT_EXPIRATION_TIME }}
-      CACHE_HOST: ${{ env.CACHE_HOST }}
-      CACHE_PORT: ${{ env.CACHE_PORT }}
-      CACHE_PASSWORD: ${{ env.CACHE_PASSWORD }}
-      CACHE_DATABASE_LOGICAL: ${{ env.CACHE_DATABASE_LOGICAL }}
-      CACHE_TTL: ${{ env.CACHE_TTL }}
-      BULL_SEND_MAIL_QUEUE_NAME: ${{ env.BULL_SEND_MAIL_QUEUE_NAME }}
-      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ env.BULL_SEND_MAIL_QUEUE_LIMITER }}
-      BULL_SEND_MAIL_QUEUE_DELAY: ${{ env.BULL_SEND_MAIL_QUEUE_DELAY }}
-      DATABASE_PROTOCOL: ${{ env.DATABASE_PROTOCOL }}
-      DATABASE_PORT: ${{ env.DATABASE_PORT }}
-      DATABASE_HOST: ${{ env.DATABASE_HOST }}
-      DATABASE_USER: ${{ env.DATABASE_USER }}
-      DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ env.DATABASE_NAME }}
-      DATABASE_SYNCHRONIZE: ${{ env.DATABASE_SYNCHRONIZE }}
-      TEMPLATE_PATH: ${{ env.TEMPLATE_PATH }}
+      NODE_ENV: ${{ secrets.NODE_ENV }}
+      APP_NAME: ${{ secrets.APP_NAME }}
+      APP_HOST: ${{ secrets.APP_HOST }}
+      APP_PORT: ${{ secrets.APP_PORT }}
+      APP_DESCRIPTION: ${{ secrets.APP_DESCRIPTION }}
+      APP_URL: ${{ secrets.APP_URL }}
+      APP_API_KEY: ${{ secrets.APP_API_KEY }}
+      APP_GLOBAL_PREFIX: ${{ secrets.APP_GLOBAL_PREFIX }}
+      SWAGGER_SERVER_APP_URL: ${{ secrets.SWAGGER_SERVER_APP_URL }}
+      SWAGGER_APP_NAME: ${{ secrets.SWAGGER_APP_NAME }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRATION_TIME: ${{ secrets.JWT_EXPIRATION_TIME }}
+      CACHE_HOST: ${{ secrets.CACHE_HOST }}
+      CACHE_PORT: ${{ secrets.CACHE_PORT }}
+      CACHE_PASSWORD: ${{ secrets.CACHE_PASSWORD }}
+      CACHE_DATABASE_LOGICAL: ${{ secrets.CACHE_DATABASE_LOGICAL }}
+      CACHE_TTL: ${{ secrets.CACHE_TTL }}
+      BULL_SEND_MAIL_QUEUE_NAME: ${{ secrets.BULL_SEND_MAIL_QUEUE_NAME }}
+      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ secrets.BULL_SEND_MAIL_QUEUE_LIMITER }}
+      BULL_SEND_MAIL_QUEUE_DELAY: ${{ secrets.BULL_SEND_MAIL_QUEUE_DELAY }}
+      DATABASE_PROTOCOL: ${{ secrets.DATABASE_PROTOCOL }}
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_SYNCHRONIZE: ${{ secrets.DATABASE_SYNCHRONIZE }}
+      TEMPLATE_PATH: ${{ secrets.TEMPLATE_PATH }}
 
 
     steps:
@@ -62,34 +62,34 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NODE_ENV: ${{ env.NODE_ENV }}
-      APP_NAME: ${{ env.APP_NAME }}
-      APP_HOST: ${{ env.APP_HOST }}
-      APP_PORT: ${{ env.APP_PORT }}
-      APP_DESCRIPTION: ${{ env.APP_DESCRIPTION }}
-      APP_URL: ${{ env.APP_URL }}
-      APP_API_KEY: ${{ env.APP_API_KEY }}
-      APP_GLOBAL_PREFIX: ${{ env.APP_GLOBAL_PREFIX }}
-      SWAGGER_SERVER_APP_URL: ${{ env.SWAGGER_SERVER_APP_URL }}
-      SWAGGER_APP_NAME: ${{ env.SWAGGER_APP_NAME }}
-      JWT_SECRET: ${{ env.JWT_SECRET }}
-      JWT_EXPIRATION_TIME: ${{ env.JWT_EXPIRATION_TIME }}
-      CACHE_HOST: ${{ env.CACHE_HOST }}
-      CACHE_PORT: ${{ env.CACHE_PORT }}
-      CACHE_PASSWORD: ${{ env.CACHE_PASSWORD }}
-      CACHE_DATABASE_LOGICAL: ${{ env.CACHE_DATABASE_LOGICAL }}
-      CACHE_TTL: ${{ env.CACHE_TTL }}
-      BULL_SEND_MAIL_QUEUE_NAME: ${{ env.BULL_SEND_MAIL_QUEUE_NAME }}
-      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ env.BULL_SEND_MAIL_QUEUE_LIMITER }}
-      BULL_SEND_MAIL_QUEUE_DELAY: ${{ env.BULL_SEND_MAIL_QUEUE_DELAY }}
-      DATABASE_PROTOCOL: ${{ env.DATABASE_PROTOCOL }}
-      DATABASE_PORT: ${{ env.DATABASE_PORT }}
-      DATABASE_HOST: ${{ env.DATABASE_HOST }}
-      DATABASE_USER: ${{ env.DATABASE_USER }}
-      DATABASE_PASSWORD: ${{ env.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ env.DATABASE_NAME }}
-      DATABASE_SYNCHRONIZE: ${{ env.DATABASE_SYNCHRONIZE }}
-      TEMPLATE_PATH: ${{ env.TEMPLATE_PATH }}
+      NODE_ENV: ${{ secrets.NODE_ENV }}
+      APP_NAME: ${{ secrets.APP_NAME }}
+      APP_HOST: ${{ secrets.APP_HOST }}
+      APP_PORT: ${{ secrets.APP_PORT }}
+      APP_DESCRIPTION: ${{ secrets.APP_DESCRIPTION }}
+      APP_URL: ${{ secrets.APP_URL }}
+      APP_API_KEY: ${{ secrets.APP_API_KEY }}
+      APP_GLOBAL_PREFIX: ${{ secrets.APP_GLOBAL_PREFIX }}
+      SWAGGER_SERVER_APP_URL: ${{ secrets.SWAGGER_SERVER_APP_URL }}
+      SWAGGER_APP_NAME: ${{ secrets.SWAGGER_APP_NAME }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRATION_TIME: ${{ secrets.JWT_EXPIRATION_TIME }}
+      CACHE_HOST: ${{ secrets.CACHE_HOST }}
+      CACHE_PORT: ${{ secrets.CACHE_PORT }}
+      CACHE_PASSWORD: ${{ secrets.CACHE_PASSWORD }}
+      CACHE_DATABASE_LOGICAL: ${{ secrets.CACHE_DATABASE_LOGICAL }}
+      CACHE_TTL: ${{ secrets.CACHE_TTL }}
+      BULL_SEND_MAIL_QUEUE_NAME: ${{ secrets.BULL_SEND_MAIL_QUEUE_NAME }}
+      BULL_SEND_MAIL_QUEUE_LIMITER: ${{ secrets.BULL_SEND_MAIL_QUEUE_LIMITER }}
+      BULL_SEND_MAIL_QUEUE_DELAY: ${{ secrets.BULL_SEND_MAIL_QUEUE_DELAY }}
+      DATABASE_PROTOCOL: ${{ secrets.DATABASE_PROTOCOL }}
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_SYNCHRONIZE: ${{ secrets.DATABASE_SYNCHRONIZE }}
+      TEMPLATE_PATH: ${{ secrets.TEMPLATE_PATH }}
 
     steps:
     - name: Configure SSH
@@ -102,4 +102,4 @@ jobs:
 
     - name: SSH into Oracle Cloud server
       run: |
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@132.226.255.117 'sudo su && cd /var/containerized-apps/ms-mail-gateway && git pull origin main && docker compose -f docker-compose.yml --env-file ./.env.production up --build -d'
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@132.226.255.117 'sudo su && cd /var/containerized-apps/ms-mail-gateway && git pull origin main && docker compose -f docker-compose.yml --env-file ./.secrets.production up --build -d'
