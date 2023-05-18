@@ -1,44 +1,19 @@
 version: '3.9'
 services:
   api:
-    container_name: ${APP_NAME}
+    container_name: ms-mail-gateway
     build:
       context: .
       dockerfile: Dockerfile
       target: run
-    hostname: ${APP_NAME}
-    environment:
-      - APP_NAME=${APP_NAME}
-      - APP_HOST=${APP_HOST}
-      - APP_PORT=${APP_PORT}
-      - APP_DESCRIPTION=${APP_DESCRIPTION}
-      - APP_URL=${APP_URL}
-      - APP_API_KEY=${APP_API_KEY}
-      - APP_GLOBAL_PREFIX=${APP_GLOBAL_PREFIX}
-      - SWAGGER_SERVER_APP_URL=${SWAGGER_SERVER_APP_URL}
-      - SWAGGER_APP_NAME=${SWAGGER_APP_NAME}
-      - JWT_SECRET=${JWT_SECRET}
-      - JWT_EXPIRATION_TIME=${JWT_EXPIRATION_TIME}
-      - CACHE_HOST=${CACHE_HOST}
-      - CACHE_PORT=${CACHE_PORT}
-      - CACHE_PASSWORD=${CACHE_PASSWORD}
-      - CACHE_DATABASE_LOGICAL=${CACHE_DATABASE_LOGICAL}
-      - CACHE_TTL=${CACHE_TTL}
-      - BULL_SEND_MAIL_QUEUE_NAME=${BULL_SEND_MAIL_QUEUE_NAME}
-      - BULL_SEND_MAIL_QUEUE_LIMITER=${BULL_SEND_MAIL_QUEUE_LIMITER}
-      - BULL_SEND_MAIL_QUEUE_DELAY=${BULL_SEND_MAIL_QUEUE_DELAY}
-      - DATABASE_PROTOCOL=${DATABASE_PROTOCOL}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_USER=${DATABASE_USER}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_NAME=${DATABASE_NAME}
-      - DATABASE_SYNCHRONIZE=${DATABASE_SYNCHRONIZE}
-      - TEMPLATE_PATH=${TEMPLATE_PATH}
-      - TZ=America/Sao_Paulo
+    hostname: ms-mail-gateway
+    env_file:
+      - .env.production
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+      - "3000:3000"
     restart: on-failure
+    environment: 
+      - TZ=America/Sao_Paulo
     networks:
       - hc-network-services
     volumes:
@@ -48,4 +23,5 @@ volumes:
     external: true
 networks:
   hc-network-services:
-    external: true
+    external: true 
+    
