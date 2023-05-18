@@ -18,6 +18,13 @@ jobs:
 
     - name: Build Docker image
       run: docker-compose build
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run tests
+      run: yarn start:test    
 
   deploy:
     needs: build
