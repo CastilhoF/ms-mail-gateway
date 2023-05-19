@@ -1,12 +1,14 @@
 version: '3.9'
 services:
-  application:
+  api:
     container_name: ms-mail-gateway
     build:
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
       target: run
     hostname: ms-mail-gateway
+    env_file:
+      - .env.production
     ports:
       - "3000:3000"
     restart: on-failure
@@ -17,7 +19,7 @@ services:
     volumes:
       - ./../logs:/usr/app/logs
 volumes:
-  application:
+  api:
     external: true
 networks:
   hc-network-services:

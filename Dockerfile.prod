@@ -16,6 +16,7 @@ FROM node:18.16.0-alpine3.16 as run
 
 WORKDIR /usr/app
 
+COPY .env.production ./
 COPY package*.json ./
 RUN yarn install --production && yarn cache clean
 

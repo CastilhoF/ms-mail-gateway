@@ -1,6 +1,6 @@
 {
   "name": "ms-mail-gateway",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "This application is the clean architecture backend for the email sending microservice, using sendgrid as the default email sending method.",
   "author": "Fernando Castilho - Honey Code Development Team",
   "private": true,
