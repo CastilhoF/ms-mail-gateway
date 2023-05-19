@@ -36,4 +36,4 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.APP_NAME }}
+      run: docker build -t ms-mail-gateway . 
