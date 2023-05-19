@@ -19,6 +19,7 @@ jobs:
     - name: Build Docker image
       run: |
         docker compose build \
+        application \
           --build-arg NODE_ENV=${{ secrets.NODE_ENV }} \
           --build-arg APP_NAME=${{ secrets.APP_NAME }} \
           --build-arg APP_HOST=${{ secrets.APP_HOST }} \
