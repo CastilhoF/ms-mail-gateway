@@ -70,32 +70,4 @@ jobs:
         ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@132.226.255.117 'sudo su \ 
         cd /var/containerized-apps/ms-mail-gateway \
         git pull origin main \
-        docker compose -f docker-compose.yml up --build \
-          --build-arg NODE_ENV=${{ secrets.NODE_ENV }} \
-          --build-arg APP_NAME=${{ secrets.APP_NAME }} \
-          --build-arg APP_HOST=${{ secrets.APP_HOST }} \
-          --build-arg APP_PORT=${{ secrets.APP_PORT }} \
-          --build-arg APP_DESCRIPTION=${{ secrets.APP_DESCRIPTION }} \
-          --build-arg APP_URL=${{ secrets.APP_URL }} \
-          --build-arg APP_API_KEY=${{ secrets.APP_API_KEY }} \
-          --build-arg APP_GLOBAL_PREFIX=${{ secrets.APP_GLOBAL_PREFIX }} \
-          --build-arg SWAGGER_SERVER_APP_URL=${{ secrets.SWAGGER_SERVER_APP_URL }} \
-          --build-arg SWAGGER_APP_NAME=${{ secrets.SWAGGER_APP_NAME }} \
-          --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
-          --build-arg JWT_EXPIRATION_TIME=${{ secrets.JWT_EXPIRATION_TIME }} \
-          --build-arg CACHE_HOST=${{ secrets.CACHE_HOST }} \
-          --build-arg CACHE_PORT=${{ secrets.CACHE_PORT }} \
-          --build-arg CACHE_PASSWORD=${{ secrets.CACHE_PASSWORD }} \
-          --build-arg CACHE_DATABASE_LOGICAL=${{ secrets.CACHE_DATABASE_LOGICAL }} \
-          --build-arg CACHE_TTL=${{ secrets.CACHE_TTL }} \
-          --build-arg BULL_SEND_MAIL_QUEUE_NAME=${{ secrets.BULL_SEND_MAIL_QUEUE_NAME }} \
-          --build-arg BULL_SEND_MAIL_QUEUE_LIMITER=${{ secrets.BULL_SEND_MAIL_QUEUE_LIMITER }} \
-          --build-arg BULL_SEND_MAIL_QUEUE_DELAY=${{ secrets.BULL_SEND_MAIL_QUEUE_DELAY }} \
-          --build-arg DATABASE_PROTOCOL=${{ secrets.DATABASE_PROTOCOL }} \
-          --build-arg DATABASE_PORT=${{ secrets.DATABASE_PORT }} \
-          --build-arg DATABASE_HOST=${{ secrets.DATABASE_HOST }} \
-          --build-arg DATABASE_USER=${{ secrets.DATABASE_USER }} \
-          --build-arg DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} \
-          --build-arg DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
-          --build-arg DATABASE_SYNCHRONIZE=${{ secrets.DATABASE_SYNCHRONIZE }} \
-          --build-arg TEMPLATE_PATH=${{ secrets.TEMPLATE_PATH }} -d \'
+        docker compose -f docker-compose.yml --env-file ./.env.production up --build -d'
