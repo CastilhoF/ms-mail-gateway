@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  api:
+  application:
     container_name: ms-mail-gateway
     build:
       context: .
@@ -17,7 +17,7 @@ services:
     volumes:
       - ./../logs:/usr/app/logs
 volumes:
-  api:
+  application:
     external: true
 networks:
   hc-network-services:
