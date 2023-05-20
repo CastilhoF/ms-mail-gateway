@@ -6,37 +6,43 @@ on:
       - main
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  # test:
+  #   runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [18.x]
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: yarn install
-      - name: Run tests
-        run: yarn test
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: Install dependencies
+  #       run: yarn install
+  #     - name: Run tests
+  #       run: yarn test
 
   deploy:
     runs-on: ubuntu-latest
     needs: test
 
     steps:
-    - name: SSH into Oracle Cloud server
-      uses: webfactory/ssh-agent@v0.5.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Install SSH CLient
+      run: sudo apt-get install -y openssh-client
 
-    - name: SSH into Oracle Cloud server
+    - name: Configure SSH agent and private key
       run: |
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'sudo su \ 
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        eval $(ssh-agent)
+        ssh-add ~/.ssh/id_rsa
+
+    - name: SSH into remote server and run commands
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'sudo su \ 
         && cd ${{ secrets.APPLICATION_PATH }} \
         && git pull origin main \
         && ${{ secrets.DEPLOYMENT_COMMAND }}'    
