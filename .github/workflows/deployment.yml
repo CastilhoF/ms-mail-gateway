@@ -3,7 +3,7 @@ name: CI/CD - Deployment
 on:
   push:
     branches:
-      - main
+      - [ main, development ]
 
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: SSH into Oracle Cloud server
+    - name: Deploy to Oracle Cloud server
       run: |
         ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@132.226.255.117 'sudo su \ 
         cd /var/containerized-apps/ms-mail-gateway \
