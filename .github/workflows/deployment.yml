@@ -36,7 +36,7 @@ jobs:
 
     - name: SSH into Oracle Cloud server
       run: |
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ SERVER_USER }}@${{ SERVER_HOST }} 'sudo su \ 
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'sudo su \ 
         && cd ${{ secrets.APPLICATION_PATH }} \
         && git pull origin main \
         && ${{ secrets.DEPLOYMENT_COMMAND }}'    
