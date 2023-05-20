@@ -29,20 +29,20 @@ jobs:
     # needs: test
 
     steps:
-    - name: Install SSH CLient
+    - name: Install SSH Client
       run: sudo apt-get install -y openssh-client
 
-    # - name: Configure SSH agent and private key
-    #   run: |
-    #     mkdir -p ~/.ssh
-    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-    #     chmod 600 ~/.ssh/id_rsa
-    #     eval $(ssh-agent)
-    #     ssh-add ~/.ssh/id_rsa
+    - name: Configure SSH agent and private key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        eval $(ssh-agent)
+        ssh-add ~/.ssh/id_rsa
 
     - name: SSH into remote server and run commands
       run: |
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'sudo su \ 
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -l ${{ secrets.SERVER_USER }} ${{ secrets.SERVER_HOST }} 'sudo su \ 
         && cd ${{ secrets.APPLICATION_PATH }} \
         && git pull origin main \
         && ${{ secrets.DEPLOYMENT_COMMAND }}'    
