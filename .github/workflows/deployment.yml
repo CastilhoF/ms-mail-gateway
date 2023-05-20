@@ -6,8 +6,27 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: yarn install
+      - name: Run tests
+        run: yarn test
+
   deploy:
     runs-on: ubuntu-latest
+    needs: test
 
     steps:
     - name: SSH into Oracle Cloud server
@@ -17,7 +36,7 @@ jobs:
 
     - name: SSH into Oracle Cloud server
       run: |
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@132.226.255.117 'sudo su \ 
-        cd /var/containerized-apps/ms-mail-gateway \
-        git pull origin main \
-        docker compose -f docker-compose.yml --env-file ./.env.production up --build -d'    
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ SERVER_USER }}@${{ SERVER_HOST }} 'sudo su \ 
+        && cd ${{ secrets.APPLICATION_PATH }} \
+        && git pull origin main \
+        && ${{ secrets.DEPLOYMENT_COMMAND }}'    
