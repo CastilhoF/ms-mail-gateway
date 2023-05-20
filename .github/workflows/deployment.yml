@@ -45,4 +45,4 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -l ${{ secrets.SERVER_USER }} ${{ secrets.SERVER_HOST }} 'sudo su \ 
         && cd ${{ secrets.APPLICATION_PATH }} \
         && git pull origin main \
-        && ${{ secrets.DEPLOYMENT_COMMAND }}'    
+        && ${{ secrets.DEPLOYMENT_COMMAND }}' 
