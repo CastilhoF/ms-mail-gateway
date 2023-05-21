@@ -32,13 +32,17 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
-    - name: SSH Access Oracle Cloud Server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          cd ${{ secrets.APPLICATION_PATH }}
-          git pull origin main
-          ${{ secrets.DEPLOYMENT_COMMAND }}
+    - name: Configure SSH agent and private key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        eval $(ssh-agent)
+        ssh-add ~/.ssh/id_rsa
+
+    - name: SSH into remote server and run commands
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -l ${{ secrets.SERVER_USER }} ${{ secrets.SERVER_HOST }} 'sudo su \ 
+        && cd ${{ secrets.APPLICATION_PATH }} \
+        && git pull origin main \
+        && ${{ secrets.DEPLOYMENT_COMMAND }}' 
