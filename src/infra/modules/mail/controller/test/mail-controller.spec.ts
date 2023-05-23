@@ -36,7 +36,7 @@ describe('mail controller', () => {
         senderInformation: {
           email: 'contact@domain.com',
           apiKey:
-            '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',
+            'OaEDEcFCQp4w.CYhfYb0ebDSgH_WrHDkMBQ59mbrA4B9SzV8DYY52r58',
           validated: true,
         },
       };
